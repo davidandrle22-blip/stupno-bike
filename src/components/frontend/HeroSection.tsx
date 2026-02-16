@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { motion } from "framer-motion";
 import {
   MapPin,
   Calendar,
@@ -38,11 +39,43 @@ export default function HeroSection({
                     </span>
                   </div>
 
-                  <h1 className="font-black text-white uppercase tracking-tight leading-[0.85]">
-                    <span className="block text-[clamp(2.5rem,6vw,4.5rem)]">Mistrovství XC</span>
-                    <span className="block text-[clamp(2.5rem,6vw,4.5rem)] gradient-text mt-0.5">Horských kol</span>
-                    <span className="block text-[clamp(3rem,7vw,5.5rem)] mt-0.5">STUPNO</span>
-                  </h1>
+                  <motion.h1
+                    className="font-black text-white uppercase tracking-tight leading-[0.85]"
+                    initial="hidden"
+                    animate="visible"
+                    variants={{
+                      hidden: {},
+                      visible: { transition: { staggerChildren: 0.25, delayChildren: 2 } },
+                    }}
+                  >
+                    <motion.span
+                      className="block text-[clamp(2.5rem,6vw,4.5rem)]"
+                      variants={{
+                        hidden: { opacity: 0, y: 30, filter: "blur(10px)" },
+                        visible: { opacity: 1, y: 0, filter: "blur(0px)", transition: { duration: 0.8, ease: "easeOut" } },
+                      }}
+                    >
+                      Mistrovství XC
+                    </motion.span>
+                    <motion.span
+                      className="block text-[clamp(2.5rem,6vw,4.5rem)] gradient-text mt-0.5"
+                      variants={{
+                        hidden: { opacity: 0, y: 30, filter: "blur(10px)" },
+                        visible: { opacity: 1, y: 0, filter: "blur(0px)", transition: { duration: 0.8, ease: "easeOut" } },
+                      }}
+                    >
+                      Horských kol
+                    </motion.span>
+                    <motion.span
+                      className="block text-[clamp(3rem,7vw,5.5rem)] mt-0.5"
+                      variants={{
+                        hidden: { opacity: 0, y: 40, filter: "blur(14px)", scale: 0.9 },
+                        visible: { opacity: 1, y: 0, filter: "blur(0px)", scale: 1, transition: { duration: 1, ease: "easeOut" } },
+                      }}
+                    >
+                      STUPNO
+                    </motion.span>
+                  </motion.h1>
 
                   <div className="flex items-center gap-4 mt-7 text-sm sm:text-base">
                     <span className="flex items-center gap-2">
