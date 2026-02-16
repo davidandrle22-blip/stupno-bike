@@ -96,7 +96,7 @@ export default async function ArticleDetailPage({
             Další články
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-            {related.map((r) => (
+            {related.map((r: { id: string; slug: string; title: string; publishedAt: Date | null; createdAt: Date }) => (
               <Link
                 key={r.id}
                 href={`/novinky/${r.slug}`}
