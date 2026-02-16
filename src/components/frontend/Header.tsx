@@ -3,7 +3,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { useState, useEffect } from "react";
-import { Menu, X } from "lucide-react";
+import { Menu, X, Skull } from "lucide-react";
 import MascotCyclist from "@/components/layout/MascotCyclist";
 
 type Settings = {
@@ -65,6 +65,14 @@ export default function Header({
                   </span>
                 </div>
               </Link>
+
+              {/* Ondra jede Keto */}
+              <div className="flex items-center gap-1.5 ml-2 bg-white/[0.08] backdrop-blur-sm border border-white/10 rounded-full px-3 py-1">
+                <Skull size={16} className="text-yellow-400" />
+                <span className="text-white/90 text-[11px] font-bold tracking-wide whitespace-nowrap">
+                  Ondra jede Keto
+                </span>
+              </div>
             </div>
 
             {/* Desktop nav links */}
