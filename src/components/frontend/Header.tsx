@@ -19,11 +19,17 @@ export default function Header({
 }) {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [uciReady, setUciReady] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 50);
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  useEffect(() => {
+    const timer = setTimeout(() => setUciReady(true), 2000);
+    return () => clearTimeout(timer);
   }, []);
 
   const navLinks = [
@@ -75,41 +81,50 @@ export default function Header({
               </div>
             </div>
 
-            {/* Desktop nav links */}
-            <div className="hidden lg:flex items-center gap-1">
-              {navLinks.map((link) => (
-                <Link
-                  key={link.href}
-                  href={link.href}
-                  className="text-white/70 hover:text-white text-[13px] font-medium transition-colors px-3 py-2 rounded-lg hover:bg-white/10 uppercase tracking-wide"
-                >
-                  {link.label}
-                </Link>
-              ))}
+            {/* Right side: nav + UCI + hamburger */}
+            <div className="flex items-center gap-2 lg:gap-3">
+              {/* Desktop nav links */}
+              <div className="hidden lg:flex items-center gap-1">
+                {navLinks.map((link) => (
+                  <Link
+                    key={link.href}
+                    href={link.href}
+                    className="text-white/70 hover:text-white text-[13px] font-medium transition-colors px-3 py-2 rounded-lg hover:bg-white/10 uppercase tracking-wide"
+                  >
+                    {link.label}
+                  </Link>
+                ))}
+              </div>
+
+              {/* UCI logo — all screen sizes, animated */}
+              <Image
+                src="/images/uci-logo.png"
+                alt="UCI"
+                width={56}
+                height={28}
+                className={`w-auto transition-all duration-700 ease-out hover:scale-110 hover:opacity-100 ${
+                  uciReady
+                    ? "h-6 opacity-80"
+                    : "h-9 opacity-100"
+                }`}
+              />
+
+              {/* Desktop: Registrace */}
               {settings.registrationUrl && (
                 <a
                   href={settings.registrationUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="ml-2 bg-gradient-to-r from-accent to-accent-dark hover:from-accent-dark hover:to-accent text-white font-bold px-5 py-2 rounded-lg text-sm uppercase tracking-wide transition-all hover:scale-105 hover:shadow-lg hover:shadow-accent/25"
+                  className="hidden lg:inline-flex ml-1 bg-gradient-to-r from-accent to-accent-dark hover:from-accent-dark hover:to-accent text-white font-bold px-5 py-2 rounded-lg text-sm uppercase tracking-wide transition-all hover:scale-105 hover:shadow-lg hover:shadow-accent/25"
                 >
                   Registrace
                 </a>
               )}
-            </div>
 
-            {/* Right side: UCI logo (mobile) + hamburger */}
-            <div className="flex items-center gap-2 lg:hidden">
-              <Image
-                src="/images/uci-logo.png"
-                alt="UCI"
-                width={40}
-                height={20}
-                className="h-5 w-auto opacity-80"
-              />
+              {/* Hamburger — mobile only */}
               <button
                 onClick={() => setMobileOpen(!mobileOpen)}
-                className="text-white p-2 hover:bg-white/10 rounded-lg transition-colors"
+                className="text-white p-2 hover:bg-white/10 rounded-lg transition-colors lg:hidden"
                 aria-label="Menu"
               >
                 {mobileOpen ? <X size={24} /> : <Menu size={24} />}
