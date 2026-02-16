@@ -2,6 +2,8 @@ import { prisma } from "@/lib/prisma";
 import Header from "@/components/frontend/Header";
 import Footer from "@/components/frontend/Footer";
 
+export const dynamic = "force-dynamic";
+
 export default async function PublicLayout({
   children,
 }: {

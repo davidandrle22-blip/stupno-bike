@@ -2,6 +2,8 @@ import { prisma } from "@/lib/prisma";
 import { notFound } from "next/navigation";
 import ResultsTable from "@/components/frontend/ResultsTable";
 
+export const dynamic = "force-dynamic";
+
 export default async function RaceResultsPage({
   params,
 }: {

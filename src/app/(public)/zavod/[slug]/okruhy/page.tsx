@@ -2,6 +2,8 @@ import { prisma } from "@/lib/prisma";
 import { notFound } from "next/navigation";
 import GpxMap from "@/components/frontend/GpxMap";
 
+export const dynamic = "force-dynamic";
+
 export default async function OkruhyPage({
   params,
 }: {

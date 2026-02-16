@@ -4,6 +4,8 @@ import { formatDate } from "@/lib/utils";
 import RaceHero from "@/components/frontend/RaceHero";
 import RaceSubNav from "@/components/frontend/RaceSubNav";
 
+export const dynamic = "force-dynamic";
+
 export async function generateMetadata({
   params,
 }: {

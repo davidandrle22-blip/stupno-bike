@@ -4,6 +4,8 @@ import { formatDate } from "@/lib/utils";
 import AnimatedSection from "@/components/frontend/AnimatedSection";
 import Countdown from "@/components/frontend/Countdown";
 import HeroWithVideo from "@/components/frontend/HeroWithVideo";
+
+export const dynamic = "force-dynamic";
 import {
   MapPin,
   Calendar,

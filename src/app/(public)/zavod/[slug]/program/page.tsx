@@ -1,6 +1,8 @@
 import { prisma } from "@/lib/prisma";
 import { notFound } from "next/navigation";
 
+export const dynamic = "force-dynamic";
+
 type ProgramItem = { time: string; desc: string };
 type ProgramDay = { day: string; items: ProgramItem[] };
 

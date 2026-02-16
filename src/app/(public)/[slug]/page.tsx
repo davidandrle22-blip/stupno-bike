@@ -2,6 +2,8 @@ import { prisma } from "@/lib/prisma";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 
+export const dynamic = "force-dynamic";
+
 const validSlugs = ["o-nas", "pravidla", "kontakt", "dale-poradame"];
 
 export async function generateMetadata({

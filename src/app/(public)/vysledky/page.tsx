@@ -2,6 +2,8 @@ import { prisma } from "@/lib/prisma";
 import ResultsTable from "@/components/frontend/ResultsTable";
 import type { Metadata } from "next";
 
+export const dynamic = "force-dynamic";
+
 export const metadata: Metadata = {
   title: "Výsledky",
   description: "Výsledky závodů série AC Heating Cup",

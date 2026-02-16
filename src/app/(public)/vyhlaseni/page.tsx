@@ -1,6 +1,8 @@
 import { prisma } from "@/lib/prisma";
 import type { Metadata } from "next";
 
+export const dynamic = "force-dynamic";
+
 export const metadata: Metadata = {
   title: "Vyhlášení",
   description: "Slavnostní vyhlášení série AC Heating Cup",
