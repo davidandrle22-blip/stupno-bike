@@ -6,11 +6,13 @@ import { Play, Youtube, Volume2, VolumeX } from "lucide-react";
 
 export default function HeroWithVideo({
   posterUrl,
+  posterMobileUrl,
   videoUrl,
   videoWebmUrl,
   youtubeUrl,
 }: {
   posterUrl: string;
+  posterMobileUrl?: string;
   videoUrl: string;
   videoWebmUrl?: string;
   youtubeUrl: string;
@@ -28,14 +30,13 @@ export default function HeroWithVideo({
     return () => window.removeEventListener("resize", check);
   }, []);
 
-  // Start video after 5-second delay
+  // Start video after 5-second delay (both mobile and desktop)
   useEffect(() => {
-    if (isMobile) return;
     const timer = setTimeout(() => {
       setVideoStarted(true);
     }, 5000);
     return () => clearTimeout(timer);
-  }, [isMobile]);
+  }, []);
 
   // Play video once it's loaded and delay has passed
   useEffect(() => {
@@ -51,6 +52,9 @@ export default function HeroWithVideo({
     }
   };
 
+  // Choose poster based on screen size
+  const activePoster = isMobile && posterMobileUrl ? posterMobileUrl : posterUrl;
+
   return (
     <>
       {/* Background poster — always present, Ken Burns while no video */}
@@ -58,17 +62,18 @@ export default function HeroWithVideo({
         className={`absolute inset-0 bg-cover bg-center transition-transform duration-[20000ms] ${
           !videoLoaded || !videoStarted ? "animate-ken-burns" : ""
         }`}
-        style={{ backgroundImage: `url(${posterUrl})` }}
+        style={{ backgroundImage: `url(${activePoster})` }}
       />
 
-      {/* Background video — desktop only, delayed start */}
-      {!isMobile && videoStarted && (
+      {/* Background video — both mobile and desktop, delayed start */}
+      {videoStarted && (
         <video
           ref={videoRef}
           muted
           loop
           playsInline
           preload="auto"
+          poster={activePoster}
           onLoadedData={() => setVideoLoaded(true)}
           className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 ${
             videoLoaded ? "opacity-100" : "opacity-0"
@@ -84,33 +89,31 @@ export default function HeroWithVideo({
       <div className="absolute inset-0 bg-gradient-to-r from-dark/60 via-dark/30 to-transparent" />
       <div className="absolute inset-0 bg-primary/[0.03] mix-blend-overlay" />
 
-      {/* Bottom-right controls — always visible on desktop */}
+      {/* Bottom-right controls */}
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 1.2, duration: 0.6 }}
         className="absolute bottom-28 right-6 sm:right-10 z-20 flex flex-col gap-3 items-end"
       >
-        {/* Sound toggle — always visible on desktop */}
-        {!isMobile && (
-          <button
-            onClick={toggleSound}
-            className={`group flex items-center gap-2.5 backdrop-blur-xl border rounded-xl px-4 py-2.5 transition-all duration-300 hover:scale-105 ${
-              muted
-                ? "bg-white/10 border-white/15 hover:bg-white/20"
-                : "bg-primary/20 border-primary/30 hover:bg-primary/30"
-            }`}
-          >
-            {muted ? (
-              <VolumeX size={18} className="text-white/70" />
-            ) : (
-              <Volume2 size={18} className="text-primary-light" />
-            )}
-            <span className="text-white text-xs font-semibold">
-              {muted ? "Zapnout zvuk" : "Ztlumit"}
-            </span>
-          </button>
-        )}
+        {/* Sound toggle — visible on all devices */}
+        <button
+          onClick={toggleSound}
+          className={`group flex items-center gap-2.5 backdrop-blur-xl border rounded-xl px-4 py-2.5 transition-all duration-300 hover:scale-105 ${
+            muted
+              ? "bg-white/10 border-white/15 hover:bg-white/20"
+              : "bg-primary/20 border-primary/30 hover:bg-primary/30"
+          }`}
+        >
+          {muted ? (
+            <VolumeX size={18} className="text-white/70" />
+          ) : (
+            <Volume2 size={18} className="text-primary-light" />
+          )}
+          <span className="text-white text-xs font-semibold">
+            {muted ? "Zapnout zvuk" : "Ztlumit"}
+          </span>
+        </button>
 
         {/* YouTube link */}
         <a

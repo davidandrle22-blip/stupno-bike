@@ -42,6 +42,7 @@ export default async function HomePage() {
         {/* Video background + overlays */}
         <HeroWithVideo
           posterUrl="/media/races/stupno/hero-poster.jpg"
+          posterMobileUrl="/media/races/stupno/hero-poster-mobile.jpg"
           videoUrl="/media/races/stupno/hero-video-720p.mp4"
           videoWebmUrl="/media/races/stupno/hero-video-720p.webm"
           youtubeUrl="https://www.youtube.com/watch?v=mzn6v-TePEs"
@@ -109,13 +110,6 @@ export default async function HomePage() {
                 )}
               </div>
             </AnimatedSection>
-          </div>
-        </div>
-
-        {/* Scroll indicator */}
-        <div className="absolute bottom-20 left-1/2 -translate-x-1/2 z-10">
-          <div className="w-5 h-9 border-2 border-white/15 rounded-full flex justify-center pt-1.5">
-            <div className="w-1 h-2.5 bg-primary/60 rounded-full animate-bounce" />
           </div>
         </div>
 

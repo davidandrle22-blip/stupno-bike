@@ -1,8 +1,10 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { useState, useEffect } from "react";
 import { Menu, X } from "lucide-react";
+import MascotCyclist from "@/components/layout/MascotCyclist";
 
 type Settings = {
   seriesName: string;
@@ -45,20 +47,27 @@ export default function Header({
       >
         <div className="max-w-7xl mx-auto px-4">
           <div className="flex items-center justify-between h-16">
-            {/* Logo */}
-            <Link href="/" className="flex items-center gap-3 group">
-              <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-primary to-secondary flex items-center justify-center">
-                <span className="text-white font-black text-sm">XC</span>
+            {/* Left side: Mascot (mobile) + Logo */}
+            <div className="flex items-center gap-2">
+              {/* Mascot — mobile only */}
+              <div className="lg:hidden">
+                <MascotCyclist size={36} />
               </div>
-              <div className="hidden sm:block">
-                <span className="text-white font-extrabold text-sm tracking-tight uppercase leading-none block">
-                  Mistrovství XC
-                </span>
-                <span className="text-primary-light text-[10px] font-semibold tracking-[0.2em] uppercase leading-none">
-                  Horských kol Stupno
-                </span>
-              </div>
-            </Link>
+
+              <Link href="/" className="flex items-center gap-3 group">
+                <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-primary to-secondary flex items-center justify-center">
+                  <span className="text-white font-black text-sm">XC</span>
+                </div>
+                <div className="hidden sm:block">
+                  <span className="text-white font-extrabold text-sm tracking-tight uppercase leading-none block">
+                    Mistrovství XC
+                  </span>
+                  <span className="text-primary-light text-[10px] font-semibold tracking-[0.2em] uppercase leading-none">
+                    Horských kol Stupno
+                  </span>
+                </div>
+              </Link>
+            </div>
 
             {/* Desktop nav links */}
             <div className="hidden lg:flex items-center gap-1">
@@ -83,14 +92,24 @@ export default function Header({
               )}
             </div>
 
-            {/* Mobile menu toggle */}
-            <button
-              onClick={() => setMobileOpen(!mobileOpen)}
-              className="lg:hidden text-white p-2 hover:bg-white/10 rounded-lg transition-colors"
-              aria-label="Menu"
-            >
-              {mobileOpen ? <X size={24} /> : <Menu size={24} />}
-            </button>
+            {/* Right side: UCI logo (mobile) + hamburger */}
+            <div className="flex items-center gap-2 lg:hidden">
+              <Image
+                src="/images/uci-logo.png"
+                alt="UCI"
+                width={40}
+                height={20}
+                className="h-5 w-auto opacity-80"
+              />
+              <button
+                onClick={() => setMobileOpen(!mobileOpen)}
+                className="text-white p-2 hover:bg-white/10 rounded-lg transition-colors"
+                aria-label="Menu"
+              >
+                {mobileOpen ? <X size={24} /> : <Menu size={24} />}
+              </button>
+            </div>
+
           </div>
         </div>
       </nav>
