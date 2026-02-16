@@ -89,29 +89,29 @@ export default function HeroWithVideo({
       <div className="absolute inset-0 bg-gradient-to-r from-dark/60 via-dark/30 to-transparent" />
       <div className="absolute inset-0 bg-primary/[0.03] mix-blend-overlay" />
 
-      {/* Bottom-right controls */}
+      {/* Bottom-right controls — higher on mobile to avoid overlapping CTAs */}
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 1.2, duration: 0.6 }}
-        className="absolute bottom-28 right-6 sm:right-10 z-20 flex flex-col gap-3 items-end"
+        className="absolute bottom-36 sm:bottom-28 right-4 sm:right-10 z-20 flex items-center gap-2 sm:flex-col sm:gap-3 sm:items-end"
       >
-        {/* Sound toggle — visible on all devices */}
+        {/* Sound toggle */}
         <button
           onClick={toggleSound}
-          className={`group flex items-center gap-2.5 backdrop-blur-xl border rounded-xl px-4 py-2.5 transition-all duration-300 hover:scale-105 ${
+          className={`group flex items-center gap-1.5 sm:gap-2.5 backdrop-blur-xl border rounded-lg sm:rounded-xl px-2.5 py-1.5 sm:px-4 sm:py-2.5 transition-all duration-300 hover:scale-105 ${
             muted
               ? "bg-white/10 border-white/15 hover:bg-white/20"
               : "bg-primary/20 border-primary/30 hover:bg-primary/30"
           }`}
         >
           {muted ? (
-            <VolumeX size={18} className="text-white/70" />
+            <VolumeX size={16} className="text-white/70 sm:w-[18px] sm:h-[18px]" />
           ) : (
-            <Volume2 size={18} className="text-primary-light" />
+            <Volume2 size={16} className="text-primary-light sm:w-[18px] sm:h-[18px]" />
           )}
-          <span className="text-white text-xs font-semibold">
-            {muted ? "Zapnout zvuk" : "Ztlumit"}
+          <span className="text-white text-[10px] sm:text-xs font-semibold">
+            {muted ? "Zvuk" : "Ztlumit"}
           </span>
         </button>
 
@@ -120,20 +120,20 @@ export default function HeroWithVideo({
           href={youtubeUrl}
           target="_blank"
           rel="noopener noreferrer"
-          className="group flex items-center gap-3 bg-white/10 hover:bg-red-600 backdrop-blur-xl border border-white/15 hover:border-red-600 rounded-xl px-4 py-2.5 transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:shadow-red-600/30"
+          className="group flex items-center gap-2 sm:gap-3 bg-white/10 hover:bg-red-600 backdrop-blur-xl border border-white/15 hover:border-red-600 rounded-lg sm:rounded-xl px-2.5 py-1.5 sm:px-4 sm:py-2.5 transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:shadow-red-600/30"
         >
           <div className="relative">
-            <div className="absolute inset-0 rounded-full bg-red-500/30 animate-ping group-hover:bg-white/20" style={{ animationDuration: "2.5s" }} />
-            <div className="relative w-8 h-8 rounded-full bg-red-600 group-hover:bg-white flex items-center justify-center transition-colors shadow-lg">
-              <Play size={14} className="text-white group-hover:text-red-600 ml-0.5 fill-current transition-colors" />
+            <div className="absolute inset-0 rounded-full bg-red-500/30 animate-ping group-hover:bg-white/20 hidden sm:block" style={{ animationDuration: "2.5s" }} />
+            <div className="relative w-6 h-6 sm:w-8 sm:h-8 rounded-full bg-red-600 group-hover:bg-white flex items-center justify-center transition-colors shadow-lg">
+              <Play size={12} className="text-white group-hover:text-red-600 ml-0.5 fill-current transition-colors sm:w-[14px] sm:h-[14px]" />
             </div>
           </div>
           <div className="text-left">
-            <p className="text-white font-bold text-xs leading-tight">
-              Celé video
+            <p className="text-white font-bold text-[10px] sm:text-xs leading-tight">
+              Video
             </p>
-            <p className="text-white/50 group-hover:text-white/80 text-[10px] font-medium flex items-center gap-1 transition-colors">
-              <Youtube size={10} />
+            <p className="text-white/50 group-hover:text-white/80 text-[9px] sm:text-[10px] font-medium flex items-center gap-1 transition-colors">
+              <Youtube size={9} />
               YouTube
             </p>
           </div>
