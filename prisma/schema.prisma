@@ -1,0 +1,148 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        String   @id @default(cuid())
+  email     String   @unique
+  password  String
+  name      String?
+  role      String   @default("ADMIN")
+  createdAt DateTime @default(now())
+}
+
+model Race {
+  id              String        @id @default(cuid())
+  title           String
+  slug            String        @unique
+  date            DateTime
+  dateEnd         DateTime?
+  location        String
+  uciCategory     String?
+  heroImage       String?
+  heroVideo       String?
+  heroVideoWebm   String?
+  showHeroVideo   Boolean       @default(false)
+  description     String?
+  program         String?
+  parking         String?
+  parkingImage    String?
+  organizer       String?
+  registrationUrl String?
+  navOrder        Int           @default(0)
+  status          String        @default("DRAFT")
+  circuits        Circuit[]
+  photos          Photo[]
+  videos          Video[]
+  results         Result[]
+  racePartners    RacePartner[]
+  createdAt       DateTime      @default(now())
+  updatedAt       DateTime      @updatedAt
+}
+
+model Circuit {
+  id         String   @id @default(cuid())
+  raceId     String
+  race       Race     @relation(fields: [raceId], references: [id], onDelete: Cascade)
+  name       String
+  categories String?
+  gpxFile    String
+  gpxData    String?
+  color      String   @default("#FF6B35")
+  order      Int      @default(0)
+  createdAt  DateTime @default(now())
+}
+
+model Article {
+  id            String    @id @default(cuid())
+  title         String
+  slug          String    @unique
+  content       String
+  excerpt       String?
+  featuredImage String?
+  tags          String?
+  status        String    @default("DRAFT")
+  publishedAt   DateTime?
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+}
+
+model Photo {
+  id        String   @id @default(cuid())
+  url       String
+  alt       String?
+  order     Int      @default(0)
+  raceId    String?
+  race      Race?    @relation(fields: [raceId], references: [id], onDelete: SetNull)
+  createdAt DateTime @default(now())
+}
+
+model Video {
+  id        String   @id @default(cuid())
+  url       String
+  title     String?
+  thumbnail String?
+  featured  Boolean  @default(false)
+  raceId    String?
+  race      Race?    @relation(fields: [raceId], references: [id], onDelete: SetNull)
+  createdAt DateTime @default(now())
+}
+
+model Result {
+  id       String  @id @default(cuid())
+  raceId   String
+  race     Race    @relation(fields: [raceId], references: [id], onDelete: Cascade)
+  category String
+  position Int
+  name     String
+  team     String?
+  time     String?
+  points   Int?
+}
+
+model Partner {
+  id           String        @id @default(cuid())
+  name         String
+  logo         String
+  url          String?
+  type         String        @default("SERIES")
+  order        Int           @default(0)
+  racePartners RacePartner[]
+  createdAt    DateTime      @default(now())
+}
+
+model RacePartner {
+  id        String  @id @default(cuid())
+  raceId    String
+  race      Race    @relation(fields: [raceId], references: [id], onDelete: Cascade)
+  partnerId String
+  partner   Partner @relation(fields: [partnerId], references: [id], onDelete: Cascade)
+
+  @@unique([raceId, partnerId])
+}
+
+model Page {
+  id        String   @id @default(cuid())
+  title     String
+  slug      String   @unique
+  content   String
+  heroImage String?
+  updatedAt DateTime @updatedAt
+}
+
+model SiteSettings {
+  id              String  @id @default("main")
+  seriesName      String  @default("Mistrovství XC Horských kol STUPNO")
+  logo            String?
+  registrationUrl String?
+  facebookUrl     String?
+  instagramUrl    String?
+  contactEmail    String?
+  contactPhone    String?
+  showUciLogo     Boolean @default(true)
+}

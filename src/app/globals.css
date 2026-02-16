@@ -1,0 +1,103 @@
+@import "tailwindcss";
+
+@theme inline {
+  --color-primary: #0EA5E9;
+  --color-primary-dark: #0284C7;
+  --color-primary-light: #38BDF8;
+  --color-secondary: #10B981;
+  --color-secondary-dark: #059669;
+  --color-secondary-light: #34D399;
+  --color-accent: #F97316;
+  --color-accent-dark: #EA580C;
+  --color-dark: #0F172A;
+  --color-dark-lighter: #1E293B;
+  --color-gray-bg: #F8FAFC;
+  --color-gray-border: #E2E8F0;
+  --font-sans: var(--font-inter);
+}
+
+/* ═══ Base ═══ */
+body {
+  font-family: var(--font-sans), system-ui, sans-serif;
+  color: #0F172A;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+::selection {
+  background: rgba(14, 165, 233, 0.15);
+  color: #0F172A;
+}
+
+/* ═══ Premium headings ═══ */
+.heading-style {
+  font-weight: 900;
+  letter-spacing: -0.03em;
+  text-transform: uppercase;
+}
+
+/* ═══ Gradient text ═══ */
+.gradient-text {
+  background: linear-gradient(135deg, #0EA5E9 0%, #10B981 50%, #38BDF8 100%);
+  background-size: 200% 200%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: gradient-shift 6s ease infinite;
+}
+
+@keyframes gradient-shift {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+
+/* ═══ Section dividers ═══ */
+.skew-top { clip-path: polygon(0 6%, 100% 0, 100% 100%, 0 100%); }
+.skew-bottom { clip-path: polygon(0 0, 100% 0, 100% 94%, 0 100%); }
+.skew-divider { clip-path: polygon(0 60%, 100% 0%, 100% 100%, 0% 100%); }
+
+/* ═══ Ken Burns ═══ */
+@keyframes ken-burns {
+  0% { transform: scale(1); }
+  100% { transform: scale(1.08); }
+}
+.animate-ken-burns {
+  animation: ken-burns 20s ease-in-out infinite alternate;
+}
+
+/* ═══ Glass morphism ═══ */
+.glass {
+  background: rgba(255, 255, 255, 0.06);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+/* ═══ Smooth scrollbar ═══ */
+::-webkit-scrollbar { width: 5px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: #CBD5E1; border-radius: 10px; }
+::-webkit-scrollbar-thumb:hover { background: #94A3B8; }
+
+/* ═══ Hide scrollbar for horizontal scroll ═══ */
+.scrollbar-none::-webkit-scrollbar { display: none; }
+.scrollbar-none { -ms-overflow-style: none; scrollbar-width: none; }
+
+/* ═══ Tiptap editor ═══ */
+.tiptap-content h1 { font-size: 2rem; font-weight: 700; margin-bottom: 0.5rem; color: #0F172A; }
+.tiptap-content h2 { font-size: 1.5rem; font-weight: 700; margin-bottom: 0.5rem; color: #0F172A; }
+.tiptap-content h3 { font-size: 1.25rem; font-weight: 600; margin-bottom: 0.5rem; color: #1E293B; }
+.tiptap-content p { margin-bottom: 0.75rem; line-height: 1.8; color: #334155; }
+.tiptap-content ul { list-style: disc; padding-left: 1.5rem; margin-bottom: 0.75rem; }
+.tiptap-content ol { list-style: decimal; padding-left: 1.5rem; margin-bottom: 0.75rem; }
+.tiptap-content li { margin-bottom: 0.25rem; color: #334155; }
+.tiptap-content a { color: #0EA5E9; text-decoration: underline; }
+.tiptap-content img { max-width: 100%; height: auto; border-radius: 0.75rem; margin: 1rem 0; }
+.tiptap-content blockquote { border-left: 4px solid #10B981; padding-left: 1rem; margin: 1rem 0; font-style: italic; color: #475569; }
+
+/* ProseMirror */
+.ProseMirror:focus { outline: none; }
+.ProseMirror { min-height: 200px; padding: 1rem; }
+
+/* Leaflet */
+.leaflet-container { z-index: 1; }
