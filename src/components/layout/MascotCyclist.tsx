@@ -12,8 +12,12 @@ export default function MascotCyclist({ size = 40 }: { size?: number }) {
       <style>{`
         .mascot-cyclist { animation: mascot-bob 2s ease-in-out infinite; }
         @keyframes mascot-bob { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-3px); } }
-        .wheel-spin { animation: wheel-rotate 1.5s linear infinite; transform-origin: center; }
+        .wheel-spin { animation: wheel-rotate 1.5s linear infinite; }
         @keyframes wheel-rotate { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+        .leg-pedal-l { animation: pedal-left 0.8s ease-in-out infinite; transform-origin: 44px 52px; }
+        .leg-pedal-r { animation: pedal-right 0.8s ease-in-out infinite; transform-origin: 44px 52px; }
+        @keyframes pedal-left { 0%, 100% { transform: rotate(-8deg); } 50% { transform: rotate(8deg); } }
+        @keyframes pedal-right { 0%, 100% { transform: rotate(8deg); } 50% { transform: rotate(-8deg); } }
       `}</style>
 
       {/* Back wheel */}
@@ -22,6 +26,8 @@ export default function MascotCyclist({ size = 40 }: { size?: number }) {
         <circle cx="25" cy="78" r="2" fill="#06B6D4" />
         <line x1="25" y1="62" x2="25" y2="94" stroke="#06B6D4" strokeWidth="1" opacity="0.4" />
         <line x1="9" y1="78" x2="41" y2="78" stroke="#06B6D4" strokeWidth="1" opacity="0.4" />
+        <line x1="14" y1="67" x2="36" y2="89" stroke="#06B6D4" strokeWidth="1" opacity="0.3" />
+        <line x1="36" y1="67" x2="14" y2="89" stroke="#06B6D4" strokeWidth="1" opacity="0.3" />
       </g>
 
       {/* Front wheel */}
@@ -30,6 +36,8 @@ export default function MascotCyclist({ size = 40 }: { size?: number }) {
         <circle cx="75" cy="78" r="2" fill="#06B6D4" />
         <line x1="75" y1="62" x2="75" y2="94" stroke="#06B6D4" strokeWidth="1" opacity="0.4" />
         <line x1="59" y1="78" x2="91" y2="78" stroke="#06B6D4" strokeWidth="1" opacity="0.4" />
+        <line x1="64" y1="67" x2="86" y2="89" stroke="#06B6D4" strokeWidth="1" opacity="0.3" />
+        <line x1="86" y1="67" x2="64" y2="89" stroke="#06B6D4" strokeWidth="1" opacity="0.3" />
       </g>
 
       {/* Frame */}
@@ -47,11 +55,17 @@ export default function MascotCyclist({ size = 40 }: { size?: number }) {
       <line x1="42" y1="50" x2="60" y2="38" stroke="#0D9488" strokeWidth="4" strokeLinecap="round" />
       {/* Arms */}
       <line x1="55" y1="40" x2="68" y2="48" stroke="#0D9488" strokeWidth="3" strokeLinecap="round" />
-      {/* Legs - pedaling */}
-      <line x1="44" y1="52" x2="38" y2="68" stroke="#0D9488" strokeWidth="3" strokeLinecap="round" />
-      <line x1="38" y1="68" x2="25" y2="78" stroke="#0D9488" strokeWidth="2.5" strokeLinecap="round" />
-      <line x1="44" y1="52" x2="50" y2="66" stroke="#0D9488" strokeWidth="3" strokeLinecap="round" />
-      <line x1="50" y1="66" x2="50" y2="68" stroke="#0D9488" strokeWidth="2.5" strokeLinecap="round" />
+
+      {/* Left leg - pedaling */}
+      <g className="leg-pedal-l">
+        <line x1="44" y1="52" x2="38" y2="68" stroke="#0D9488" strokeWidth="3" strokeLinecap="round" />
+        <line x1="38" y1="68" x2="25" y2="78" stroke="#0D9488" strokeWidth="2.5" strokeLinecap="round" />
+      </g>
+      {/* Right leg - pedaling (opposite phase) */}
+      <g className="leg-pedal-r">
+        <line x1="44" y1="52" x2="50" y2="66" stroke="#0D9488" strokeWidth="3" strokeLinecap="round" />
+        <line x1="50" y1="66" x2="50" y2="68" stroke="#0D9488" strokeWidth="2.5" strokeLinecap="round" />
+      </g>
 
       {/* Head */}
       <circle cx="62" cy="30" r="8" fill="#0D9488" />

@@ -49,10 +49,8 @@ export default function Header({
           <div className="flex items-center justify-between h-16">
             {/* Left side: Mascot (mobile) + Logo */}
             <div className="flex items-center gap-2">
-              {/* Mascot — mobile only */}
-              <div className="lg:hidden">
-                <MascotCyclist size={36} />
-              </div>
+              {/* Mascot — all screen sizes */}
+              <MascotCyclist size={36} />
 
               <Link href="/" className="flex items-center gap-3 group">
                 <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-primary to-secondary flex items-center justify-center">
