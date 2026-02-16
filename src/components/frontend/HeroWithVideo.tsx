@@ -17,7 +17,7 @@ export default function HeroWithVideo({
   videoUrl: string;
   videoWebmUrl?: string;
   youtubeUrl: string;
-  children?: (controls: React.ReactNode) => React.ReactNode;
+  children?: (mobileControls: React.ReactNode, desktopControls: React.ReactNode) => React.ReactNode;
 }) {
   const [videoLoaded, setVideoLoaded] = useState(false);
   const [videoStarted, setVideoStarted] = useState(false);
@@ -66,53 +66,72 @@ export default function HeroWithVideo({
 
   const activePoster = isMobile && posterMobileUrl ? posterMobileUrl : posterUrl;
 
-  // Controls element — passed to children render prop
-  const controlsElement = (
+  // Shared button markup
+  const soundButton = (
+    <button
+      onClick={toggleSound}
+      className={`group flex items-center gap-1.5 backdrop-blur-xl border rounded-lg px-3 py-2 transition-all duration-500 hover:scale-105 ${
+        muted
+          ? "bg-white/10 border-white/15 hover:bg-white/20"
+          : "bg-primary/20 border-primary/30 hover:bg-primary/30"
+      }`}
+    >
+      {muted ? (
+        <VolumeX size={15} className="text-white/70" />
+      ) : (
+        <Volume2 size={15} className="text-primary-light" />
+      )}
+      <span className="text-white text-[11px] font-semibold">
+        {muted ? "Zvuk" : "Ztlumit"}
+      </span>
+    </button>
+  );
+
+  const youtubeButton = (
+    <a
+      href={youtubeUrl}
+      target="_blank"
+      rel="noopener noreferrer"
+      className="group flex items-center gap-2 bg-white/10 hover:bg-red-600 backdrop-blur-xl border border-white/15 hover:border-red-600 rounded-lg px-3 py-2 transition-all duration-300 hover:scale-105"
+    >
+      <div className="relative w-6 h-6 rounded-full bg-red-600 group-hover:bg-white flex items-center justify-center transition-colors shadow-lg">
+        <Play size={11} className="text-white group-hover:text-red-600 ml-0.5 fill-current transition-colors" />
+      </div>
+      <div className="text-left">
+        <p className="text-white font-bold text-[11px] leading-tight">
+          Celé video
+        </p>
+        <p className="text-white/50 group-hover:text-white/80 text-[9px] font-medium flex items-center gap-1 transition-colors">
+          <Youtube size={9} />
+          YouTube
+        </p>
+      </div>
+    </a>
+  );
+
+  // Mobile: inline above countdown (shown via md:hidden)
+  const mobileControls = (
     <motion.div
       initial={{ opacity: 0, scale: 1.15 }}
-      animate={{ opacity: 1, scale: shrunk && isMobile ? 0.85 : 1 }}
+      animate={{ opacity: 1, scale: shrunk ? 0.85 : 1 }}
       transition={{ delay: 1.2, duration: 0.6 }}
-      className="flex items-center gap-2 origin-left transition-transform duration-700"
+      className="flex items-center gap-2 origin-left transition-transform duration-700 md:hidden"
     >
-      {/* Sound toggle */}
-      <button
-        onClick={toggleSound}
-        className={`group flex items-center gap-1.5 backdrop-blur-xl border rounded-lg px-3 py-2 transition-all duration-500 hover:scale-105 ${
-          muted
-            ? "bg-white/10 border-white/15 hover:bg-white/20"
-            : "bg-primary/20 border-primary/30 hover:bg-primary/30"
-        }`}
-      >
-        {muted ? (
-          <VolumeX size={15} className="text-white/70" />
-        ) : (
-          <Volume2 size={15} className="text-primary-light" />
-        )}
-        <span className="text-white text-[11px] font-semibold">
-          {muted ? "Zvuk" : "Ztlumit"}
-        </span>
-      </button>
+      {soundButton}
+      {youtubeButton}
+    </motion.div>
+  );
 
-      {/* YouTube link */}
-      <a
-        href={youtubeUrl}
-        target="_blank"
-        rel="noopener noreferrer"
-        className="group flex items-center gap-2 bg-white/10 hover:bg-red-600 backdrop-blur-xl border border-white/15 hover:border-red-600 rounded-lg px-3 py-2 transition-all duration-300 hover:scale-105"
-      >
-        <div className="relative w-6 h-6 rounded-full bg-red-600 group-hover:bg-white flex items-center justify-center transition-colors shadow-lg">
-          <Play size={11} className="text-white group-hover:text-red-600 ml-0.5 fill-current transition-colors" />
-        </div>
-        <div className="text-left">
-          <p className="text-white font-bold text-[11px] leading-tight">
-            Celé video
-          </p>
-          <p className="text-white/50 group-hover:text-white/80 text-[9px] font-medium flex items-center gap-1 transition-colors">
-            <Youtube size={9} />
-            YouTube
-          </p>
-        </div>
-      </a>
+  // Desktop: absolute bottom-right (shown via hidden md:flex)
+  const desktopControls = (
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ delay: 1.2, duration: 0.6 }}
+      className="absolute bottom-28 right-10 z-20 hidden md:flex flex-col gap-3 items-end"
+    >
+      {soundButton}
+      {youtubeButton}
     </motion.div>
   );
 
@@ -151,7 +170,7 @@ export default function HeroWithVideo({
       <div className="absolute inset-0 bg-primary/[0.03] mix-blend-overlay" />
 
       {/* Render children with controls passed in */}
-      {children ? children(controlsElement) : controlsElement}
+      {children ? children(mobileControls, desktopControls) : <>{mobileControls}{desktopControls}</>}
     </>
   );
 }
