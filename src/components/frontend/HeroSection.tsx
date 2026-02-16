@@ -59,7 +59,7 @@ export default function HeroSection({
               {/* Countdown + Video/Sound controls */}
               <AnimatedSection delay={0.25}>
                 <div className="mt-10 mb-10">
-                  <div className="flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-6 mb-4">
+                  <div className="flex flex-col-reverse sm:flex-row sm:items-center gap-3 sm:gap-6 mb-4">
                     <p className="text-white text-[11px] uppercase tracking-[0.35em] font-semibold">
                       Do startu zbývá
                     </p>
@@ -72,23 +72,23 @@ export default function HeroSection({
               {/* CTAs */}
               <AnimatedSection delay={0.45}>
                 <div className="flex flex-col sm:flex-row gap-3">
-                  <Link
-                    href={raceSlug ? `/zavod/${raceSlug}` : "/vysledky"}
+                  <a
+                    href="https://www.the-pulse.cz"
+                    target="_blank"
+                    rel="noopener noreferrer"
                     className="group bg-gradient-to-r from-primary to-primary-dark text-white font-bold px-7 py-3.5 rounded-xl uppercase tracking-wide transition-all duration-300 hover:shadow-xl hover:shadow-primary/30 hover:-translate-y-0.5 flex items-center gap-2 justify-center"
                   >
                     Detail závodu
                     <ArrowRight size={17} className="group-hover:translate-x-0.5 transition-transform" />
-                  </Link>
-                  {registrationUrl && (
-                    <a
-                      href={registrationUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="bg-gradient-to-r from-accent to-accent-dark text-white font-bold px-7 py-3.5 rounded-xl uppercase tracking-wide transition-all duration-300 hover:shadow-xl hover:shadow-accent/30 hover:-translate-y-0.5 text-center"
-                    >
-                      Registrace
-                    </a>
-                  )}
+                  </a>
+                  <a
+                    href="https://www.the-pulse.cz"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="bg-gradient-to-r from-accent to-accent-dark text-white font-bold px-7 py-3.5 rounded-xl uppercase tracking-wide transition-all duration-300 hover:shadow-xl hover:shadow-accent/30 hover:-translate-y-0.5 text-center"
+                  >
+                    Registrace
+                  </a>
                 </div>
               </AnimatedSection>
             </div>
