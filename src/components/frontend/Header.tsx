@@ -58,30 +58,32 @@ export default function Header({
         }`}
       >
         <div className="max-w-7xl mx-auto px-4">
-          <div className="flex items-center justify-between h-16">
-            {/* Left side: Mascot */}
-            <div className="flex items-center">
+          <div className="flex items-center h-16">
+            {/* Left: Mascot */}
+            <div className="flex items-center shrink-0">
               <MascotCyclist size={36} />
             </div>
 
-            {/* Center: Stupno logo */}
-            <Link href="/" className="absolute left-1/2 -translate-x-1/2 flex items-center group">
-              <Image
-                src="/images/stupno-logo.png"
-                alt="Mistrovství XC Horských kol Stupno"
-                width={240}
-                height={64}
-                priority
-                className={`w-auto transition-all duration-700 ease-out animate-logo-pulse ${
-                  logoReady
-                    ? "h-11 sm:h-12 lg:h-14"
-                    : "h-16 sm:h-18 lg:h-20"
-                }`}
-              />
-            </Link>
+            {/* Center: Stupno logo — fills space between mascot and nav */}
+            <div className="flex-1 flex justify-center min-w-0">
+              <Link href="/" className="flex items-center group">
+                <Image
+                  src="/images/stupno-logo.png"
+                  alt="Mistrovství XC Horských kol Stupno"
+                  width={280}
+                  height={72}
+                  priority
+                  className={`w-auto transition-all duration-700 ease-out animate-logo-pulse ${
+                    logoReady
+                      ? "h-12 sm:h-14 lg:h-16"
+                      : "h-16 sm:h-20 lg:h-22"
+                  }`}
+                />
+              </Link>
+            </div>
 
-            {/* Right side: nav + UCI + hamburger */}
-            <div className="flex items-center gap-2 lg:gap-3">
+            {/* Right: nav + UCI + hamburger */}
+            <div className="flex items-center gap-2 lg:gap-3 shrink-0">
               {/* Desktop nav links */}
               <div className="hidden lg:flex items-center gap-1">
                 {navLinks.map((link) => (
