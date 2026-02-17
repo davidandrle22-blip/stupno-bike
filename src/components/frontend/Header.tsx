@@ -3,7 +3,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { useState, useEffect } from "react";
-import { Menu, X, Skull } from "lucide-react";
+import { Menu, X } from "lucide-react";
 import MascotCyclist from "@/components/layout/MascotCyclist";
 
 type Settings = {
@@ -20,6 +20,7 @@ export default function Header({
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const [uciReady, setUciReady] = useState(false);
+  const [logoReady, setLogoReady] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 50);
@@ -29,6 +30,11 @@ export default function Header({
 
   useEffect(() => {
     const timer = setTimeout(() => setUciReady(true), 2000);
+    return () => clearTimeout(timer);
+  }, []);
+
+  useEffect(() => {
+    const timer = setTimeout(() => setLogoReady(true), 1500);
     return () => clearTimeout(timer);
   }, []);
 
@@ -58,27 +64,20 @@ export default function Header({
               {/* Mascot — all screen sizes */}
               <MascotCyclist size={36} />
 
-              <Link href="/" className="flex items-center gap-3 group">
-                <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-primary to-secondary flex items-center justify-center">
-                  <span className="text-white font-black text-sm">XC</span>
-                </div>
-                <div className="hidden sm:block">
-                  <span className="text-white font-extrabold text-sm tracking-tight uppercase leading-none block">
-                    Mistrovství XC
-                  </span>
-                  <span className="text-primary-light text-[10px] font-semibold tracking-[0.2em] uppercase leading-none">
-                    Horských kol Stupno
-                  </span>
-                </div>
+              <Link href="/" className="flex items-center group">
+                <Image
+                  src="/images/stupno-logo.png"
+                  alt="Mistrovství XC Horských kol Stupno"
+                  width={160}
+                  height={48}
+                  priority
+                  className={`w-auto transition-all duration-700 ease-out hover:scale-105 animate-pulse-subtle ${
+                    logoReady
+                      ? "h-9 sm:h-10"
+                      : "h-12 sm:h-14"
+                  }`}
+                />
               </Link>
-
-              {/* Ondra jede Keto */}
-              <div className="flex items-center gap-1.5 ml-2 bg-white/[0.08] backdrop-blur-sm border border-white/10 rounded-full px-3 py-1">
-                <Skull size={16} className="text-yellow-400" />
-                <span className="text-white/90 text-[11px] font-bold tracking-wide whitespace-nowrap">
-                  Ondra jede Keto
-                </span>
-              </div>
             </div>
 
             {/* Right side: nav + UCI + hamburger */}
