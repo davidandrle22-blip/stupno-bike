@@ -59,26 +59,26 @@ export default function Header({
       >
         <div className="max-w-7xl mx-auto px-4">
           <div className="flex items-center justify-between h-16">
-            {/* Left side: Mascot (mobile) + Logo */}
-            <div className="flex items-center gap-2">
-              {/* Mascot — all screen sizes */}
+            {/* Left side: Mascot */}
+            <div className="flex items-center">
               <MascotCyclist size={36} />
-
-              <Link href="/" className="flex items-center group">
-                <Image
-                  src="/images/stupno-logo.png"
-                  alt="Mistrovství XC Horských kol Stupno"
-                  width={160}
-                  height={48}
-                  priority
-                  className={`w-auto transition-all duration-700 ease-out hover:scale-105 animate-pulse-subtle ${
-                    logoReady
-                      ? "h-9 sm:h-10"
-                      : "h-12 sm:h-14"
-                  }`}
-                />
-              </Link>
             </div>
+
+            {/* Center: Stupno logo */}
+            <Link href="/" className="absolute left-1/2 -translate-x-1/2 flex items-center group">
+              <Image
+                src="/images/stupno-logo.png"
+                alt="Mistrovství XC Horských kol Stupno"
+                width={240}
+                height={64}
+                priority
+                className={`w-auto transition-all duration-700 ease-out animate-logo-pulse ${
+                  logoReady
+                    ? "h-11 sm:h-12 lg:h-14"
+                    : "h-16 sm:h-18 lg:h-20"
+                }`}
+              />
+            </Link>
 
             {/* Right side: nav + UCI + hamburger */}
             <div className="flex items-center gap-2 lg:gap-3">
