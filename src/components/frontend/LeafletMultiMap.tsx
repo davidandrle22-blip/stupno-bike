@@ -31,10 +31,10 @@ export default function LeafletMultiMap({
     const map = L.map(mapRef.current);
     mapInstanceRef.current = map;
 
-    L.tileLayer("https://mapserver.mapy.cz/turist-m/{z}-{x}-{y}", {
+    L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
       attribution:
-        '&copy; <a href="https://www.seznam.cz">Seznam.cz</a>, &copy; <a href="https://www.openstreetmap.org">OpenStreetMap</a>',
-      maxZoom: 18,
+        '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+      maxZoom: 19,
     }).addTo(map);
 
     const allLatLngs: L.LatLngExpression[] = [];
