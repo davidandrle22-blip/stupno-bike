@@ -70,13 +70,13 @@ export default function Header({
                 <Image
                   src="/images/stupno-logo.png"
                   alt="Mistrovství XC Horských kol Stupno"
-                  width={280}
-                  height={72}
+                  width={80}
+                  height={80}
                   priority
                   className={`w-auto transition-all duration-700 ease-out animate-logo-pulse ${
                     logoReady
-                      ? "h-12 sm:h-14 lg:h-16"
-                      : "h-16 sm:h-20 lg:h-22"
+                      ? "h-14 sm:h-16 lg:h-18"
+                      : "h-18 sm:h-20 lg:h-22"
                   }`}
                 />
               </Link>

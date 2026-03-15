@@ -12,10 +12,19 @@ export const metadata: Metadata = {
 };
 
 export default async function NovinkyPage() {
-  const articles = await prisma.article.findMany({
+  type ArticleRow = {
+    id: string;
+    title: string;
+    slug: string;
+    excerpt: string | null;
+    featuredImage: string | null;
+    publishedAt: Date | null;
+    createdAt: Date;
+  };
+  const articles = (await prisma.article.findMany({
     where: { status: "PUBLISHED" },
     orderBy: { publishedAt: "desc" },
-  });
+  })) as ArticleRow[];
 
   return (
     <div className="max-w-7xl mx-auto px-4 py-8">
