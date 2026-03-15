@@ -114,16 +114,7 @@ export default function OkruhyPage() {
         {CIRCUITS.map((circuit) => (
           <div
             key={circuit.id}
-            className="rounded-2xl bg-slate-900 overflow-hidden border border-slate-700/60 transition-all duration-300 hover:-translate-y-0.5"
-            style={{
-              boxShadow: `0 0 0 0 transparent`,
-            }}
-            onMouseEnter={(e) => {
-              (e.currentTarget as HTMLDivElement).style.boxShadow = `0 8px 32px -4px ${circuit.color}30`;
-            }}
-            onMouseLeave={(e) => {
-              (e.currentTarget as HTMLDivElement).style.boxShadow = `0 0 0 0 transparent`;
-            }}
+            className="rounded-2xl bg-slate-900 overflow-hidden border border-slate-700/60 transition-all duration-300 hover:-translate-y-0.5 hover:border-slate-500"
           >
             {/* Barevný horní proužek */}
             <div className="h-1" style={{ backgroundColor: circuit.color }} />
