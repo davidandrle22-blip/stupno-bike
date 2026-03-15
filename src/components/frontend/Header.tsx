@@ -67,18 +67,22 @@ export default function Header({
             {/* Center: Stupno logo — fills space between mascot and nav */}
             <div className="flex-1 flex justify-center min-w-0">
               <Link href="/" className="flex items-center group">
-                <Image
-                  src="/images/stupno-logo.png"
-                  alt="Mistrovství XC Horských kol Stupno"
-                  width={80}
-                  height={80}
-                  priority
-                  className={`w-auto rounded-full transition-all duration-700 ease-out animate-logo-pulse ${
+                <div
+                  className={`rounded-full overflow-hidden bg-dark shrink-0 transition-all duration-700 ease-out animate-logo-pulse ${
                     logoReady
-                      ? "h-14 sm:h-16 lg:h-18"
-                      : "h-18 sm:h-20 lg:h-22"
+                      ? "h-14 w-14 sm:h-16 sm:w-16 lg:h-18 lg:w-18"
+                      : "h-18 w-18 sm:h-20 sm:w-20 lg:h-22 lg:w-22"
                   }`}
-                />
+                >
+                  <Image
+                    src="/images/stupno-logo.jpg"
+                    alt="Mistrovství XC Horských kol Stupno"
+                    width={80}
+                    height={80}
+                    priority
+                    className="w-full h-full object-cover"
+                  />
+                </div>
               </Link>
             </div>
 
