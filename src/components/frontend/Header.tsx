@@ -73,7 +73,7 @@ export default function Header({
                   width={80}
                   height={80}
                   priority
-                  className={`w-auto transition-all duration-700 ease-out animate-logo-pulse ${
+                  className={`w-auto rounded-full transition-all duration-700 ease-out animate-logo-pulse ${
                     logoReady
                       ? "h-14 sm:h-16 lg:h-18"
                       : "h-18 sm:h-20 lg:h-22"
