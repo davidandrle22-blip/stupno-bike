@@ -64,7 +64,7 @@ export default async function PropozicePage({
       {/* Místo konání */}
       <div className="mb-8">
         <a
-          href="https://www.google.com/maps/place/Ultramarinka/@49.8324452,13.5836209"
+          href="https://maps.app.goo.gl/n5pTXDGfKVuZKJtu8"
           target="_blank"
           rel="noopener noreferrer"
           className="inline-flex items-center gap-2 text-sm font-semibold text-primary hover:text-primary-dark transition-colors"
