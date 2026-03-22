@@ -8,6 +8,7 @@ import {
   ArrowRight,
 } from "lucide-react";
 import AnimatedSection from "@/components/frontend/AnimatedSection";
+import CyclistDivider from "@/components/frontend/CyclistDivider";
 import Countdown from "@/components/frontend/Countdown";
 import HeroWithVideo from "@/components/frontend/HeroWithVideo";
 import SocialLinks from "@/components/frontend/SocialLinks";
@@ -157,8 +158,8 @@ export default function HeroSection({
         )}
       </HeroWithVideo>
 
-      {/* Skewed divider */}
-      <div className="absolute bottom-0 left-0 right-0 h-24 bg-white z-10" style={{ clipPath: "polygon(0 75%, 100% 0%, 100% 100%, 0% 100%)" }} />
+      {/* Cyclist divider */}
+      <CyclistDivider />
     </section>
   );
 }

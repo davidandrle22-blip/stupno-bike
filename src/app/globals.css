@@ -150,6 +150,24 @@ body {
   border: 1px solid rgba(255, 255, 255, 0.08);
 }
 
+/* ═══ Cyclist divider animations ═══ */
+@keyframes cyclist-scroll {
+  0%   { transform: translateX(calc(100vw + 120px)); }
+  100% { transform: translateX(-120px); }
+}
+.cyclist-a { animation: cyclist-scroll 13s linear -1s infinite; }
+.cyclist-b { animation: cyclist-scroll 16s linear -5s infinite; }
+.cyclist-c { animation: cyclist-scroll 11s linear -3s infinite; }
+.cyclist-d { animation: cyclist-scroll 19s linear -9s infinite; }
+.cyclist-dust { animation: cyclist-scroll 11s linear -3.5s infinite; }
+@media (max-width: 768px) {
+  .cyclist-a { animation-duration: 9s; }
+  .cyclist-b { animation-duration: 11s; }
+  .cyclist-c { animation-duration: 8s; }
+  .cyclist-d { animation-duration: 13s; }
+  .cyclist-dust { animation-duration: 8s; }
+}
+
 /* ═══ Smooth scrollbar ═══ */
 ::-webkit-scrollbar { width: 5px; }
 ::-webkit-scrollbar-track { background: transparent; }
