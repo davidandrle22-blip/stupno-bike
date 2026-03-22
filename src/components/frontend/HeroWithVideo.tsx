@@ -152,7 +152,7 @@ export default function HeroWithVideo({
           muted
           loop
           playsInline
-          preload="auto"
+          preload="metadata"
           poster={activePoster}
           onLoadedData={() => setVideoLoaded(true)}
           className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 ${

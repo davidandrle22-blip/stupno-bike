@@ -1,5 +1,6 @@
 import { prisma } from "@/lib/prisma";
 import Link from "next/link";
+import Image from "next/image";
 import AnimatedSection from "@/components/frontend/AnimatedSection";
 import HeroSection from "@/components/frontend/HeroSection";
 
@@ -151,10 +152,12 @@ export default async function HomePage() {
                   rel="noopener noreferrer"
                   className="group block rounded-2xl overflow-hidden shadow-xl shadow-black/40 border border-white/10 hover:border-pink-500/30 hover:shadow-2xl hover:shadow-pink-900/20 transition-all duration-500 relative h-[320px] sm:h-[420px] lg:h-[480px]"
                 >
-                  <img
+                  <Image
                     src="/images/ig-screen.png"
                     alt="Stupno Bike na Instagramu — Víc než závod"
-                    className="w-full h-full object-cover group-hover:scale-[1.02] transition-transform duration-700"
+                    fill
+                    className="object-cover group-hover:scale-[1.02] transition-transform duration-700"
+                    sizes="(max-width: 768px) 100vw, 50vw"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent opacity-100 sm:opacity-0 sm:group-hover:opacity-100 transition-opacity duration-500" />
                   <div className="absolute bottom-5 left-1/2 -translate-x-1/2 opacity-100 sm:opacity-0 sm:group-hover:opacity-100 transition-opacity duration-500">
@@ -174,10 +177,12 @@ export default async function HomePage() {
                   href={`/zavod/${race.slug}/okruhy`}
                   className="group block rounded-2xl overflow-hidden shadow-xl shadow-black/40 border border-white/10 hover:border-primary/30 hover:shadow-2xl hover:shadow-primary/15 transition-all duration-500 relative h-[320px] sm:h-[420px] lg:h-[480px]"
                 >
-                  <img
+                  <Image
                     src="/images/mapa-okruhu.png"
                     alt="Mapa závodních okruhů Stupno XC"
-                    className="w-full h-full object-cover object-center group-hover:scale-[1.02] transition-transform duration-700"
+                    fill
+                    className="object-cover object-center group-hover:scale-[1.02] transition-transform duration-700"
+                    sizes="(max-width: 768px) 100vw, 50vw"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent opacity-100 sm:opacity-0 sm:group-hover:opacity-100 transition-opacity duration-500" />
                   <div className="absolute bottom-5 left-1/2 -translate-x-1/2 opacity-100 sm:opacity-0 sm:group-hover:opacity-100 transition-opacity duration-500">
