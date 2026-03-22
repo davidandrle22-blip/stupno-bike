@@ -3,12 +3,27 @@ import { notFound } from "next/navigation";
 
 export const revalidate = 3600;
 
-const VSECHNY_KATEGORIE = [
-  { skupina: "Nejmladší", items: ["Holky 5–6 let", "Kluci 5–6 let", "Holky 7–8 let", "Kluci 7–8 let", "Holky 9–10 let", "Kluci 9–10 let"] },
-  { skupina: "Žáci", items: ["Žákyně I", "Žáci I", "Žákyně II", "Žáci II"] },
-  { skupina: "Kadeti a junioři", items: ["Kadetky", "Kadeti", "Juniorky", "Junioři"] },
-  { skupina: "Elite", items: ["Ženy Elite / U23", "Muži Elite"] },
-  { skupina: "Hobby a masters", items: ["Masters", "Experti"] },
+const VSECHNY_KATEGORIE: { skupina: string; items: [string, string][] }[] = [
+  { skupina: "Nejmladší", items: [
+    ["Holky 5–6 let", "nar. 2020–2021"], ["Kluci 5–6 let", "nar. 2020–2021"],
+    ["Holky 7–8 let", "nar. 2018–2019"], ["Kluci 7–8 let", "nar. 2018–2019"],
+    ["Holky 9–10 let", "nar. 2016–2017"], ["Kluci 9–10 let", "nar. 2016–2017"],
+  ]},
+  { skupina: "Žáci", items: [
+    ["Žákyně I", "11–12 let (nar. 2014–2015)"], ["Žáci I", "11–12 let (nar. 2014–2015)"],
+    ["Žákyně II", "13–14 let (nar. 2012–2013)"], ["Žáci II", "13–14 let (nar. 2012–2013)"],
+  ]},
+  { skupina: "Kadeti a junioři", items: [
+    ["Kadetky", "15–16 let (nar. 2010–2011)"], ["Kadeti", "15–16 let (nar. 2010–2011)"],
+    ["Juniorky", "17–18 let (nar. 2008–2009)"], ["Junioři", "17–18 let (nar. 2008–2009)"],
+  ]},
+  { skupina: "Elite & U23", items: [
+    ["Ženy U23", "19–22 let (nar. 2004–2007)"], ["Muži U23", "19–22 let (nar. 2004–2007)"],
+    ["Ženy Elite", "23+ (nar. 2003 a dříve)"], ["Muži Elite", "23+ (nar. 2003 a dříve)"],
+  ]},
+  { skupina: "Hobby a masters", items: [
+    ["Experti", "19 let a starší"], ["Masters", "35 let a starší"],
+  ]},
 ];
 
 export default async function PropozicePage({
@@ -85,12 +100,13 @@ export default async function PropozicePage({
                 {skupina.skupina}
               </p>
               <div className="flex flex-wrap gap-2">
-                {skupina.items.map((kat) => (
+                {skupina.items.map(([kat, vek]) => (
                   <span
                     key={kat}
-                    className="bg-white/[0.06] border border-white/[0.1] rounded-xl px-3 py-1.5 text-sm font-medium text-slate-200"
+                    className="bg-white/[0.06] border border-white/[0.1] rounded-xl px-3 py-1.5 text-sm font-medium text-slate-200 flex flex-col"
                   >
                     {kat}
+                    <span className="text-[10px] text-slate-500 font-normal mt-0.5">{vek}</span>
                   </span>
                 ))}
               </div>
