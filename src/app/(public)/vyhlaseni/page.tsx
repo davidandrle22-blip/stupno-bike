@@ -15,7 +15,7 @@ export default async function VyhlaseniPage() {
 
   return (
     <div className="max-w-4xl mx-auto px-4 py-8">
-      <h1 className="text-3xl sm:text-4xl font-extrabold text-dark uppercase tracking-tight mb-8">
+      <h1 className="text-3xl sm:text-4xl font-extrabold text-white uppercase tracking-tight mb-8">
         Vyhlášení série
       </h1>
       {page?.content ? (
@@ -25,7 +25,7 @@ export default async function VyhlaseniPage() {
         />
       ) : (
         <div className="text-center py-16">
-          <p className="text-gray-500 text-lg">
+          <p className="text-slate-400 text-lg">
             Informace o vyhlášení série budou zveřejněny po posledním závodě.
           </p>
         </div>

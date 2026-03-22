@@ -14,7 +14,7 @@ export default async function ParkovaniPage({
 
   return (
     <div>
-      <h2 className="text-2xl sm:text-3xl font-extrabold text-dark uppercase tracking-tight mb-6">
+      <h2 className="text-2xl sm:text-3xl font-extrabold text-white uppercase tracking-tight mb-6">
         Parkování
       </h2>
       {race.parking ? (
@@ -34,7 +34,7 @@ export default async function ParkovaniPage({
           )}
         </>
       ) : (
-        <p className="text-gray-500">Informace o parkování budou doplněny.</p>
+        <p className="text-slate-400">Informace o parkování budou doplněny.</p>
       )}
     </div>
   );

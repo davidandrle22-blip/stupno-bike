@@ -98,32 +98,20 @@ export default function RaceHero({
           animate={{ opacity: 1, y: 0, scale: 1 }}
           transition={{ delay: 0.4, duration: 0.8 }}
         >
-          <span className="block text-4xl sm:text-6xl md:text-7xl text-white">
-            Mistrovství XC
+          <span className="block text-3xl sm:text-5xl md:text-6xl text-white">
+            Mistrovství České republiky
           </span>
-          <span className="block text-4xl sm:text-6xl md:text-7xl gradient-text mt-1">
-            Horských kol
+          <span className="block text-3xl sm:text-5xl md:text-6xl gradient-text mt-1">
+            Horských kol XCO
           </span>
-          <span className="block text-5xl sm:text-7xl md:text-8xl text-white mt-1">
+          <span className="block text-4xl sm:text-6xl md:text-7xl text-white mt-1">
             STUPNO
+          </span>
+          <span className="block text-lg sm:text-2xl text-white/60 font-semibold tracking-widest mt-2">
+            Velká cena CUBE
           </span>
         </motion.h1>
 
-        {uciCategory && (
-          <motion.div
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ delay: 0.8, duration: 0.5 }}
-            className="mt-6"
-          >
-            <span className="inline-flex items-center gap-2.5 bg-white/10 backdrop-blur-sm border border-white/15 rounded-full px-6 py-2.5">
-              <span className="w-2 h-2 rounded-full bg-primary animate-pulse" />
-              <span className="text-white/90 text-sm font-bold uppercase tracking-wider">
-                UCI {uciCategory}
-              </span>
-            </span>
-          </motion.div>
-        )}
 
         {registrationUrl && (
           <motion.div

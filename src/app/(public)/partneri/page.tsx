@@ -26,7 +26,7 @@ export default async function PartneriPage() {
             href={partner.url || "#"}
             target="_blank"
             rel="noopener noreferrer"
-            className="bg-white rounded-xl p-6 shadow-sm border hover:shadow-md transition-all flex flex-col items-center justify-center gap-3 h-full"
+            className="bg-white/[0.08] rounded-xl p-6 border border-white/[0.1] hover:border-white/20 hover:bg-white/[0.12] transition-all flex flex-col items-center justify-center gap-3 h-full"
           >
             {partner.logo ? (
               <img
@@ -35,11 +35,11 @@ export default async function PartneriPage() {
                 className="h-16 w-auto object-contain"
               />
             ) : (
-              <span className="text-lg font-bold text-gray-400">
+              <span className="text-lg font-bold text-slate-300">
                 {partner.name}
               </span>
             )}
-            <span className="text-sm text-gray-500 text-center">
+            <span className="text-sm text-slate-400 text-center">
               {partner.name}
             </span>
           </a>
@@ -49,14 +49,14 @@ export default async function PartneriPage() {
   );
 
   return (
-    <div className="max-w-7xl mx-auto px-4 py-8">
-      <h1 className="text-3xl sm:text-4xl font-extrabold text-dark uppercase tracking-tight mb-8">
+    <div className="max-w-7xl mx-auto px-4 sm:px-6 py-8 sm:py-12">
+      <h1 className="text-3xl sm:text-4xl font-extrabold text-white uppercase tracking-tight mb-8">
         Partneři
       </h1>
 
       {mainPartners.length > 0 && (
         <div className="mb-12">
-          <h2 className="text-xl font-bold text-dark uppercase tracking-wide mb-4">
+          <h2 className="text-xl font-bold text-white uppercase tracking-wide mb-4">
             Hlavní partner
           </h2>
           {renderPartnerGrid(mainPartners)}
@@ -65,7 +65,7 @@ export default async function PartneriPage() {
 
       {seriesPartners.length > 0 && (
         <div className="mb-12">
-          <h2 className="text-xl font-bold text-dark uppercase tracking-wide mb-4">
+          <h2 className="text-xl font-bold text-white uppercase tracking-wide mb-4">
             Partneři série
           </h2>
           {renderPartnerGrid(seriesPartners)}
@@ -74,7 +74,7 @@ export default async function PartneriPage() {
 
       {racePartners.length > 0 && (
         <div>
-          <h2 className="text-xl font-bold text-dark uppercase tracking-wide mb-4">
+          <h2 className="text-xl font-bold text-white uppercase tracking-wide mb-4">
             Partneři závodů
           </h2>
           {renderPartnerGrid(racePartners)}

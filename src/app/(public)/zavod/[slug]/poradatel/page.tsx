@@ -14,7 +14,7 @@ export default async function PoradatelPage({
 
   return (
     <div>
-      <h2 className="text-2xl sm:text-3xl font-extrabold text-dark uppercase tracking-tight mb-6">
+      <h2 className="text-2xl sm:text-3xl font-extrabold text-white uppercase tracking-tight mb-6">
         Pořadatel
       </h2>
       {race.organizer ? (
@@ -23,7 +23,7 @@ export default async function PoradatelPage({
           dangerouslySetInnerHTML={{ __html: race.organizer }}
         />
       ) : (
-        <p className="text-gray-500">Informace o pořadateli budou doplněny.</p>
+        <p className="text-slate-400">Informace o pořadateli budou doplněny.</p>
       )}
     </div>
   );

@@ -18,7 +18,7 @@ export default async function RaceResultsPage({
 
   return (
     <div>
-      <h2 className="text-2xl sm:text-3xl font-extrabold text-dark uppercase tracking-tight mb-6">
+      <h2 className="text-2xl sm:text-3xl font-extrabold text-white uppercase tracking-tight mb-6">
         Výsledky
       </h2>
       {race.results.length > 0 ? (
@@ -33,7 +33,7 @@ export default async function RaceResultsPage({
           ]}
         />
       ) : (
-        <p className="text-gray-500">
+        <p className="text-slate-400">
           Výsledky tohoto závodu budou zveřejněny po závodě.
         </p>
       )}

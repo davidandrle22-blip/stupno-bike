@@ -46,7 +46,7 @@ export default function ResultsTable({ races }: { races: RaceResults[] }) {
               className={`px-4 py-2 rounded-xl text-sm font-bold uppercase tracking-wide transition-all ${
                 selectedRace === r.id
                   ? "bg-gradient-to-r from-primary to-primary-dark text-white shadow-md shadow-primary/20"
-                  : "bg-gray-100 text-gray-500 hover:bg-gray-200"
+                  : "bg-white/[0.08] text-slate-400 hover:bg-white/[0.12] border border-white/[0.1]"
               }`}
             >
               {r.title}
@@ -65,7 +65,7 @@ export default function ResultsTable({ races }: { races: RaceResults[] }) {
               className={`px-3 py-1.5 rounded-lg text-sm font-semibold transition-all ${
                 activeCategory === cat
                   ? "bg-secondary text-white shadow-sm shadow-secondary/20"
-                  : "bg-gray-100 text-gray-500 hover:bg-gray-200"
+                  : "bg-white/[0.08] text-slate-400 hover:bg-white/[0.12] border border-white/[0.1]"
               }`}
             >
               {cat}
@@ -77,9 +77,9 @@ export default function ResultsTable({ races }: { races: RaceResults[] }) {
       {/* Results table */}
       {filteredResults.length > 0 ? (
         <div className="overflow-x-auto">
-          <table className="w-full bg-white rounded-2xl overflow-hidden shadow-sm border border-gray-100">
+          <table className="w-full bg-white/[0.04] rounded-2xl overflow-hidden border border-white/[0.08]">
             <thead>
-              <tr className="bg-dark text-white">
+              <tr className="bg-white/[0.06] text-white">
                 <th className="px-4 py-3.5 text-left text-xs font-bold uppercase tracking-wider w-16">
                   #
                 </th>
@@ -101,8 +101,8 @@ export default function ResultsTable({ races }: { races: RaceResults[] }) {
               {filteredResults.map((result, i) => (
                 <tr
                   key={result.id}
-                  className={`border-b border-gray-50 ${
-                    i < 3 ? "bg-primary/[0.03]" : "hover:bg-gray-50"
+                  className={`border-b border-white/[0.05] ${
+                    i < 3 ? "bg-primary/[0.05]" : "hover:bg-white/[0.03]"
                   }`}
                 >
                   <td className="px-4 py-3.5">
@@ -114,19 +114,19 @@ export default function ResultsTable({ races }: { races: RaceResults[] }) {
                           ? "text-secondary"
                           : result.position === 3
                           ? "text-accent"
-                          : "text-gray-300"
+                          : "text-slate-500"
                       }`}
                     >
                       {result.position}.
                     </span>
                   </td>
-                  <td className="px-4 py-3.5 font-semibold text-dark">
+                  <td className="px-4 py-3.5 font-semibold text-white">
                     {result.name}
                   </td>
-                  <td className="px-4 py-3.5 text-gray-400 text-sm">
+                  <td className="px-4 py-3.5 text-slate-400 text-sm">
                     {result.team || "—"}
                   </td>
-                  <td className="px-4 py-3.5 text-sm font-mono text-gray-600">
+                  <td className="px-4 py-3.5 text-sm font-mono text-slate-300">
                     {result.time || "—"}
                   </td>
                   <td className="px-4 py-3.5 text-sm font-bold text-primary">
@@ -138,7 +138,7 @@ export default function ResultsTable({ races }: { races: RaceResults[] }) {
           </table>
         </div>
       ) : (
-        <p className="text-gray-500">
+        <p className="text-slate-400">
           Pro tuto kategorii nejsou zatím výsledky.
         </p>
       )}

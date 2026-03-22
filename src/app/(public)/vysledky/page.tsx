@@ -23,8 +23,8 @@ export default async function VysledkyPage() {
   const racesWithResults = races.filter((r) => r.results.length > 0);
 
   return (
-    <div className="max-w-7xl mx-auto px-4 py-8">
-      <h1 className="text-3xl sm:text-4xl font-extrabold text-dark uppercase tracking-tight mb-8">
+    <div className="max-w-7xl mx-auto px-4 sm:px-6 py-8 sm:py-12">
+      <h1 className="text-3xl sm:text-4xl font-extrabold text-white uppercase tracking-tight mb-8">
         Výsledky
       </h1>
 
@@ -38,7 +38,7 @@ export default async function VysledkyPage() {
           }))}
         />
       ) : (
-        <p className="text-gray-500">Výsledky budou zveřejněny po závodech.</p>
+        <p className="text-slate-400">Výsledky budou zveřejněny po závodech.</p>
       )}
     </div>
   );

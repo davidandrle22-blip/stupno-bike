@@ -23,51 +23,51 @@ type Circuit = {
 
 const CIRCUITS: Circuit[] = [
   {
-    id: "modra",
-    name: "Modrá trasa",
-    categories: "Elite & U23",
-    difficulty: "Závodní okruh Elite",
-    length: "4,5 km",
-    elevation: "85 m",
-    color: "#38bdf8",
-    gpx: "/gpx/okruh-modry.gpx",
-    profile:
-      "0,52 18,38 36,44 54,22 72,35 90,14 108,28 126,10 144,20 162,32 180,8 198,18 216,30 234,12 252,22 270,38 288,18 300,52",
+    id: "bila",
+    name: "Bílá trasa",
+    categories: "Děti 6 let",
+    difficulty: "Nejkratší okruh pro nejmenší závodníky",
+    length: "cca 0,5 km",
+    elevation: "~10 m",
+    color: "#e2e8f0",
+    gpx: "/gpx/okruh-bily.gpx",
+    profile: "0,52 60,46 120,42 180,46 240,44 300,52",
   },
   {
     id: "cervena",
     name: "Červená trasa",
-    categories: "Junior & Masters",
-    difficulty: "Závodní okruh Junior",
-    length: "3,8 km",
-    elevation: "65 m",
+    categories: "Děti 7–10 let",
+    difficulty: "Okruh pro mladé závodníky",
+    length: "cca 1,2 km",
+    elevation: "~25 m",
     color: "#ef4444",
     gpx: "/gpx/okruh-cerveny.gpx",
     profile:
-      "0,52 30,30 60,40 90,18 120,32 150,14 180,26 210,18 240,30 270,20 300,52",
+      "0,52 40,42 80,34 120,40 160,28 200,38 240,32 280,42 300,52",
   },
   {
-    id: "bila",
-    name: "Bílá trasa",
-    categories: "Hobby & Děti",
-    difficulty: "Hobby & děti",
-    length: "2,6 km",
-    elevation: "40 m",
-    color: "#94a3b8",
-    gpx: "/gpx/okruh-bily.gpx",
-    profile: "0,52 50,38 100,30 150,36 200,24 250,34 300,52",
+    id: "modra",
+    name: "Modrá trasa",
+    categories: "Žáci a žákyně",
+    difficulty: "Závodní okruh pro žákovské kategorie",
+    length: "cca 2,5 km",
+    elevation: "~50 m",
+    color: "#38bdf8",
+    gpx: "/gpx/okruh-modry.gpx",
+    profile:
+      "0,52 30,38 60,44 90,22 120,35 150,14 180,28 210,10 240,22 270,34 300,52",
   },
   {
     id: "zluta",
     name: "Žlutá trasa",
-    categories: "Enduro sekce",
-    difficulty: "Technická enduro sekce",
-    length: "1,2 km",
-    elevation: "55 m",
-    color: "#eab308",
+    categories: "Kadeti, kadetky, junioři, juniorky, ELITE muži a ženy",
+    difficulty: "Hlavní závodní okruh MČR XCO — technický terén",
+    length: "4,2 km",
+    elevation: "~85 m",
+    color: "#fbbf24",
     gpx: "/gpx/okruh-zluty.gpx",
     profile:
-      "0,52 40,44 80,10 120,36 160,14 200,40 240,22 280,38 300,52",
+      "0,52 18,38 36,44 54,22 72,35 90,14 108,28 126,10 144,20 162,32 180,8 198,18 216,30 234,12 252,22 270,38 288,18 300,52",
   },
 ];
 
@@ -121,13 +121,13 @@ export default function OkruhyPage() {
     <div>
       {/* Hlavička sekce */}
       <div className="mb-10">
-        <h2 className="text-2xl sm:text-3xl font-extrabold text-dark uppercase tracking-tight mb-3">
+        <h2 className="text-2xl sm:text-3xl font-extrabold text-white uppercase tracking-tight mb-3">
           Závodní okruhy
         </h2>
-        <p className="text-gray-500 max-w-2xl leading-relaxed">
-          Areál Stupno nabízí čtyři MTB trasy různé obtížnosti — od elitního závodního okruhu pro
-          kategorii Elite & U23 až po technickou enduro sekci. Stáhněte si GPX soubory nebo si
-          trasu zobrazte přímo na mapě níže.
+        <p className="text-slate-400 max-w-2xl leading-relaxed">
+          Areál Ultramarinka v Břasích nabízí čtyři MTB okruhy pro různé věkové kategorie.
+          Hlavní závodní okruh (4,2 km) je určen pro kadety, juniory a elitu bojující o tituly MČR.
+          Stáhněte si GPX soubory nebo si trasy zobrazte přímo na mapě níže.
         </p>
       </div>
 
@@ -167,9 +167,9 @@ export default function OkruhyPage() {
                 </div>
 
                 {/* Statistiky */}
-                <div className="flex gap-6 mb-4">
+                <div className="flex gap-3 sm:gap-6 mb-4">
                   <div>
-                    <p className="text-white text-2xl font-extrabold leading-none">
+                    <p className="text-white text-xl sm:text-2xl font-extrabold leading-none">
                       {circuit.length}
                     </p>
                     <p className="text-slate-500 text-xs uppercase tracking-widest mt-1">
@@ -177,7 +177,7 @@ export default function OkruhyPage() {
                     </p>
                   </div>
                   <div>
-                    <p className="text-white text-2xl font-extrabold leading-none">
+                    <p className="text-white text-xl sm:text-2xl font-extrabold leading-none">
                       {circuit.elevation}
                     </p>
                     <p className="text-slate-500 text-xs uppercase tracking-widest mt-1">
@@ -248,6 +248,30 @@ export default function OkruhyPage() {
         })}
       </div>
 
+      {/* Mapa okruhů — plné zobrazení + PDF stažení */}
+      <div className="mb-10">
+        <div className="rounded-2xl overflow-hidden border border-white/10 shadow-xl shadow-black/30">
+          <img
+            src="/images/mapa-okruhu.png"
+            alt="Mapa závodních okruhů Stupno XC — plné rozlišení"
+            className="w-full h-auto block"
+          />
+        </div>
+        <div className="mt-4 flex flex-wrap items-center gap-3">
+          <a
+            href="/mapa-okruhu.pdf"
+            download="Mapa-okruhu-Stupno-XCO.pdf"
+            className="inline-flex items-center gap-2 bg-primary/10 hover:bg-primary/20 border border-primary/30 hover:border-primary/50 text-primary font-semibold text-sm px-5 py-2.5 rounded-xl transition-all duration-200"
+          >
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth={1.8} strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+              <path d="M8 1v9M5 7l3 3 3-3M2 13h12" />
+            </svg>
+            Stáhnout mapu v plném rozlišení (PDF)
+          </a>
+          <span className="text-slate-500 text-xs">Formát PDF, tisk A3/A2</span>
+        </div>
+      </div>
+
       {/* Interaktivní mapa s GPX trasami */}
       <div id="mapa-okruhu" className="rounded-2xl overflow-hidden border border-gray-border shadow-lg">
         <div className="bg-slate-800 px-5 py-3.5 flex items-center gap-2.5 flex-wrap">
@@ -308,7 +332,7 @@ export default function OkruhyPage() {
           </a>
         </div>
 
-        <div style={{ height: "450px" }}>
+        <div className="h-[280px] sm:h-[380px] lg:h-[450px]">
           <GpxTracksMap
             circuits={MAP_CIRCUITS}
             activeId={activeId ?? undefined}
@@ -331,7 +355,7 @@ export default function OkruhyPage() {
             <circle cx="7" cy="7" r="5.5" />
             <path d="M7 4v3.5l2 1.5" strokeLinecap="round" />
           </svg>
-          GPX soubory jsou kompatibilní s Garmin, Wahoo, Komoot a dalšími navigacemi.
+          GPX soubory jsou kompatibilní s Garmin, Wahoo, Komoot a dalšími GPS aplikacemi.
         </div>
         <Link
           href="/zavod/stupno/propozice"

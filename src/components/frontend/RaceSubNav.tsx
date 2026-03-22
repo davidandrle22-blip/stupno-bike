@@ -24,9 +24,9 @@ export default function RaceSubNav({
   const pathname = usePathname();
 
   return (
-    <div className="bg-white border-b border-gray-border sticky top-16 z-30 shadow-sm">
+    <div className="bg-dark/95 backdrop-blur-md border-b border-white/10 sticky top-16 z-30 shadow-lg shadow-black/20">
       <div className="max-w-7xl mx-auto px-4">
-        <div className="flex items-center gap-0 overflow-x-auto py-0 -mb-px scrollbar-none">
+        <div className="flex items-center gap-0 overflow-x-auto -mb-px scrollbar-none">
           {tabs.map((tab) => {
             const href = `/zavod/${slug}/${tab.path}`;
             const isActive = pathname === href;
@@ -35,10 +35,10 @@ export default function RaceSubNav({
                 key={tab.path}
                 href={href}
                 className={cn(
-                  "px-4 py-3.5 text-[13px] font-semibold whitespace-nowrap border-b-2 transition-all uppercase tracking-wide",
+                  "px-3 sm:px-4 py-3.5 min-h-[44px] flex items-center text-[12px] sm:text-[13px] font-semibold whitespace-nowrap border-b-2 transition-all uppercase tracking-wide",
                   isActive
-                    ? "border-accent text-dark"
-                    : "border-transparent text-gray-400 hover:text-dark hover:border-gray-200"
+                    ? "border-accent text-white"
+                    : "border-transparent text-white/40 hover:text-white hover:border-white/20"
                 )}
               >
                 {tab.label}
@@ -51,7 +51,7 @@ export default function RaceSubNav({
               href={registrationUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="ml-auto shrink-0 bg-gradient-to-r from-accent to-accent-dark text-white font-bold px-5 py-2 rounded-lg text-[13px] uppercase tracking-wide transition-all hover:scale-105 hover:shadow-lg hover:shadow-accent/25 my-1"
+              className="ml-auto shrink-0 bg-gradient-to-r from-accent to-accent-dark text-white font-bold px-4 sm:px-5 py-2 rounded-lg text-[12px] sm:text-[13px] uppercase tracking-wide transition-all hover:scale-105 hover:shadow-lg hover:shadow-accent/25 my-1 min-h-[36px] flex items-center"
             >
               Registrace
             </a>

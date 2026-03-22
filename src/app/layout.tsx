@@ -9,20 +9,24 @@ const inter = Inter({
 
 export const metadata: Metadata = {
   title: {
-    default: "Mistrovství XC Horských kol STUPNO",
-    template: "%s | Mistrovství XC STUPNO",
+    default: "MČR XCO Stupno 2026 — Mistrovství ČR horských kol | Velká cena CUBE",
+    template: "%s | MČR XCO Stupno 2026",
   },
   description:
-    "Oficiální web Mistrovství XC Horských kol STUPNO - UCI XCO cross-country závody v České republice",
+    "Mistrovství České republiky horských kol XCO — Stupno — Velká cena CUBE. 17.–19. července 2026, areál Ultramarinka, Břasy. 650 závodníků, 3 dny programu.",
   keywords: [
     "MTB",
     "XCO",
+    "MČR",
     "cross-country",
     "závody",
     "horská kola",
     "UCI",
     "Stupno",
     "Mistrovství",
+    "Velká cena CUBE",
+    "Ultramarinka",
+    "Břasy",
   ],
 };
 

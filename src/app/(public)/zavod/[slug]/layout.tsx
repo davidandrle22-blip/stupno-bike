@@ -46,21 +46,20 @@ export default async function RaceLayout({
           heroImage={race.heroImage}
           heroVideo={race.showHeroVideo ? race.heroVideo : null}
           heroVideoWebm={race.showHeroVideo ? race.heroVideoWebm : null}
-          registrationUrl={race.registrationUrl}
+          registrationUrl={race.registrationUrl || "https://cycling.sportsoft.cz/mtb/#registrace"}
         />
       </div>
 
       {/* Sub navigation */}
-      <RaceSubNav slug={slug} registrationUrl={race.registrationUrl} />
+      <RaceSubNav slug={slug} registrationUrl={race.registrationUrl || "https://cycling.sportsoft.cz/mtb/#registrace"} />
 
       {/* Content */}
-      <div className="max-w-7xl mx-auto px-4 py-10 sm:py-14">{children}</div>
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 py-8 sm:py-10 lg:py-14 pb-24 sm:pb-10">{children}</div>
 
       {/* Mobile sticky CTA */}
-      {race.registrationUrl && (
-        <div className="sm:hidden fixed bottom-0 left-0 right-0 p-3 bg-white/95 backdrop-blur-lg border-t border-gray-border shadow-xl z-40">
+      <div className="sm:hidden fixed bottom-0 left-0 right-0 p-3 bg-dark/95 backdrop-blur-lg border-t border-white/10 shadow-xl z-40">
           <a
-            href={race.registrationUrl}
+            href={race.registrationUrl || "https://cycling.sportsoft.cz/mtb/#registrace"}
             target="_blank"
             rel="noopener noreferrer"
             className="block text-center bg-gradient-to-r from-accent to-accent-dark text-white font-bold py-3 rounded-xl uppercase tracking-wide"
@@ -68,7 +67,6 @@ export default async function RaceLayout({
             Registrace do závodu
           </a>
         </div>
-      )}
     </div>
   );
 }

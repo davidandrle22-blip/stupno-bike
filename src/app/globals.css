@@ -17,11 +17,58 @@
 }
 
 /* ═══ Base ═══ */
+html {
+  scroll-behavior: smooth;
+}
+
 body {
   font-family: var(--font-sans), system-ui, sans-serif;
-  color: #0F172A;
+  background-color: #0a0f0d;
+  background-image:
+    radial-gradient(ellipse at 20% 50%, rgba(13, 148, 136, 0.04) 0%, transparent 50%),
+    radial-gradient(ellipse at 80% 30%, rgba(6, 182, 212, 0.03) 0%, transparent 50%),
+    linear-gradient(180deg, #0a0f0d 0%, #0d1a17 40%, #0f1f1b 70%, #0a0f0d 100%);
+  background-attachment: fixed;
+  color: #e2e8f0;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  min-height: 100vh;
+}
+
+/* ═══ Topografické vrstevnice (main wrapper) ═══ */
+.main-wrapper {
+  position: relative;
+}
+
+.main-wrapper::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1200' height='800'%3E%3Cpath d='M0 400Q200 350 400 380T800 340T1200 360' fill='none' stroke='%230d9488' stroke-width='0.6' opacity='0.12'/%3E%3Cpath d='M0 440Q180 400 360 420T720 390T1200 410' fill='none' stroke='%230d9488' stroke-width='0.5' opacity='0.09'/%3E%3Cpath d='M0 480Q220 440 440 460T880 430T1200 450' fill='none' stroke='%2306b6d4' stroke-width='0.4' opacity='0.07'/%3E%3Cpath d='M0 360Q160 320 320 340T640 310T1200 330' fill='none' stroke='%230d9488' stroke-width='0.5' opacity='0.1'/%3E%3Cpath d='M0 320Q200 280 400 300T800 270T1200 290' fill='none' stroke='%2306b6d4' stroke-width='0.4' opacity='0.07'/%3E%3Cpath d='M0 520Q150 480 300 500T600 470T1200 490' fill='none' stroke='%230d9488' stroke-width='0.35' opacity='0.06'/%3E%3Cpath d='M0 280Q180 240 360 260T720 230T1200 250' fill='none' stroke='%230d9488' stroke-width='0.35' opacity='0.05'/%3E%3Cpath d='M0 240Q220 200 440 220T880 190T1200 210' fill='none' stroke='%2306b6d4' stroke-width='0.3' opacity='0.04'/%3E%3Cpath d='M0 560Q200 520 400 540T800 510T1200 530' fill='none' stroke='%230d9488' stroke-width='0.3' opacity='0.04'/%3E%3Cpath d='M0 200Q160 160 320 180T640 150T1200 170' fill='none' stroke='%2306b6d4' stroke-width='0.25' opacity='0.035'/%3E%3C/svg%3E");
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
+
+.main-wrapper::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  opacity: 0.025;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='256' height='256' filter='url(%23noise)'/%3E%3C/svg%3E");
+  background-size: 180px 180px;
+  background-repeat: repeat;
+}
+
+@media (max-width: 768px) {
+  body,
+  .main-wrapper::before {
+    background-attachment: scroll;
+  }
 }
 
 ::selection {
@@ -74,6 +121,27 @@ body {
   animation: logo-pulse 5s ease-in-out infinite;
 }
 
+/* ═══ Nav link animated underline ═══ */
+.nav-link-underline {
+  position: relative;
+}
+.nav-link-underline::after {
+  content: '';
+  position: absolute;
+  bottom: 5px;
+  left: 12px;
+  right: 12px;
+  height: 1.5px;
+  background: var(--color-primary);
+  border-radius: 2px;
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform 0.3s ease-out;
+}
+.nav-link-underline:hover::after {
+  transform: scaleX(1);
+}
+
 /* ═══ Glass morphism ═══ */
 .glass {
   background: rgba(255, 255, 255, 0.06);
@@ -92,7 +160,7 @@ body {
 .scrollbar-none::-webkit-scrollbar { display: none; }
 .scrollbar-none { -ms-overflow-style: none; scrollbar-width: none; }
 
-/* ═══ Tiptap editor ═══ */
+/* ═══ Tiptap editor — admin (světlé pozadí) ═══ */
 .tiptap-content h1 { font-size: 2rem; font-weight: 700; margin-bottom: 0.5rem; color: #0F172A; }
 .tiptap-content h2 { font-size: 1.5rem; font-weight: 700; margin-bottom: 0.5rem; color: #0F172A; }
 .tiptap-content h3 { font-size: 1.25rem; font-weight: 600; margin-bottom: 0.5rem; color: #1E293B; }
@@ -104,9 +172,80 @@ body {
 .tiptap-content img { max-width: 100%; height: auto; border-radius: 0.75rem; margin: 1rem 0; }
 .tiptap-content blockquote { border-left: 4px solid #10B981; padding-left: 1rem; margin: 1rem 0; font-style: italic; color: #475569; }
 
+/* ═══ Tiptap — veřejné stránky (tmavé pozadí) ═══ */
+.main-wrapper .tiptap-content h1,
+.main-wrapper .tiptap-content h2 { color: #e2e8f0; }
+.main-wrapper .tiptap-content h3 { color: #cbd5e1; }
+.main-wrapper .tiptap-content p { color: #94a3b8; }
+.main-wrapper .tiptap-content li { color: #94a3b8; }
+.main-wrapper .tiptap-content blockquote { color: #64748b; border-left-color: #0d9488; }
+.main-wrapper .tiptap-content strong { color: #e2e8f0; }
+
 /* ProseMirror */
 .ProseMirror:focus { outline: none; }
 .ProseMirror { min-height: 200px; padding: 1rem; }
 
 /* Leaflet */
 .leaflet-container { z-index: 1; }
+
+/* ═══ Responsivita — mobile performance ═══ */
+@media (max-width: 768px) {
+  .main-wrapper::before {
+    position: absolute !important;
+    background-attachment: scroll !important;
+  }
+
+  .main-wrapper::after {
+    background-size: 120px 120px;
+    opacity: 0.015;
+  }
+}
+
+/* ═══ Touch optimalizace ═══ */
+@media (max-width: 768px) {
+  /* Prevent zoom on input focus (iOS) */
+  input, select, textarea {
+    font-size: 16px !important;
+  }
+
+  /* Safe area (notch, home indicator) */
+  body {
+    padding-left: env(safe-area-inset-left);
+    padding-right: env(safe-area-inset-right);
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+}
+
+/* ═══ Reduced motion ═══ */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* ═══ Wide screen 1441px+ ═══ */
+@media (min-width: 1441px) {
+  .max-w-7xl {
+    max-width: 1400px;
+  }
+  .max-w-5xl {
+    max-width: 1100px;
+  }
+}
+
+/* ═══ Tiptap dark mode (on dark pages) ═══ */
+.dark .tiptap-content h1,
+.dark .tiptap-content h2,
+.dark .tiptap-content h3 { color: #e2e8f0; }
+.dark .tiptap-content p,
+.dark .tiptap-content li { color: #94a3b8; }
+
+/* ═══ Focus visible (accessibility) ═══ */
+:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+  border-radius: 4px;
+}

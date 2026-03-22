@@ -24,7 +24,7 @@ export default async function PublicLayout({
   return (
     <>
       <Header settings={settingsData} />
-      <main className="min-h-screen pt-16">{children}</main>
+      <main className="main-wrapper min-h-screen pt-16">{children}</main>
       <Footer settings={settingsData} />
     </>
   );

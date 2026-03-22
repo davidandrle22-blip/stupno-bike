@@ -34,7 +34,7 @@ export default async function PartneriPage({
 
   return (
     <div>
-      <h2 className="text-2xl sm:text-3xl font-extrabold text-dark uppercase tracking-tight mb-6">
+      <h2 className="text-2xl sm:text-3xl font-extrabold text-white uppercase tracking-tight mb-6">
         Partneři závodu
       </h2>
       {allPartners.length > 0 ? (
@@ -45,7 +45,7 @@ export default async function PartneriPage({
               href={partner.url || "#"}
               target="_blank"
               rel="noopener noreferrer"
-              className="bg-white rounded-xl p-6 shadow-sm border hover:shadow-md transition-shadow flex flex-col items-center justify-center gap-3"
+              className="bg-white/[0.08] rounded-xl p-6 border border-white/[0.1] hover:border-white/20 hover:bg-white/[0.12] transition-all flex flex-col items-center justify-center gap-3"
             >
               {partner.logo ? (
                 <img
@@ -54,16 +54,16 @@ export default async function PartneriPage({
                   className="h-16 w-auto object-contain"
                 />
               ) : (
-                <span className="text-lg font-bold text-gray-400">
+                <span className="text-lg font-bold text-slate-300">
                   {partner.name}
                 </span>
               )}
-              <span className="text-sm text-gray-500">{partner.name}</span>
+              <span className="text-sm text-slate-400">{partner.name}</span>
             </a>
           ))}
         </div>
       ) : (
-        <p className="text-gray-500">Partneři budou doplněni.</p>
+        <p className="text-slate-400">Partneři budou doplněni.</p>
       )}
     </div>
   );
