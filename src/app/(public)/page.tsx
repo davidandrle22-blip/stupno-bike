@@ -3,7 +3,7 @@ import Link from "next/link";
 import AnimatedSection from "@/components/frontend/AnimatedSection";
 import HeroSection from "@/components/frontend/HeroSection";
 
-export const dynamic = "force-dynamic";
+export const revalidate = 60;
 import {
   MapPin,
   Calendar,

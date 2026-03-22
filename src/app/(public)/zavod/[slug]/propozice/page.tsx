@@ -1,7 +1,7 @@
 import { prisma } from "@/lib/prisma";
 import { notFound } from "next/navigation";
 
-export const dynamic = "force-dynamic";
+export const revalidate = 120;
 
 const VSECHNY_KATEGORIE = [
   { skupina: "Nejmladší", items: ["Holky 5–6 let", "Kluci 5–6 let", "Holky 7–8 let", "Kluci 7–8 let", "Holky 9–10 let", "Kluci 9–10 let"] },

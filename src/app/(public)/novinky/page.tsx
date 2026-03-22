@@ -4,7 +4,7 @@ import { formatDate } from "@/lib/utils";
 import AnimatedSection from "@/components/frontend/AnimatedSection";
 import type { Metadata } from "next";
 
-export const dynamic = "force-dynamic";
+export const revalidate = 120;
 
 export const metadata: Metadata = {
   title: "Novinky",
