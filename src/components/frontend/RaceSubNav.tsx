@@ -4,7 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
 
-const tabs = [
+const tabs: { label: string; path: string; absolute?: string }[] = [
   { label: "Propozice", path: "propozice" },
   { label: "Program", path: "program" },
   { label: "Parkování", path: "parkovani" },
@@ -12,6 +12,7 @@ const tabs = [
   { label: "Pořadatel", path: "poradatel" },
   { label: "Partneři", path: "partneri" },
   { label: "Výsledky", path: "vysledky" },
+  { label: "Pravidla", path: "pravidla", absolute: "/pravidla" },
 ];
 
 export default function RaceSubNav({
@@ -28,7 +29,7 @@ export default function RaceSubNav({
       <div className="max-w-7xl mx-auto px-4">
         <div className="flex items-center gap-0 overflow-x-auto -mb-px scrollbar-none">
           {tabs.map((tab) => {
-            const href = `/zavod/${slug}/${tab.path}`;
+            const href = tab.absolute ?? `/zavod/${slug}/${tab.path}`;
             const isActive = pathname === href;
             return (
               <Link

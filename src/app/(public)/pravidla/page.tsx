@@ -4,34 +4,55 @@ export const metadata: Metadata = {
   title: "Pravidla a kategorie | MČR XCO Stupno 2026",
 };
 
-const KATEGORIE = [
+const KATEGORIE: { skupina: string; items: [string, string][]; color: string }[] = [
   {
     skupina: "Nejmladší",
     items: [
-      "Holky 5–6 let", "Kluci 5–6 let",
-      "Holky 7–8 let", "Kluci 7–8 let",
-      "Holky 9–10 let", "Kluci 9–10 let",
+      ["Holky 5–6 let", "nar. 2020–2021"],
+      ["Kluci 5–6 let", "nar. 2020–2021"],
+      ["Holky 7–8 let", "nar. 2018–2019"],
+      ["Kluci 7–8 let", "nar. 2018–2019"],
+      ["Holky 9–10 let", "nar. 2016–2017"],
+      ["Kluci 9–10 let", "nar. 2016–2017"],
     ],
     color: "text-secondary",
   },
   {
     skupina: "Žáci",
-    items: ["Žákyně I", "Žáci I", "Žákyně II", "Žáci II"],
+    items: [
+      ["Žákyně I", "11–12 let (nar. 2014–2015)"],
+      ["Žáci I", "11–12 let (nar. 2014–2015)"],
+      ["Žákyně II", "13–14 let (nar. 2012–2013)"],
+      ["Žáci II", "13–14 let (nar. 2012–2013)"],
+    ],
     color: "text-primary",
   },
   {
     skupina: "Kadeti a junioři",
-    items: ["Kadetky", "Kadeti", "Juniorky", "Junioři"],
+    items: [
+      ["Kadetky", "15–16 let (nar. 2010–2011)"],
+      ["Kadeti", "15–16 let (nar. 2010–2011)"],
+      ["Juniorky", "17–18 let (nar. 2008–2009)"],
+      ["Junioři", "17–18 let (nar. 2008–2009)"],
+    ],
     color: "text-accent",
   },
   {
-    skupina: "Elite",
-    items: ["Ženy Elite / U23", "Muži Elite"],
+    skupina: "Elite & U23",
+    items: [
+      ["Ženy U23", "19–22 let (nar. 2004–2007)"],
+      ["Muži U23", "19–22 let (nar. 2004–2007)"],
+      ["Ženy Elite", "23 let a starší (nar. 2003 a dříve)"],
+      ["Muži Elite", "23 let a starší (nar. 2003 a dříve)"],
+    ],
     color: "text-primary",
   },
   {
     skupina: "Hobby a masters",
-    items: ["Masters", "Experti"],
+    items: [
+      ["Experti", "19 let a starší"],
+      ["Masters", "35 let a starší"],
+    ],
     color: "text-secondary",
   },
 ];
@@ -57,7 +78,17 @@ export default function PravidlaPage() {
         <p className="text-slate-300 text-base leading-relaxed mb-6">
           Závodí se dle pravidel Českého svazu cyklistiky a seriálu Český pohár MTB.
         </p>
-        <div className="flex flex-col sm:flex-row gap-3">
+        <div className="flex flex-col sm:flex-row gap-3 flex-wrap">
+          <a
+            href="/rozpis-mtb-cup-2026.pdf"
+            download="Rozpis-MTB-Cup-2026.pdf"
+            className="inline-flex items-center gap-2 bg-primary/10 hover:bg-primary/20 border border-primary/30 hover:border-primary/50 text-primary font-semibold text-sm px-5 py-3 rounded-xl transition-all"
+          >
+            <svg width="15" height="15" viewBox="0 0 15 15" fill="none" stroke="currentColor" strokeWidth={1.8} strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+              <path d="M7.5 1v9M4.5 7l3 3 3-3M1.5 13h12" />
+            </svg>
+            Rozpis ČP MTB 2026 (PDF)
+          </a>
           <a
             href="https://www.poharmtb.cz/mtb-xco-cup"
             target="_blank"
@@ -89,12 +120,13 @@ export default function PravidlaPage() {
                 {skupina.skupina}
               </h3>
               <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
-                {skupina.items.map((kat) => (
+                {skupina.items.map(([kat, vek]) => (
                   <div
                     key={kat}
-                    className="bg-white/[0.06] border border-white/[0.1] rounded-xl px-4 py-2.5 text-sm font-medium text-slate-200"
+                    className="bg-white/[0.06] border border-white/[0.1] rounded-xl px-4 py-2.5"
                   >
-                    {kat}
+                    <p className="text-sm font-medium text-slate-200">{kat}</p>
+                    <p className="text-[11px] text-slate-500 mt-0.5">{vek}</p>
                   </div>
                 ))}
               </div>

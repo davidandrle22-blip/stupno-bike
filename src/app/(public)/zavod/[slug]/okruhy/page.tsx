@@ -25,7 +25,7 @@ const CIRCUITS: Circuit[] = [
   {
     id: "bila",
     name: "Bílá trasa",
-    categories: "Děti 6 let",
+    categories: "Děti 5–6 let",
     difficulty: "Nejkratší okruh pro nejmenší závodníky",
     length: "cca 0,5 km",
     elevation: "~10 m",
@@ -36,7 +36,7 @@ const CIRCUITS: Circuit[] = [
   {
     id: "cervena",
     name: "Červená trasa",
-    categories: "Děti 7–10 let",
+    categories: "Děti 7–10 let (nar. 2016–2019)",
     difficulty: "Okruh pro mladé závodníky",
     length: "cca 1,2 km",
     elevation: "~25 m",
@@ -48,7 +48,7 @@ const CIRCUITS: Circuit[] = [
   {
     id: "modra",
     name: "Modrá trasa",
-    categories: "Žáci a žákyně",
+    categories: "Žáci a žákyně I+II (11–14 let)",
     difficulty: "Závodní okruh pro žákovské kategorie",
     length: "cca 2,5 km",
     elevation: "~50 m",
@@ -60,7 +60,7 @@ const CIRCUITS: Circuit[] = [
   {
     id: "zluta",
     name: "Žlutá trasa",
-    categories: "Kadeti, kadetky, junioři, juniorky, ELITE muži a ženy",
+    categories: "Kadeti/ky (15–16 let), Junioři/ky (17–18 let), U23 + ELITE",
     difficulty: "Hlavní závodní okruh MČR XCO — technický terén",
     length: "4,2 km",
     elevation: "~85 m",
