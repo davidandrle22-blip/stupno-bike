@@ -2,7 +2,7 @@ import { prisma } from "@/lib/prisma";
 import AnimatedSection from "@/components/frontend/AnimatedSection";
 import type { Metadata } from "next";
 
-export const revalidate = 120;
+export const revalidate = 3600;
 
 export const metadata: Metadata = {
   title: "Partneři",

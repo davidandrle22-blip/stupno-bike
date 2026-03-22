@@ -1,7 +1,7 @@
 import { prisma } from "@/lib/prisma";
 import { notFound } from "next/navigation";
 
-export const revalidate = 120;
+export const revalidate = 3600;
 
 type ProgramItem = { time: string; desc: string; entertainment?: boolean };
 type ProgramDay = { day: string; subtitle?: string; items: ProgramItem[] };

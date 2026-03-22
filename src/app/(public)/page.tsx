@@ -4,7 +4,7 @@ import Image from "next/image";
 import AnimatedSection from "@/components/frontend/AnimatedSection";
 import HeroSection from "@/components/frontend/HeroSection";
 
-export const revalidate = 60;
+export const revalidate = 3600;
 import {
   MapPin,
   Calendar,

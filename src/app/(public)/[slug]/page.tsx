@@ -2,7 +2,7 @@ import { prisma } from "@/lib/prisma";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 
-export const revalidate = 120;
+export const revalidate = 3600;
 
 const validSlugs = ["o-nas", "pravidla", "kontakt", "dale-poradame"];
 

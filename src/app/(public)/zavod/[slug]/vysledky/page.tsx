@@ -2,7 +2,7 @@ import { prisma } from "@/lib/prisma";
 import { notFound } from "next/navigation";
 import ResultsTable from "@/components/frontend/ResultsTable";
 
-export const revalidate = 120;
+export const revalidate = 3600;
 
 export default async function RaceResultsPage({
   params,

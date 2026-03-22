@@ -4,7 +4,15 @@ import { formatDate } from "@/lib/utils";
 import RaceHero from "@/components/frontend/RaceHero";
 import RaceSubNav from "@/components/frontend/RaceSubNav";
 
-export const revalidate = 120;
+export const revalidate = 3600;
+
+export async function generateStaticParams() {
+  const races = await prisma.race.findMany({
+    where: { status: "PUBLISHED" },
+    select: { slug: true },
+  });
+  return races.map((r) => ({ slug: r.slug }));
+}
 
 export async function generateMetadata({
   params,

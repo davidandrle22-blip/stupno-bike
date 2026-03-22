@@ -2,7 +2,7 @@ import { prisma } from "@/lib/prisma";
 import Header from "@/components/frontend/Header";
 import Footer from "@/components/frontend/Footer";
 
-export const revalidate = 60;
+export const revalidate = 3600;
 
 export default async function PublicLayout({
   children,
