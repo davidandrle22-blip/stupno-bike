@@ -34,12 +34,19 @@ export default function LeafletMap({
       maxZoom: 18,
     }).addTo(map);
 
-    // Add GPX polyline
+    // Add GPX polyline — vždy výrazná barva, fallback na teal
+    const c = color?.toLowerCase().trim() ?? "";
+    const effectiveColor =
+      !c || c.startsWith("#fff") || c === "white" || c === "rgb(255,255,255)"
+        ? "#0d9488"
+        : color;
     const latLngs: L.LatLngExpression[] = points.map((p) => [p.lat, p.lon]);
+    // Outline + barevná čára navrch pro maximální viditelnost
+    L.polyline(latLngs, { color: "#000000", weight: 9, opacity: 0.35 }).addTo(map);
     const polyline = L.polyline(latLngs, {
-      color,
-      weight: 4,
-      opacity: 0.8,
+      color: effectiveColor,
+      weight: 5,
+      opacity: 1,
     }).addTo(map);
 
     // Fit bounds

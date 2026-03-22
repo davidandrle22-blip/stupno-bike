@@ -45,11 +45,19 @@ export default function LeafletMultiMap({
       const latLngs: L.LatLngExpression[] = track.points.map((p) => [p.lat, p.lon]);
       latLngs.forEach((ll) => allLatLngs.push(ll));
 
-      L.polyline(latLngs, {
-        color: track.color,
-        weight: isActive ? 5 : 2,
-        opacity: isActive ? 0.9 : 0.3,
-      }).addTo(map);
+      const c = track.color?.toLowerCase().trim() ?? "";
+      const trackColor =
+        !c || c.startsWith("#fff") || c === "white" || c === "rgb(255,255,255)"
+          ? "#0d9488"
+          : track.color;
+
+      if (isActive) {
+        // Outline (tmavý podklad) + barevná čára navrch
+        L.polyline(latLngs, { color: "#000000", weight: 9, opacity: 0.35 }).addTo(map);
+        L.polyline(latLngs, { color: trackColor, weight: 5, opacity: 1 }).addTo(map);
+      } else {
+        L.polyline(latLngs, { color: trackColor, weight: 2, opacity: 0.35 }).addTo(map);
+      }
     });
 
     if (allLatLngs.length > 0) {

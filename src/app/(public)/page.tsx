@@ -3,6 +3,7 @@ import Link from "next/link";
 import Image from "next/image";
 import AnimatedSection from "@/components/frontend/AnimatedSection";
 import HeroSection from "@/components/frontend/HeroSection";
+import GpsTrackingSection from "@/components/frontend/GpsTrackingSection";
 
 export const revalidate = 3600;
 import {
@@ -38,6 +39,9 @@ export default async function HomePage() {
         facebookUrl={settings?.facebookUrl ?? null}
         instagramUrl={settings?.instagramUrl ?? null}
       />
+
+      {/* ═══════════════ GPS TRACKING — přechodová zóna ═══════════════ */}
+      <GpsTrackingSection />
 
       {/* ═══════════════ SLOGAN — nad dlaždice ═══════════════ */}
       <section className="pt-12 sm:pt-16 pb-8 sm:pb-10 relative z-10">

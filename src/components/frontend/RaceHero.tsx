@@ -141,10 +141,13 @@ export default function RaceHero({
         <ChevronDown className="text-white/30 w-7 h-7" />
       </motion.div>
 
-      {/* Skewed divider at bottom */}
+      {/* Skewed divider at bottom — tmavý gradient místo bílé */}
       <div
-        className="absolute bottom-0 left-0 right-0 h-20 bg-white z-10"
-        style={{ clipPath: "polygon(0 60%, 100% 0%, 100% 100%, 0% 100%)" }}
+        className="absolute bottom-0 left-0 right-0 h-20 z-10"
+        style={{
+          clipPath: "polygon(0 60%, 100% 0%, 100% 100%, 0% 100%)",
+          background: "linear-gradient(to bottom right, rgba(6,182,212,0.18), #0F172A)",
+        }}
       />
     </section>
   );

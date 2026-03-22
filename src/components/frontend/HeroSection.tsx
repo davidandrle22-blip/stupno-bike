@@ -8,7 +8,6 @@ import {
   ArrowRight,
 } from "lucide-react";
 import AnimatedSection from "@/components/frontend/AnimatedSection";
-import CyclistDivider from "@/components/frontend/CyclistDivider";
 import Countdown from "@/components/frontend/Countdown";
 import HeroWithVideo from "@/components/frontend/HeroWithVideo";
 import SocialLinks from "@/components/frontend/SocialLinks";
@@ -25,7 +24,7 @@ export default function HeroSection({
   instagramUrl?: string | null;
 }) {
   return (
-    <section className="relative min-h-screen flex items-center overflow-hidden -mt-16 pt-16">
+    <section className="relative min-h-screen flex items-center -mt-16 pt-16">
       <HeroWithVideo
         posterUrl="/media/races/stupno/hero-poster.jpg"
         posterMobileUrl="/media/races/stupno/hero-poster-mobile.jpg"
@@ -135,7 +134,7 @@ export default function HeroSection({
                   <div className="flex flex-col sm:flex-row gap-3">
                     <Link
                       href={raceSlug ? `/zavod/${raceSlug}/program` : "/zavod/stupno/program"}
-                      className="group bg-gradient-to-r from-primary to-primary-dark text-white font-bold px-7 py-3.5 rounded-full uppercase tracking-wide transition-all duration-300 hover:shadow-xl hover:shadow-primary/30 hover:-translate-y-0.5 flex items-center gap-2 justify-center"
+                      className="group bg-gradient-to-r from-primary to-primary-dark text-white font-bold px-7 py-3.5 rounded-full uppercase tracking-wide transition-all duration-300 hover:shadow-xl hover:shadow-primary/30 hover:-translate-y-0.5 flex items-center gap-2 justify-center w-full sm:w-auto"
                     >
                       Detail závodu
                       <ArrowRight size={17} className="group-hover:translate-x-0.5 transition-transform" />
@@ -144,7 +143,7 @@ export default function HeroSection({
                       href={registrationUrl || "https://cycling.sportsoft.cz/mtb/#registrace"}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="bg-gradient-to-r from-accent to-accent-dark text-white font-bold px-7 py-3.5 rounded-full uppercase tracking-wide transition-all duration-300 hover:shadow-xl hover:shadow-accent/30 hover:-translate-y-0.5 text-center"
+                      className="bg-gradient-to-r from-accent to-accent-dark text-white font-bold px-7 py-3.5 rounded-full uppercase tracking-wide transition-all duration-300 hover:shadow-xl hover:shadow-accent/30 hover:-translate-y-0.5 text-center w-full sm:w-auto"
                     >
                       Registrace
                     </a>
@@ -158,8 +157,6 @@ export default function HeroSection({
         )}
       </HeroWithVideo>
 
-      {/* Cyclist divider */}
-      <CyclistDivider />
     </section>
   );
 }
