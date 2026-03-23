@@ -21,11 +21,11 @@ export default function Footer({ settings }: { settings: Settings }) {
           {/* Brand */}
           <div className="lg:w-[320px] shrink-0">
             <div className="flex items-center gap-3 mb-5">
-              <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-primary to-secondary flex items-center justify-center shadow-lg shadow-primary/20">
+              <div className="w-10 h-10 rounded-xl flex items-center justify-center" style={{ background: "linear-gradient(135deg, #1148B8, #4A90E2)", boxShadow: "0 4px 16px rgba(74,144,226,0.45)" }}>
                 <span className="text-white font-black text-sm">XC</span>
               </div>
               <div>
-                <span className="font-extrabold text-sm uppercase tracking-tight block leading-none">
+                <span className="font-extrabold text-sm uppercase tracking-tight block leading-none" style={{ color: "#4A90E2" }}>
                   MČR XCO
                 </span>
                 <span className="text-[10px] font-semibold tracking-[0.2em] uppercase">
