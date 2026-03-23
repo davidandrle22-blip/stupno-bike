@@ -83,6 +83,34 @@ body {
   text-transform: uppercase;
 }
 
+/* ═══ Česká trikolóra — text gradient ═══ */
+.tricolor-text {
+  background: linear-gradient(
+    92deg,
+    #11457E 0%,
+    #11457E 33%,
+    #ffffff 50%,
+    #D7141A 67%,
+    #D7141A 100%
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.tricolor-text-strong {
+  background: linear-gradient(
+    110deg,
+    #11457E 0%,
+    #11457E 33%,
+    #ffffff 50%,
+    #D7141A 67%,
+    #D7141A 100%
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
 /* ═══ Gradient text ═══ */
 .gradient-text {
   background: linear-gradient(135deg, #0EA5E9 0%, #10B981 50%, #38BDF8 100%);

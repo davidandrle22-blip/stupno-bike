@@ -55,6 +55,7 @@ export default function HeroSection({
                   >
                     <motion.span
                       className="block text-[clamp(2rem,4.5vw,3.5rem)]"
+                      style={{ color: "#4A90E2" }}
                       variants={{
                         hidden: { opacity: 0, y: 30, filter: "blur(10px)" },
                         visible: { opacity: 1, y: 0, filter: "blur(0px)", transition: { duration: 0.8, ease: "easeOut" } },
@@ -63,7 +64,7 @@ export default function HeroSection({
                       Mistrovství České republiky
                     </motion.span>
                     <motion.span
-                      className="block text-[clamp(2rem,4.5vw,3.5rem)] gradient-text mt-0.5"
+                      className="block text-[clamp(2rem,4.5vw,3.5rem)] text-white mt-0.5"
                       variants={{
                         hidden: { opacity: 0, y: 30, filter: "blur(10px)" },
                         visible: { opacity: 1, y: 0, filter: "blur(0px)", transition: { duration: 0.8, ease: "easeOut" } },
@@ -73,6 +74,7 @@ export default function HeroSection({
                     </motion.span>
                     <motion.span
                       className="block text-[clamp(2.8rem,6.5vw,5rem)] mt-0.5"
+                      style={{ color: "#D7141A" }}
                       variants={{
                         hidden: { opacity: 0, y: 40, filter: "blur(14px)", scale: 0.9 },
                         visible: { opacity: 1, y: 0, filter: "blur(0px)", scale: 1, transition: { duration: 1, ease: "easeOut" } },
