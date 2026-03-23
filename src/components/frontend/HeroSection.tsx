@@ -64,7 +64,7 @@ export default function HeroSection({
                       Mistrovství České republiky
                     </motion.span>
                     <motion.span
-                      className="block text-[clamp(2rem,4.5vw,3.5rem)] text-white mt-0.5"
+                      className="block text-[clamp(2rem,4.5vw,3.5rem)] text-white mt-3"
                       variants={{
                         hidden: { opacity: 0, y: 30, filter: "blur(10px)" },
                         visible: { opacity: 1, y: 0, filter: "blur(0px)", transition: { duration: 0.8, ease: "easeOut" } },

@@ -98,13 +98,13 @@ export default function RaceHero({
           animate={{ opacity: 1, y: 0, scale: 1 }}
           transition={{ delay: 0.4, duration: 0.8 }}
         >
-          <span className="block text-3xl sm:text-5xl md:text-6xl text-white">
+          <span className="block text-3xl sm:text-5xl md:text-6xl" style={{ color: "#4A90E2" }}>
             Mistrovství České republiky
           </span>
-          <span className="block text-3xl sm:text-5xl md:text-6xl gradient-text mt-1">
+          <span className="block text-3xl sm:text-5xl md:text-6xl text-white mt-3">
             Horských kol XCO
           </span>
-          <span className="block text-4xl sm:text-6xl md:text-7xl text-white mt-1">
+          <span className="block text-4xl sm:text-6xl md:text-7xl mt-1" style={{ color: "#D7141A" }}>
             STUPNO
           </span>
           <span className="block text-lg sm:text-2xl text-white/60 font-semibold tracking-widest mt-2">
