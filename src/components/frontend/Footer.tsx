@@ -28,8 +28,8 @@ export default function Footer({ settings }: { settings: Settings }) {
                 <span className="font-extrabold text-sm uppercase tracking-tight block leading-none">
                   MČR XCO
                 </span>
-                <span className="text-primary-light text-[10px] font-semibold tracking-[0.2em] uppercase">
-                  Horských kol Stupno
+                <span className="text-[10px] font-semibold tracking-[0.2em] uppercase">
+                  <span className="text-white/80">Horských kol </span><span style={{ color: "#D7141A" }}>Stupno</span>
                 </span>
               </div>
             </div>

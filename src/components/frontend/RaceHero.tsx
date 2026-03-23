@@ -86,7 +86,7 @@ export default function RaceHero({
           className="flex items-center gap-3 mb-6"
         >
           <div className="h-px w-8 sm:w-12 bg-gradient-to-r from-transparent to-primary-light" />
-          <span className="text-primary-light text-xs sm:text-sm font-semibold uppercase tracking-[0.3em]">
+          <span className="text-white/80 text-xs sm:text-sm font-semibold uppercase tracking-[0.3em]">
             {formatDate(date)} &bull; {location}
           </span>
           <div className="h-px w-8 sm:w-12 bg-gradient-to-l from-transparent to-primary-light" />
