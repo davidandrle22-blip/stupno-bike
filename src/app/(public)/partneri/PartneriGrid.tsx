@@ -32,25 +32,25 @@ export default function PartneriGrid() {
 
       {/* Generální partneři */}
       <TierLabel label="Generální partneři" />
-      <div className="grid grid-cols-2 gap-4 sm:gap-5 mb-10 sm:mb-12">
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-5 mb-10 sm:mb-12">
         {general.map((p, i) => (
-          <LogoTile key={p.id} partner={p} size="lg" delay={i * 0.1} />
+          <LogoTile key={p.id} partner={p} logoH={100} logoW={260} delay={i * 0.1} />
         ))}
       </div>
 
       {/* Hlavní partneři */}
       <TierLabel label="Hlavní partneři" />
-      <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 sm:gap-5 mb-10 sm:mb-12">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5 mb-10 sm:mb-12">
         {main.map((p, i) => (
-          <LogoTile key={p.id} partner={p} size="md" delay={i * 0.07} />
+          <LogoTile key={p.id} partner={p} logoH={70} logoW={180} delay={i * 0.07} />
         ))}
       </div>
 
       {/* Partneři */}
       <TierLabel label="Partneři" />
-      <div className="grid grid-cols-3 sm:grid-cols-5 gap-4 sm:gap-5">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-4 sm:gap-5">
         {partner.map((p, i) => (
-          <LogoTile key={p.id} partner={p} size="sm" delay={i * 0.05} />
+          <LogoTile key={p.id} partner={p} logoH={56} logoW={140} delay={i * 0.05} />
         ))}
       </div>
     </div>
@@ -67,17 +67,15 @@ function TierLabel({ label }: { label: string }) {
 
 function LogoTile({
   partner: p,
-  size,
+  logoH,
+  logoW,
   delay,
 }: {
   partner: (typeof partners)[0];
-  size: "lg" | "md" | "sm";
+  logoH: number;
+  logoW: number;
   delay: number;
 }) {
-  const heightCls = "min-h-[160px] sm:min-h-[180px]";
-  const imgH = size === "lg" ? 110 : size === "md" ? 80 : 56;
-  const imgW = size === "lg" ? 260 : size === "md" ? 180 : 130;
-
   return (
     <motion.a
       href={p.url}
@@ -89,22 +87,35 @@ function LogoTile({
       viewport={{ once: true, margin: "-30px" }}
       transition={{ duration: 0.45, delay, ease: "easeOut" }}
       whileHover={{ y: -3, transition: { duration: 0.2 } }}
-      className={`group flex flex-col items-center justify-start gap-0 ${heightCls} bg-white rounded-2xl border-2 border-transparent hover:border-primary/50 hover:shadow-xl hover:shadow-primary/15 transition-colors duration-300 px-5 py-5`}
+      className="group flex flex-col bg-white rounded-2xl border-2 border-transparent hover:border-primary/50 hover:shadow-xl hover:shadow-primary/15 transition-colors duration-300 overflow-hidden"
     >
-      <Image
-        src={p.logo}
-        alt={p.name}
-        width={imgW}
-        height={imgH}
-        className="object-contain w-auto group-hover:scale-105 transition-transform duration-300"
-        style={{ maxHeight: imgH, maxWidth: "100%" }}
-      />
-      <span className="text-[10px] font-semibold text-gray-400 uppercase tracking-wider text-center leading-tight mt-1">
-        {p.name}
-      </span>
-      <p className="text-[11px] sm:text-xs text-gray-500 text-center leading-relaxed mt-1 line-clamp-4">
-        {p.description}
-      </p>
+      {/* Logo zone — fixed height, logo centered */}
+      <div
+        className="flex items-center justify-center w-full shrink-0 px-6"
+        style={{ height: logoH + 40 }}
+      >
+        <Image
+          src={p.logo}
+          alt={p.name}
+          width={logoW}
+          height={logoH}
+          className="object-contain w-auto group-hover:scale-105 transition-transform duration-300"
+          style={{ maxHeight: logoH, maxWidth: "100%" }}
+        />
+      </div>
+
+      {/* Divider */}
+      <div className="h-px bg-gray-100 mx-5" />
+
+      {/* Text zone */}
+      <div className="flex flex-col px-5 py-4 gap-1">
+        <span className="text-[10px] font-bold text-gray-400 uppercase tracking-[0.2em] text-center">
+          {p.name}
+        </span>
+        <p className="text-xs text-gray-500 text-center leading-relaxed">
+          {p.description}
+        </p>
+      </div>
     </motion.a>
   );
 }
