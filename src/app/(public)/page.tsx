@@ -4,6 +4,7 @@ import Image from "next/image";
 import AnimatedSection from "@/components/frontend/AnimatedSection";
 import HeroSection from "@/components/frontend/HeroSection";
 import GpsTrackingSection from "@/components/frontend/GpsTrackingSection";
+import PartnersStrip from "@/components/frontend/PartnersStrip";
 
 export const revalidate = 3600;
 import {
@@ -17,13 +18,10 @@ import {
 } from "lucide-react";
 
 export default async function HomePage() {
-  const [races, partners, settings] = await Promise.all([
+  const [races, settings] = await Promise.all([
     prisma.race.findMany({
       where: { status: "PUBLISHED" },
       orderBy: { date: "asc" },
-    }),
-    prisma.partner.findMany({
-      orderBy: { order: "asc" },
     }),
     prisma.siteSettings.findFirst({ where: { id: "main" } }),
   ]);
@@ -205,49 +203,7 @@ export default async function HomePage() {
       )}
 
       {/* ═══════════════ PARTNERS ═══════════════ */}
-      {partners.length > 0 && (
-        <section className="py-16 sm:py-24 lg:py-32 relative z-10">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6">
-            <AnimatedSection>
-              <div className="text-center mb-10 sm:mb-14 lg:mb-16">
-                <span className="text-primary text-[11px] uppercase tracking-[0.4em] font-bold">
-                  Podporují nás
-                </span>
-                <h2 className="text-2xl sm:text-4xl lg:text-5xl font-black text-white uppercase tracking-tight mt-3">
-                  Partneři
-                </h2>
-                <div className="w-16 h-1 bg-gradient-to-r from-primary to-secondary mx-auto mt-5 rounded-full" />
-              </div>
-            </AnimatedSection>
-            <div className="flex flex-wrap justify-center items-center gap-8 sm:gap-12 lg:gap-16">
-              {partners.map((partner, i) => (
-                <AnimatedSection key={partner.id} delay={i * 0.06}>
-                  {partner.url ? (
-                    <a
-                      href={partner.url}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="group block"
-                    >
-                      <div className="h-14 w-36 flex items-center justify-center grayscale group-hover:grayscale-0 opacity-30 group-hover:opacity-100 transition-all duration-500 group-hover:scale-110">
-                        <span className="text-lg font-bold text-slate-400 group-hover:text-primary transition-colors">
-                          {partner.name}
-                        </span>
-                      </div>
-                    </a>
-                  ) : (
-                    <div className="h-14 w-36 flex items-center justify-center opacity-30">
-                      <span className="text-lg font-bold text-slate-400">
-                        {partner.name}
-                      </span>
-                    </div>
-                  )}
-                </AnimatedSection>
-              ))}
-            </div>
-          </div>
-        </section>
-      )}
+      <PartnersStrip />
     </>
   );
 }
