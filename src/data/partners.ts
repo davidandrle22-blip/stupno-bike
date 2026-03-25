@@ -158,6 +158,15 @@ export const partners: Partner[] = [
     description: 'Česká značka sportovního a cyklistického oblečení. Dresy, kraťasy, bundy a doplňky navržené pro výkon, pohodlí a styl. Nabízí i zakázkovou výrobu dresů s vlastním designem. Vše vyráběno s pečlivostí v České republice.',
     order: 16,
   },
+  {
+    id: 'recovera',
+    name: 'Recovera by Veolia',
+    tier: 'partner',
+    url: 'https://www.recovera.cz',
+    logo: '/images/partners/17-recovera.png',
+    description: 'Recovera by Veolia je přední česká společnost v oblasti odpadového hospodářství a cirkulární ekonomiky. Zajišťuje sběr, třídění a recyklaci odpadů pro firmy i obce. Součást globální skupiny Veolia – světového lídra v ekologické transformaci průmyslu.',
+    order: 17,
+  },
 ];
 
 export const getPartnersByTier = (tier: PartnerTier) =>
