@@ -74,12 +74,7 @@ function LogoTile({
   size: "lg" | "md" | "sm";
   delay: number;
 }) {
-  const heightCls =
-    size === "lg"
-      ? "h-36 sm:h-44"
-      : size === "md"
-      ? "h-28 sm:h-32"
-      : "h-20 sm:h-24";
+  const heightCls = "min-h-[160px] sm:min-h-[180px]";
   const imgH = size === "lg" ? 110 : size === "md" ? 80 : 56;
   const imgW = size === "lg" ? 260 : size === "md" ? 180 : 130;
 
@@ -94,7 +89,7 @@ function LogoTile({
       viewport={{ once: true, margin: "-30px" }}
       transition={{ duration: 0.45, delay, ease: "easeOut" }}
       whileHover={{ y: -3, transition: { duration: 0.2 } }}
-      className={`group flex flex-col items-center justify-center gap-2 ${heightCls} bg-white rounded-2xl border-2 border-transparent hover:border-primary/50 hover:shadow-xl hover:shadow-primary/15 transition-colors duration-300 px-4`}
+      className={`group flex flex-col items-center justify-start gap-0 ${heightCls} bg-white rounded-2xl border-2 border-transparent hover:border-primary/50 hover:shadow-xl hover:shadow-primary/15 transition-colors duration-300 px-5 py-5`}
     >
       <Image
         src={p.logo}
@@ -104,9 +99,12 @@ function LogoTile({
         className="object-contain w-auto group-hover:scale-105 transition-transform duration-300"
         style={{ maxHeight: imgH, maxWidth: "100%" }}
       />
-      <span className="text-[10px] font-semibold text-gray-400 uppercase tracking-wider text-center leading-tight">
+      <span className="text-[10px] font-semibold text-gray-400 uppercase tracking-wider text-center leading-tight mt-1">
         {p.name}
       </span>
+      <p className="text-[11px] sm:text-xs text-gray-500 text-center leading-relaxed mt-1 line-clamp-4">
+        {p.description}
+      </p>
     </motion.a>
   );
 }
