@@ -3,32 +3,35 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useRef, useEffect, useState } from "react";
-import { partners } from "@/data/partners";
+import { partners, getPartnersByTier } from "@/data/partners";
 
 export default function PartnersStrip() {
-  const stripRef = useRef<HTMLDivElement>(null);
+  const ref = useRef<HTMLDivElement>(null);
   const [visible, setVisible] = useState(false);
 
   useEffect(() => {
-    const el = stripRef.current;
+    const el = ref.current;
     if (!el) return;
     const observer = new IntersectionObserver(
       ([entry]) => { if (entry.isIntersecting) { setVisible(true); observer.disconnect(); } },
-      { threshold: 0.15 }
+      { threshold: 0.1 }
     );
     observer.observe(el);
     return () => observer.disconnect();
   }, []);
 
+  const general = getPartnersByTier("general");
+  const main = getPartnersByTier("main");
+  const partner = getPartnersByTier("partner");
+
   return (
-    <section className="py-14 sm:py-20 relative overflow-hidden">
-      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-white/[0.02] to-transparent pointer-events-none" />
+    <section className="py-14 sm:py-20 relative">
       <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-white/10 to-transparent" />
       <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-white/10 to-transparent" />
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6">
+      <div ref={ref} className="max-w-7xl mx-auto px-4 sm:px-6">
         {/* Header */}
-        <div className="flex items-center justify-between mb-8 sm:mb-10">
+        <div className="flex items-center justify-between mb-10 sm:mb-12">
           <div>
             <span className="text-[11px] font-bold uppercase tracking-[0.4em] text-white/30">
               Podporují nás
@@ -41,50 +44,89 @@ export default function PartnersStrip() {
             href="/partneri"
             className="text-sm font-semibold text-white/40 hover:text-primary transition-colors duration-200 flex items-center gap-1.5 shrink-0"
           >
-            Všichni partneři
+            Více info
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
               <path d="M5 12h14M12 5l7 7-7 7" />
             </svg>
           </Link>
         </div>
 
-        {/* Logo strip */}
-        <div
-          ref={stripRef}
-          className="flex items-center gap-6 sm:gap-8 overflow-x-auto pb-2 sm:pb-0 sm:flex-wrap sm:justify-center"
-          style={{ scrollbarWidth: "none" }}
-        >
-          {partners.map((partner, i) => {
-            const isGeneral = partner.tier === "general";
-            const logoH = isGeneral ? 56 : 40;
+        {/* Generální partneři — velké dlaždice */}
+        <div className="mb-3">
+          <span className="text-[10px] font-bold uppercase tracking-[0.35em] text-white/20 mb-3 block">
+            Generální partneři
+          </span>
+          <div className="grid grid-cols-2 gap-3 sm:gap-4">
+            {general.map((p, i) => (
+              <LogoTile key={p.id} partner={p} size="lg" index={i} visible={visible} />
+            ))}
+          </div>
+        </div>
 
-            return (
-              <a
-                key={partner.id}
-                href={partner.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                title={partner.name}
-                className="group shrink-0 flex items-center justify-center px-3 py-2 rounded-xl transition-all duration-400 hover:bg-white/[0.04]"
-                style={{
-                  opacity: visible ? 1 : 0,
-                  transform: visible ? "translateY(0)" : "translateY(12px)",
-                  transition: `opacity 0.5s ease ${i * 0.04}s, transform 0.5s ease ${i * 0.04}s, background 0.3s ease`,
-                }}
-              >
-                <Image
-                  src={partner.logo}
-                  alt={partner.name}
-                  width={isGeneral ? 120 : 90}
-                  height={logoH}
-                  className="object-contain w-auto transition-all duration-400 grayscale brightness-150 opacity-50 group-hover:grayscale-0 group-hover:brightness-100 group-hover:opacity-100 group-hover:scale-105"
-                  style={{ maxHeight: logoH }}
-                />
-              </a>
-            );
-          })}
+        {/* Hlavní partneři */}
+        <div className="mt-4 mb-3">
+          <span className="text-[10px] font-bold uppercase tracking-[0.35em] text-white/20 mb-3 block">
+            Hlavní partneři
+          </span>
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4">
+            {main.map((p, i) => (
+              <LogoTile key={p.id} partner={p} size="md" index={i + general.length} visible={visible} />
+            ))}
+          </div>
+        </div>
+
+        {/* Partneři */}
+        <div className="mt-4">
+          <span className="text-[10px] font-bold uppercase tracking-[0.35em] text-white/20 mb-3 block">
+            Partneři
+          </span>
+          <div className="grid grid-cols-3 sm:grid-cols-5 lg:grid-cols-5 gap-3 sm:gap-4">
+            {partner.map((p, i) => (
+              <LogoTile key={p.id} partner={p} size="sm" index={i + general.length + main.length} visible={visible} />
+            ))}
+          </div>
         </div>
       </div>
     </section>
+  );
+}
+
+function LogoTile({
+  partner: p,
+  size,
+  index,
+  visible,
+}: {
+  partner: (typeof partners)[0];
+  size: "lg" | "md" | "sm";
+  index: number;
+  visible: boolean;
+}) {
+  const heightCls = size === "lg" ? "h-24 sm:h-28" : size === "md" ? "h-16 sm:h-20" : "h-14 sm:h-16";
+  const imgH = size === "lg" ? 80 : size === "md" ? 56 : 44;
+  const imgW = size === "lg" ? 200 : size === "md" ? 140 : 110;
+
+  return (
+    <a
+      href={p.url}
+      target="_blank"
+      rel="noopener noreferrer"
+      title={p.name}
+      className={`group flex items-center justify-center ${heightCls} bg-white rounded-xl border-2 border-transparent hover:border-primary/60 hover:shadow-lg hover:shadow-primary/20 hover:-translate-y-0.5 transition-all duration-300`}
+      style={{
+        opacity: visible ? 1 : 0,
+        transform: visible ? "translateY(0)" : "translateY(16px)",
+        transition: `opacity 0.5s ease ${index * 0.035}s, transform 0.5s ease ${index * 0.035}s, border-color 0.3s, box-shadow 0.3s`,
+      }}
+    >
+      <Image
+        src={p.logo}
+        alt={p.name}
+        width={imgW}
+        height={imgH}
+        className="object-contain w-auto px-3 group-hover:scale-105 transition-transform duration-300"
+        style={{ maxHeight: imgH }}
+      />
+    </a>
   );
 }
