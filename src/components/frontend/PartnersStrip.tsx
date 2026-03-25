@@ -22,7 +22,6 @@ export default function PartnersStrip() {
 
   return (
     <section className="py-14 sm:py-20 relative overflow-hidden">
-      {/* Subtle background */}
       <div className="absolute inset-0 bg-gradient-to-b from-transparent via-white/[0.02] to-transparent pointer-events-none" />
       <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-white/10 to-transparent" />
       <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-white/10 to-transparent" />
@@ -49,11 +48,11 @@ export default function PartnersStrip() {
           </Link>
         </div>
 
-        {/* Logo strip — horizontal scroll on mobile */}
+        {/* Logo strip */}
         <div
           ref={stripRef}
-          className="flex items-center gap-6 sm:gap-8 overflow-x-auto pb-2 sm:pb-0 sm:flex-wrap sm:justify-center scrollbar-hide"
-          style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
+          className="flex items-center gap-6 sm:gap-8 overflow-x-auto pb-2 sm:pb-0 sm:flex-wrap sm:justify-center"
+          style={{ scrollbarWidth: "none" }}
         >
           {partners.map((partner, i) => {
             const isGeneral = partner.tier === "general";
@@ -66,38 +65,21 @@ export default function PartnersStrip() {
                 target="_blank"
                 rel="noopener noreferrer"
                 title={partner.name}
-                className="group shrink-0 flex items-center justify-center transition-all duration-400"
+                className="group shrink-0 flex items-center justify-center px-3 py-2 rounded-xl transition-all duration-400 hover:bg-white/[0.04]"
                 style={{
                   opacity: visible ? 1 : 0,
                   transform: visible ? "translateY(0)" : "translateY(12px)",
-                  transition: `opacity 0.5s ease ${i * 0.04}s, transform 0.5s ease ${i * 0.04}s`,
+                  transition: `opacity 0.5s ease ${i * 0.04}s, transform 0.5s ease ${i * 0.04}s, background 0.3s ease`,
                 }}
               >
-                <div
-                  className="relative flex items-center justify-center"
-                  style={{ height: logoH + 16, padding: "8px 12px" }}
-                >
-                  <Image
-                    src={partner.logo}
-                    alt={partner.name}
-                    width={isGeneral ? 120 : 90}
-                    height={logoH}
-                    className="object-contain w-auto"
-                    style={{
-                      maxHeight: logoH,
-                      filter: "grayscale(100%) brightness(1.8) opacity(0.5)",
-                      transition: "filter 0.4s cubic-bezier(0.4,0,0.2,1), transform 0.4s cubic-bezier(0.4,0,0.2,1)",
-                    }}
-                    onMouseEnter={e => {
-                      (e.currentTarget as HTMLImageElement).style.filter = "grayscale(0%) brightness(1) opacity(1)";
-                      (e.currentTarget as HTMLImageElement).style.transform = "scale(1.08)";
-                    }}
-                    onMouseLeave={e => {
-                      (e.currentTarget as HTMLImageElement).style.filter = "grayscale(100%) brightness(1.8) opacity(0.5)";
-                      (e.currentTarget as HTMLImageElement).style.transform = "scale(1)";
-                    }}
-                  />
-                </div>
+                <Image
+                  src={partner.logo}
+                  alt={partner.name}
+                  width={isGeneral ? 120 : 90}
+                  height={logoH}
+                  className="object-contain w-auto transition-all duration-400 grayscale brightness-150 opacity-50 group-hover:grayscale-0 group-hover:brightness-100 group-hover:opacity-100 group-hover:scale-105"
+                  style={{ maxHeight: logoH }}
+                />
               </a>
             );
           })}

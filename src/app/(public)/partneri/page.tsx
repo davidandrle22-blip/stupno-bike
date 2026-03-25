@@ -82,10 +82,7 @@ function PartnerCard({ partner: p, large = false }: { partner: (typeof partners)
       href={p.url}
       target="_blank"
       rel="noopener noreferrer"
-      className="group flex flex-col h-full rounded-2xl border border-white/[0.08] bg-white/[0.04] hover:bg-white/[0.07] p-6 sm:p-8 transition-all duration-300"
-      style={{ boxShadow: "0 0 0 0 rgba(74,144,226,0)" }}
-      onMouseEnter={e => { (e.currentTarget as HTMLElement).style.boxShadow = "0 0 24px rgba(74,144,226,0.12)"; (e.currentTarget as HTMLElement).style.transform = "translateY(-4px)"; (e.currentTarget as HTMLElement).style.borderColor = "rgba(74,144,226,0.25)"; }}
-      onMouseLeave={e => { (e.currentTarget as HTMLElement).style.boxShadow = "0 0 0 0 rgba(74,144,226,0)"; (e.currentTarget as HTMLElement).style.transform = "translateY(0)"; (e.currentTarget as HTMLElement).style.borderColor = "rgba(255,255,255,0.08)"; }}
+      className="group flex flex-col h-full rounded-2xl border border-white/[0.08] bg-white/[0.04] hover:bg-white/[0.07] hover:border-primary/25 hover:-translate-y-1 hover:shadow-lg hover:shadow-primary/10 p-6 sm:p-8 transition-all duration-300"
     >
       {/* Logo */}
       <div className={`flex items-center justify-center mb-6 ${large ? "h-20" : "h-14"}`}>
