@@ -2,24 +2,10 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useRef, useEffect, useState } from "react";
-import { partners, getPartnersByTier } from "@/data/partners";
+import { motion } from "framer-motion";
+import { getPartnersByTier, partners } from "@/data/partners";
 
 export default function PartnersStrip() {
-  const ref = useRef<HTMLDivElement>(null);
-  const [visible, setVisible] = useState(false);
-
-  useEffect(() => {
-    const el = ref.current;
-    if (!el) return;
-    const observer = new IntersectionObserver(
-      ([entry]) => { if (entry.isIntersecting) { setVisible(true); observer.disconnect(); } },
-      { threshold: 0.1 }
-    );
-    observer.observe(el);
-    return () => observer.disconnect();
-  }, []);
-
   const general = getPartnersByTier("general");
   const main = getPartnersByTier("main");
   const partner = getPartnersByTier("partner");
@@ -29,7 +15,7 @@ export default function PartnersStrip() {
       <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-white/10 to-transparent" />
       <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-white/10 to-transparent" />
 
-      <div ref={ref} className="max-w-7xl mx-auto px-4 sm:px-6">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6">
         {/* Header */}
         <div className="flex items-center justify-between mb-10 sm:mb-12">
           <div>
@@ -51,82 +37,77 @@ export default function PartnersStrip() {
           </Link>
         </div>
 
-        {/* Generální partneři — velké dlaždice */}
-        <div className="mb-3">
-          <span className="text-[10px] font-bold uppercase tracking-[0.35em] text-white/20 mb-3 block">
-            Generální partneři
-          </span>
-          <div className="grid grid-cols-2 gap-3 sm:gap-4">
-            {general.map((p, i) => (
-              <LogoTile key={p.id} partner={p} size="lg" index={i} visible={visible} />
-            ))}
-          </div>
+        {/* Generální partneři */}
+        <TierLabel label="Generální partneři" />
+        <div className="grid grid-cols-2 gap-3 sm:gap-4 mb-5">
+          {general.map((p, i) => (
+            <LogoTile key={p.id} partner={p} size="lg" delay={i * 0.08} />
+          ))}
         </div>
 
         {/* Hlavní partneři */}
-        <div className="mt-4 mb-3">
-          <span className="text-[10px] font-bold uppercase tracking-[0.35em] text-white/20 mb-3 block">
-            Hlavní partneři
-          </span>
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4">
-            {main.map((p, i) => (
-              <LogoTile key={p.id} partner={p} size="md" index={i + general.length} visible={visible} />
-            ))}
-          </div>
+        <TierLabel label="Hlavní partneři" />
+        <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4 mb-5">
+          {main.map((p, i) => (
+            <LogoTile key={p.id} partner={p} size="md" delay={i * 0.06} />
+          ))}
         </div>
 
         {/* Partneři */}
-        <div className="mt-4">
-          <span className="text-[10px] font-bold uppercase tracking-[0.35em] text-white/20 mb-3 block">
-            Partneři
-          </span>
-          <div className="grid grid-cols-3 sm:grid-cols-5 lg:grid-cols-5 gap-3 sm:gap-4">
-            {partner.map((p, i) => (
-              <LogoTile key={p.id} partner={p} size="sm" index={i + general.length + main.length} visible={visible} />
-            ))}
-          </div>
+        <TierLabel label="Partneři" />
+        <div className="grid grid-cols-3 sm:grid-cols-5 gap-3 sm:gap-4">
+          {partner.map((p, i) => (
+            <LogoTile key={p.id} partner={p} size="sm" delay={i * 0.04} />
+          ))}
         </div>
       </div>
     </section>
   );
 }
 
+function TierLabel({ label }: { label: string }) {
+  return (
+    <span className="text-[10px] font-bold uppercase tracking-[0.35em] text-white/20 mb-3 block">
+      {label}
+    </span>
+  );
+}
+
 function LogoTile({
   partner: p,
   size,
-  index,
-  visible,
+  delay,
 }: {
   partner: (typeof partners)[0];
   size: "lg" | "md" | "sm";
-  index: number;
-  visible: boolean;
+  delay: number;
 }) {
-  const heightCls = size === "lg" ? "h-24 sm:h-28" : size === "md" ? "h-16 sm:h-20" : "h-14 sm:h-16";
-  const imgH = size === "lg" ? 80 : size === "md" ? 56 : 44;
-  const imgW = size === "lg" ? 200 : size === "md" ? 140 : 110;
+  const heightCls =
+    size === "lg" ? "h-24 sm:h-28" : size === "md" ? "h-16 sm:h-20" : "h-14 sm:h-16";
+  const imgH = size === "lg" ? 72 : size === "md" ? 48 : 36;
+  const imgW = size === "lg" ? 200 : size === "md" ? 150 : 110;
 
   return (
-    <a
+    <motion.a
       href={p.url}
       target="_blank"
       rel="noopener noreferrer"
       title={p.name}
-      className={`group flex items-center justify-center ${heightCls} bg-white rounded-xl border-2 border-transparent hover:border-primary/60 hover:shadow-lg hover:shadow-primary/20 hover:-translate-y-0.5 transition-all duration-300`}
-      style={{
-        opacity: visible ? 1 : 0,
-        transform: visible ? "translateY(0)" : "translateY(16px)",
-        transition: `opacity 0.5s ease ${index * 0.035}s, transform 0.5s ease ${index * 0.035}s, border-color 0.3s, box-shadow 0.3s`,
-      }}
+      initial={{ opacity: 0, y: 14 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: "-40px" }}
+      transition={{ duration: 0.45, delay, ease: "easeOut" }}
+      whileHover={{ y: -2, transition: { duration: 0.2 } }}
+      className={`group flex flex-col items-center justify-center gap-1.5 ${heightCls} bg-white rounded-xl border-2 border-transparent hover:border-primary/50 hover:shadow-lg hover:shadow-primary/15 transition-colors duration-300 px-3`}
     >
       <Image
         src={p.logo}
         alt={p.name}
         width={imgW}
         height={imgH}
-        className="object-contain w-auto px-3 group-hover:scale-105 transition-transform duration-300"
-        style={{ maxHeight: imgH }}
+        className="object-contain w-auto group-hover:scale-105 transition-transform duration-300"
+        style={{ maxHeight: imgH, maxWidth: "100%" }}
       />
-    </a>
+    </motion.a>
   );
 }
