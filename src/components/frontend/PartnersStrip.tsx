@@ -83,7 +83,7 @@ function LogoTile({
   delay: number;
 }) {
   const heightCls =
-    size === "lg" ? "h-24 sm:h-28" : size === "md" ? "h-16 sm:h-20" : "h-14 sm:h-16";
+    size === "lg" ? "h-28 sm:h-32" : size === "md" ? "h-20 sm:h-24" : "h-16 sm:h-20";
   const imgH = size === "lg" ? 72 : size === "md" ? 48 : 36;
   const imgW = size === "lg" ? 200 : size === "md" ? 150 : 110;
 
@@ -108,6 +108,9 @@ function LogoTile({
         className="object-contain w-auto group-hover:scale-105 transition-transform duration-300"
         style={{ maxHeight: imgH, maxWidth: "100%" }}
       />
+      <span className="text-[10px] font-semibold text-gray-400 uppercase tracking-wider text-center leading-tight">
+        {p.name}
+      </span>
     </motion.a>
   );
 }
