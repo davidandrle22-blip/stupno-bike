@@ -1,5 +1,6 @@
 import { prisma } from "@/lib/prisma";
 import { notFound } from "next/navigation";
+import Image from "next/image";
 
 export const revalidate = 3600;
 
@@ -65,6 +66,22 @@ export default async function PartneriPage({
       ) : (
         <p className="text-slate-400">Partneři budou doplněni.</p>
       )}
+
+      {/* Partneři Českého poháru */}
+      <div className="mt-12">
+        <h3 className="text-sm font-bold uppercase tracking-[0.25em] text-slate-400 mb-6">
+          Partneři Českého poháru XCO
+        </h3>
+        <div className="bg-white/[0.04] rounded-2xl border border-white/[0.08] p-6 flex items-center justify-center">
+          <Image
+            src="/images/pohar-cp-partneri.png"
+            alt="Partneři Českého poháru XCO"
+            width={900}
+            height={300}
+            className="w-full max-w-3xl h-auto object-contain"
+          />
+        </div>
+      </div>
     </div>
   );
 }
