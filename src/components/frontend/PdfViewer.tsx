@@ -10,16 +10,19 @@ pdfjs.GlobalWorkerOptions.workerSrc = `//unpkg.com/pdfjs-dist@${pdfjs.version}/b
 export default function PdfViewer({ file, downloadName }: { file: string; downloadName: string }) {
   const [numPages, setNumPages] = useState<number>(0);
   const [pageNumber, setPageNumber] = useState(1);
-  const [containerWidth, setContainerWidth] = useState<number>(0);
+  const [containerWidth, setContainerWidth] = useState<number>(700);
   const containerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    if (!containerRef.current) return;
+    const el = containerRef.current;
+    if (!el) return;
+    // Nastav ihned po mountu
+    setContainerWidth(Math.floor(el.getBoundingClientRect().width));
     const observer = new ResizeObserver((entries) => {
       const width = entries[0]?.contentRect.width;
       if (width) setContainerWidth(Math.floor(width));
     });
-    observer.observe(containerRef.current);
+    observer.observe(el);
     return () => observer.disconnect();
   }, []);
 
@@ -107,15 +110,13 @@ export default function PdfViewer({ file, downloadName }: { file: string; downlo
             </div>
           }
         >
-          {pageWidth && (
-            <Page
-              pageNumber={pageNumber}
-              renderTextLayer={false}
-              renderAnnotationLayer={false}
-              className="shadow-2xl rounded-sm overflow-hidden"
-              width={pageWidth}
-            />
-          )}
+          <Page
+            pageNumber={pageNumber}
+            renderTextLayer={false}
+            renderAnnotationLayer={false}
+            className="shadow-2xl rounded-sm overflow-hidden"
+            width={pageWidth}
+          />
         </Document>
       </div>
 
