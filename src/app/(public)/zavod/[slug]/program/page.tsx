@@ -49,17 +49,7 @@ export default async function ProgramPage({
   const race = await prisma.race.findUnique({ where: { slug } });
   if (!race) notFound();
 
-  let programData: ProgramDay[] = [];
-  if (race.program) {
-    try {
-      programData = JSON.parse(race.program);
-    } catch {
-      programData = [];
-    }
-  }
-
-  // Use static program if DB has no data
-  const displayProgram = programData.length > 0 ? programData : STATIC_PROGRAM;
+  const displayProgram = STATIC_PROGRAM;
 
   return (
     <div>
