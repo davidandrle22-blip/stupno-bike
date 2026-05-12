@@ -57,6 +57,7 @@ export default async function PropozicePage({
         <PdfViewerClient
           file="/propozice-mcr-stupno-2026.pdf"
           downloadName="Propozice-MCR-Stupno-2026.pdf"
+          openUrl={`/zavod/${slug}/propozice/pdf`}
         />
       </div>
 

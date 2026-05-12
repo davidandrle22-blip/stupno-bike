@@ -7,7 +7,7 @@ import "react-pdf/dist/Page/TextLayer.css";
 
 pdfjs.GlobalWorkerOptions.workerSrc = "/pdf.worker.min.mjs";
 
-export default function PdfViewer({ file, downloadName }: { file: string; downloadName: string }) {
+export default function PdfViewer({ file, downloadName, openUrl }: { file: string; downloadName: string; openUrl?: string }) {
   const [numPages, setNumPages] = useState<number>(0);
   const [pageNumber, setPageNumber] = useState(1);
   const [containerWidth, setContainerWidth] = useState<number>(700);
@@ -68,9 +68,9 @@ export default function PdfViewer({ file, downloadName }: { file: string; downlo
         {/* Akce */}
         <div className="flex items-center gap-1.5 sm:gap-2">
           <a
-            href={file}
-            target="_blank"
-            rel="noopener noreferrer"
+            href={openUrl || file}
+            target={openUrl ? undefined : "_blank"}
+            rel={openUrl ? undefined : "noopener noreferrer"}
             className="inline-flex items-center gap-1.5 text-xs font-semibold text-slate-300 hover:text-white bg-white/[0.06] hover:bg-white/[0.12] px-2.5 sm:px-3 py-1.5 rounded-lg transition-colors"
             aria-label="Otevřít PDF"
           >
