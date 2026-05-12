@@ -1,5 +1,8 @@
 import { prisma } from "@/lib/prisma";
 import { notFound } from "next/navigation";
+import dynamic from "next/dynamic";
+
+const PdfViewer = dynamic(() => import("@/components/frontend/PdfViewer"), { ssr: false });
 
 export const revalidate = 3600;
 
@@ -48,63 +51,10 @@ export default async function PropozicePage({
 
       {/* PDF propozice */}
       <div className="mb-8">
-        <a
-          href="/propozice-mcr-stupno-2026.pdf"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="group block"
-        >
-          <div className="relative bg-gradient-to-br from-white/[0.07] to-white/[0.03] border border-white/[0.1] rounded-2xl overflow-hidden hover:border-primary/40 transition-all duration-300 hover:shadow-xl hover:shadow-primary/10">
-            {/* Dekorativní pruhy nahoře */}
-            <div className="h-1.5 w-full bg-gradient-to-r from-primary via-secondary to-primary opacity-80" />
-
-            <div className="p-5 sm:p-7 flex items-center gap-5">
-              {/* Ikona dokumentu */}
-              <div className="flex-shrink-0 w-14 h-18 sm:w-16 sm:h-20 relative">
-                <div className="w-full h-full bg-white/[0.08] border border-white/[0.12] rounded-lg flex flex-col items-center justify-center gap-1 shadow-lg">
-                  <span className="text-[11px] font-black text-red-400 tracking-widest leading-none">PDF</span>
-                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" className="text-slate-300">
-                    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
-                    <polyline points="14 2 14 8 20 8" />
-                    <line x1="16" y1="13" x2="8" y2="13" />
-                    <line x1="16" y1="17" x2="8" y2="17" />
-                    <polyline points="10 9 9 9 8 9" />
-                  </svg>
-                </div>
-              </div>
-
-              {/* Text */}
-              <div className="flex-1 min-w-0">
-                <p className="text-[11px] font-bold uppercase tracking-[0.25em] text-primary mb-1">Oficiální dokument</p>
-                <p className="text-white font-bold text-base sm:text-lg leading-tight">Propozice MČR Stupno 2026</p>
-                <p className="text-slate-400 text-xs sm:text-sm mt-1">Kliknutím otevřete celé PDF</p>
-              </div>
-
-              {/* Šipka */}
-              <div className="flex-shrink-0 w-9 h-9 rounded-full bg-primary/15 border border-primary/25 flex items-center justify-center group-hover:bg-primary/30 group-hover:scale-110 transition-all duration-300">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="text-primary">
-                  <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
-                  <polyline points="15 3 21 3 21 9" />
-                  <line x1="10" y1="14" x2="21" y2="3" />
-                </svg>
-              </div>
-            </div>
-          </div>
-        </a>
-
-        {/* Stáhnout tlačítko */}
-        <div className="mt-3">
-          <a
-            href="/propozice-mcr-stupno-2026.pdf"
-            download="Propozice-MCR-Stupno-2026.pdf"
-            className="inline-flex items-center gap-2 text-slate-400 hover:text-white text-sm font-medium transition-colors"
-          >
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" /><polyline points="7 10 12 15 17 10" /><line x1="12" y1="15" x2="12" y2="3" />
-            </svg>
-            Stáhnout PDF
-          </a>
-        </div>
+        <PdfViewer
+          file="/propozice-mcr-stupno-2026.pdf"
+          downloadName="Propozice-MCR-Stupno-2026.pdf"
+        />
       </div>
 
       {race.description ? (
