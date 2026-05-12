@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useCallback } from "react";
+import { useState, useCallback, useRef, useEffect } from "react";
 import { Document, Page, pdfjs } from "react-pdf";
 import "react-pdf/dist/Page/AnnotationLayer.css";
 import "react-pdf/dist/Page/TextLayer.css";
@@ -10,16 +10,31 @@ pdfjs.GlobalWorkerOptions.workerSrc = `//unpkg.com/pdfjs-dist@${pdfjs.version}/b
 export default function PdfViewer({ file, downloadName }: { file: string; downloadName: string }) {
   const [numPages, setNumPages] = useState<number>(0);
   const [pageNumber, setPageNumber] = useState(1);
+  const [containerWidth, setContainerWidth] = useState<number>(0);
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (!containerRef.current) return;
+    const observer = new ResizeObserver((entries) => {
+      const width = entries[0]?.contentRect.width;
+      if (width) setContainerWidth(Math.floor(width));
+    });
+    observer.observe(containerRef.current);
+    return () => observer.disconnect();
+  }, []);
 
   const onDocumentLoadSuccess = useCallback(({ numPages }: { numPages: number }) => {
     setNumPages(numPages);
   }, []);
 
+  const pageWidth = containerWidth > 0 ? Math.min(containerWidth - 32, 700) : undefined;
+
   return (
     <div className="bg-white/[0.04] border border-white/[0.08] rounded-2xl overflow-hidden">
       {/* Toolbar */}
-      <div className="flex items-center justify-between px-4 py-3 border-b border-white/[0.06] bg-white/[0.02]">
-        <div className="flex items-center gap-3">
+      <div className="flex items-center justify-between px-3 sm:px-4 py-3 border-b border-white/[0.06] bg-white/[0.02]">
+        {/* Navigace stran */}
+        <div className="flex items-center gap-2 sm:gap-3">
           <button
             onClick={() => setPageNumber((p) => Math.max(1, p - 1))}
             disabled={pageNumber <= 1}
@@ -31,7 +46,7 @@ export default function PdfViewer({ file, downloadName }: { file: string; downlo
             </svg>
           </button>
 
-          <span className="text-sm text-slate-300 font-medium tabular-nums">
+          <span className="text-sm text-slate-300 font-medium tabular-nums min-w-[48px] text-center">
             {pageNumber} / {numPages || "—"}
           </span>
 
@@ -47,39 +62,42 @@ export default function PdfViewer({ file, downloadName }: { file: string; downlo
           </button>
         </div>
 
-        <div className="flex items-center gap-2">
+        {/* Akce */}
+        <div className="flex items-center gap-1.5 sm:gap-2">
           <a
             href={file}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-1.5 text-xs font-semibold text-slate-300 hover:text-white bg-white/[0.06] hover:bg-white/[0.12] px-3 py-1.5 rounded-lg transition-colors"
+            className="inline-flex items-center gap-1.5 text-xs font-semibold text-slate-300 hover:text-white bg-white/[0.06] hover:bg-white/[0.12] px-2.5 sm:px-3 py-1.5 rounded-lg transition-colors"
+            aria-label="Otevřít PDF"
           >
-            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
               <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
               <polyline points="15 3 21 3 21 9" /><line x1="10" y1="14" x2="21" y2="3" />
             </svg>
-            Otevřít
+            <span className="hidden sm:inline">Otevřít</span>
           </a>
           <a
             href={file}
             download={downloadName}
-            className="inline-flex items-center gap-1.5 text-xs font-semibold text-slate-300 hover:text-white bg-white/[0.06] hover:bg-white/[0.12] px-3 py-1.5 rounded-lg transition-colors"
+            className="inline-flex items-center gap-1.5 text-xs font-semibold text-slate-300 hover:text-white bg-white/[0.06] hover:bg-white/[0.12] px-2.5 sm:px-3 py-1.5 rounded-lg transition-colors"
+            aria-label="Stáhnout PDF"
           >
-            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
               <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" /><polyline points="7 10 12 15 17 10" /><line x1="12" y1="15" x2="12" y2="3" />
             </svg>
-            Stáhnout
+            <span className="hidden sm:inline">Stáhnout</span>
           </a>
         </div>
       </div>
 
       {/* PDF strana */}
-      <div className="flex justify-center bg-slate-800/40 py-6 px-4">
+      <div ref={containerRef} className="flex justify-center bg-slate-800/40 py-6 px-4">
         <Document
           file={file}
           onLoadSuccess={onDocumentLoadSuccess}
           loading={
-            <div className="flex items-center justify-center h-64 text-slate-400 text-sm">
+            <div className="flex items-center justify-center h-48 text-slate-400 text-sm">
               Načítání PDF…
             </div>
           }
@@ -89,13 +107,15 @@ export default function PdfViewer({ file, downloadName }: { file: string; downlo
             </div>
           }
         >
-          <Page
-            pageNumber={pageNumber}
-            renderTextLayer={false}
-            renderAnnotationLayer={false}
-            className="shadow-2xl rounded-sm overflow-hidden"
-            width={Math.min(typeof window !== "undefined" ? window.innerWidth - 80 : 700, 700)}
-          />
+          {pageWidth && (
+            <Page
+              pageNumber={pageNumber}
+              renderTextLayer={false}
+              renderAnnotationLayer={false}
+              className="shadow-2xl rounded-sm overflow-hidden"
+              width={pageWidth}
+            />
+          )}
         </Document>
       </div>
 
@@ -105,7 +125,7 @@ export default function PdfViewer({ file, downloadName }: { file: string; downlo
           <button
             onClick={() => setPageNumber((p) => Math.max(1, p - 1))}
             disabled={pageNumber <= 1}
-            className="flex items-center gap-1.5 text-sm font-medium text-slate-300 hover:text-white disabled:opacity-30 disabled:cursor-not-allowed transition-colors"
+            className="flex items-center gap-1.5 text-sm font-medium text-slate-300 hover:text-white disabled:opacity-30 disabled:cursor-not-allowed transition-colors min-h-[44px]"
           >
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
               <polyline points="15 18 9 12 15 6" />
@@ -116,7 +136,7 @@ export default function PdfViewer({ file, downloadName }: { file: string; downlo
           <button
             onClick={() => setPageNumber((p) => Math.min(numPages, p + 1))}
             disabled={pageNumber >= numPages}
-            className="flex items-center gap-1.5 text-sm font-medium text-slate-300 hover:text-white disabled:opacity-30 disabled:cursor-not-allowed transition-colors"
+            className="flex items-center gap-1.5 text-sm font-medium text-slate-300 hover:text-white disabled:opacity-30 disabled:cursor-not-allowed transition-colors min-h-[44px]"
           >
             Další
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
