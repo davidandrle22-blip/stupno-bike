@@ -60,6 +60,20 @@ export default function PartnersStrip() {
             <LogoTile key={p.id} partner={p} size="sm" delay={i * 0.04} />
           ))}
         </div>
+
+        {/* Partneři Českého poháru */}
+        <div className="mt-10">
+          <TierLabel label="Partneři Českého poháru XCO" />
+          <div className="bg-white rounded-2xl p-6 flex items-center justify-center">
+            <Image
+              src="/images/pohar-cp-partneri.png"
+              alt="Partneři Českého poháru XCO"
+              width={900}
+              height={300}
+              className="w-full h-auto object-contain"
+            />
+          </div>
+        </div>
       </div>
     </section>
   );

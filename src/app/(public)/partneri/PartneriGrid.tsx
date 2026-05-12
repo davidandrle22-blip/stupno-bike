@@ -53,6 +53,20 @@ export default function PartneriGrid() {
           <LogoTile key={p.id} partner={p} logoH={56} logoW={140} delay={i * 0.05} />
         ))}
       </div>
+
+      {/* Partneři Českého poháru */}
+      <div className="mt-14">
+        <TierLabel label="Partneři Českého poháru XCO" />
+        <div className="bg-white rounded-2xl p-8 flex items-center justify-center">
+          <Image
+            src="/images/pohar-cp-partneri.png"
+            alt="Partneři Českého poháru XCO"
+            width={900}
+            height={300}
+            className="w-full max-w-3xl h-auto object-contain"
+          />
+        </div>
+      </div>
     </div>
   );
 }
