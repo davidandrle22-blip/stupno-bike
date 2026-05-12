@@ -157,9 +157,12 @@ export default function Footer({ settings }: { settings: Settings }) {
           <p className="text-white/40 text-xs">
             &copy; {new Date().getFullYear()} MČR Stupno — Author team Stupno z.s. Všechna práva vyhrazena.
           </p>
-          <span className="text-white/[0.07] text-[10px] uppercase tracking-[0.2em]">
-            Cross-Country
-          </span>
+          <Link
+            href="/david-le"
+            className="text-white/20 hover:text-white/50 text-[10px] uppercase tracking-[0.2em] transition-colors duration-200"
+          >
+            vytvořil david.LE
+          </Link>
         </div>
       </div>
     </footer>

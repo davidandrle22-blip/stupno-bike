@@ -81,9 +81,13 @@ export default function PartnersStrip() {
 
 function TierLabel({ label }: { label: string }) {
   return (
-    <span className="text-[10px] font-bold uppercase tracking-[0.35em] text-white/20 mb-3 block">
-      {label}
-    </span>
+    <div className="flex items-center gap-3 mb-4">
+      <span className="h-px flex-1 bg-white/10" />
+      <span className="text-[11px] font-bold uppercase tracking-[0.3em] text-white/55 shrink-0">
+        {label}
+      </span>
+      <span className="h-px flex-1 bg-white/10" />
+    </div>
   );
 }
 

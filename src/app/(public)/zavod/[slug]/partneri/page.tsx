@@ -25,7 +25,7 @@ export default async function PartneriPage({
       </h2>
 
       {/* Generální partneři */}
-      <p className="text-[10px] font-bold uppercase tracking-[0.35em] text-white/25 mb-3">
+      <p className="text-[11px] font-bold uppercase tracking-[0.3em] text-white/60 mb-4 flex items-center gap-3 before:content-[''] before:h-px before:flex-1 before:bg-white/10 after:content-[''] after:h-px after:flex-1 after:bg-white/10 text-center">
         Generální partneři
       </p>
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-8">
@@ -52,7 +52,7 @@ export default async function PartneriPage({
       </div>
 
       {/* Hlavní partneři */}
-      <p className="text-[10px] font-bold uppercase tracking-[0.35em] text-white/25 mb-3">
+      <p className="text-[11px] font-bold uppercase tracking-[0.3em] text-white/60 mb-4 flex items-center gap-3 before:content-[''] before:h-px before:flex-1 before:bg-white/10 after:content-[''] after:h-px after:flex-1 after:bg-white/10 text-center">
         Hlavní partneři
       </p>
       <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-8">
@@ -79,7 +79,7 @@ export default async function PartneriPage({
       </div>
 
       {/* Partneři */}
-      <p className="text-[10px] font-bold uppercase tracking-[0.35em] text-white/25 mb-3">
+      <p className="text-[11px] font-bold uppercase tracking-[0.3em] text-white/60 mb-4 flex items-center gap-3 before:content-[''] before:h-px before:flex-1 before:bg-white/10 after:content-[''] after:h-px after:flex-1 after:bg-white/10 text-center">
         Partneři
       </p>
       <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 mb-12">
@@ -106,7 +106,7 @@ export default async function PartneriPage({
       </div>
 
       {/* Partneři Českého poháru */}
-      <p className="text-[10px] font-bold uppercase tracking-[0.35em] text-white/25 mb-3">
+      <p className="text-[11px] font-bold uppercase tracking-[0.3em] text-white/60 mb-4 flex items-center gap-3 before:content-[''] before:h-px before:flex-1 before:bg-white/10 after:content-[''] after:h-px after:flex-1 after:bg-white/10 text-center">
         Partneři Českého poháru XCO
       </p>
       <div className="bg-white rounded-2xl p-6 flex items-center justify-center">
