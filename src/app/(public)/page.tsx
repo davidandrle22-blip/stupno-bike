@@ -62,7 +62,7 @@ export default async function HomePage() {
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-px bg-white/5 rounded-2xl overflow-hidden shadow-lg shadow-black/30 border border-white/10">
               {[
                 { icon: Trophy, value: "MČR", label: "Boj o tituly", color: "text-primary" },
-                { icon: Mountain, value: "4,2 km", label: "Délka okruhu", color: "text-secondary" },
+                { icon: Mountain, value: "4 km", label: "Délka okruhu", color: "text-secondary" },
                 { icon: Users, value: "650", label: "Závodníků", color: "text-accent" },
                 { icon: Timer, value: "3 dny", label: "Program", color: "text-primary" },
               ].map((stat) => (
@@ -90,7 +90,7 @@ export default async function HomePage() {
                     href: `/zavod/${race.slug}/propozice`,
                     icon: Trophy,
                     title: "Propozice",
-                    desc: "MČR — technický okruh 4,2 km s náročnými sjezdy a výjezdy v areálu Ultramarinka",
+                    desc: "MČR — technický okruh 4 km s náročnými sjezdy a výjezdy v areálu Ultramarinka",
                     gradient: "from-primary/20 to-primary/10",
                     border: "hover:border-primary/40",
                     shadow: "hover:shadow-primary/15",

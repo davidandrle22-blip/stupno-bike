@@ -62,7 +62,7 @@ const CIRCUITS: Circuit[] = [
     name: "Žlutá trasa",
     categories: "Kadeti/ky (15–16 let), Junioři/ky (17–18 let), U23 + ELITE",
     difficulty: "Hlavní závodní okruh MČR XCO — technický terén",
-    length: "4,2 km",
+    length: "4 km",
     elevation: "~85 m",
     color: "#fbbf24",
     gpx: "/gpx/okruh-zluty.gpx",
@@ -126,7 +126,7 @@ export default function OkruhyPage() {
         </h2>
         <p className="text-slate-400 max-w-2xl leading-relaxed">
           Areál Ultramarinka v Břasích nabízí čtyři MTB okruhy pro různé věkové kategorie.
-          Hlavní závodní okruh (4,2 km) je určen pro kadety, juniory a elitu bojující o tituly MČR.
+          Hlavní závodní okruh (4 km) je určen pro kadety, juniory a elitu bojující o tituly MČR.
           Stáhněte si GPX soubory nebo si trasy zobrazte přímo na mapě níže.
         </p>
       </div>

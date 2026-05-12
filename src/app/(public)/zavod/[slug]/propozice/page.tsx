@@ -55,7 +55,7 @@ export default async function PropozicePage({
         <div className="mb-8 space-y-4 text-slate-300 leading-relaxed">
           <p>
             <strong className="text-white">Mistrovství České republiky horských kol XCO — Stupno — Velká cena CUBE.</strong>{" "}
-            MČR XCO s bohem o tituly mistrů ČR. Technický okruh 4,2 km s náročnými
+            MČR XCO s bohem o tituly mistrů ČR. Technický okruh 4 km s náročnými
             sjezdy a výjezdy v areálu Ultramarinka.
           </p>
         </div>
@@ -66,7 +66,7 @@ export default async function PropozicePage({
         {[
           { label: "Datum", value: "17. — 19. července 2026" },
           { label: "Místo", value: "ULTRAMARINKA — volnočasový areál, Břasy 224, 338 24" },
-          { label: "Délka okruhu", value: "4,2 km" },
+          { label: "Délka okruhu", value: "4 km" },
           { label: "Pořadatel", value: "Author team Stupno z.s., IČO: 22818057" },
         ].map(({ label, value }) => (
           <div key={label}>

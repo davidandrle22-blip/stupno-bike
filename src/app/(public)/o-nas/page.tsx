@@ -24,7 +24,7 @@ export default function ONasPage() {
             Mistrovství České republiky horských kol XCO — Stupno — Velká cena CUBE
           </strong>{" "}
           je vrcholnou akcí českého cross-country. Závod se koná v areálu Ultramarinka
-          u Břas na technicky náročném okruhu 4,2 km, který prověří zdatnost
+          u Břas na technicky náročném okruhu 4 km, který prověří zdatnost
           i techniku každého závodníka.
         </p>
         <p>
