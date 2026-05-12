@@ -1,6 +1,7 @@
 import { prisma } from "@/lib/prisma";
 import { notFound } from "next/navigation";
 import PdfViewerClient from "@/components/frontend/PdfViewerClient";
+import ReactDOM from "react-dom";
 
 export const revalidate = 3600;
 
@@ -37,6 +38,10 @@ export default async function PropozicePage({
   if (!race) notFound();
 
   const registrationUrl = race.registrationUrl || "https://cycling.sportsoft.cz/mtb/#registrace";
+
+  // Preload PDF a worker — browser začne stahovat okamžitě
+  ReactDOM.preload("/propozice-mcr-stupno-2026.pdf", { as: "fetch", crossOrigin: "anonymous" });
+  ReactDOM.preload("/pdf.worker.min.mjs", { as: "script" });
 
   return (
     <div>

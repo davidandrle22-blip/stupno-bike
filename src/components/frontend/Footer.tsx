@@ -159,9 +159,9 @@ export default function Footer({ settings }: { settings: Settings }) {
           </p>
           <Link
             href="/david-le"
-            className="text-white/20 hover:text-white/50 text-[10px] uppercase tracking-[0.2em] transition-colors duration-200"
+            className="text-white/50 hover:text-primary text-[11px] font-semibold uppercase tracking-[0.25em] transition-colors duration-200"
           >
-            vytvořil david.LE
+            vytvořil <span className="text-primary/80">DAVID.LE</span>
           </Link>
         </div>
       </div>
