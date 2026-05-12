@@ -73,7 +73,7 @@ export default function Header({ settings }: { settings: Settings }) {
           <div className="flex items-center h-16">
             {/* Left: Mascot */}
             <div className="flex items-center shrink-0">
-              <MascotCyclist size={36} /><span className="text-white/70 ml-0.5">.</span>
+              <MascotCyclist size={36} />
             </div>
 
             {/* Center: Stupno logo */}
