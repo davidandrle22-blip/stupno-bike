@@ -1,7 +1,6 @@
 import { prisma } from "@/lib/prisma";
 import { notFound } from "next/navigation";
 import Link from "next/link";
-import PdfViewerClient from "@/components/frontend/PdfViewerClient";
 
 export const revalidate = 3600;
 
@@ -15,30 +14,29 @@ export default async function PropozicePdfPage({
   if (!race) notFound();
 
   return (
-    <div className="min-h-screen bg-slate-950 flex flex-col">
-      {/* Horní lišta */}
-      <div className="sticky top-0 z-50 flex items-center justify-between px-4 sm:px-6 py-3 bg-slate-900/95 backdrop-blur border-b border-white/[0.08]">
-        <span className="text-sm font-semibold text-white/70">
+    <div className="h-screen flex flex-col bg-slate-950">
+      {/* Sticky lišta se zavíracím tlačítkem */}
+      <div className="flex-shrink-0 flex items-center justify-between px-4 sm:px-6 py-3 bg-slate-900/95 backdrop-blur-sm border-b border-white/[0.08] z-50">
+        <span className="text-sm font-semibold text-white/60 truncate">
           Propozice MČR Stupno 2026
         </span>
         <Link
           href={`/zavod/${slug}/propozice`}
-          className="inline-flex items-center gap-2 text-sm font-semibold text-white/60 hover:text-white bg-white/[0.06] hover:bg-white/[0.12] px-4 py-2 rounded-xl transition-colors"
+          className="flex-shrink-0 inline-flex items-center gap-2 text-sm font-bold text-white bg-white/[0.08] hover:bg-primary hover:text-white px-4 py-2 rounded-xl border border-white/10 hover:border-primary transition-all duration-200 ml-4"
         >
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-            <line x1="18" y1="6" x2="6" y2="18" /><line x1="6" y1="6" x2="18" y2="18" />
+            <polyline points="15 18 9 12 15 6" />
           </svg>
-          Zavřít
+          Zpět na web
         </Link>
       </div>
 
-      {/* PDF viewer */}
-      <div className="flex-1 max-w-4xl w-full mx-auto px-4 sm:px-6 py-6">
-        <PdfViewerClient
-          file="/propozice-mcr-stupno-2026.pdf"
-          downloadName="Propozice-MCR-Stupno-2026.pdf"
-        />
-      </div>
+      {/* Nativní PDF viewer přes celou výšku */}
+      <iframe
+        src="/propozice-mcr-stupno-2026.pdf"
+        className="flex-1 w-full border-0"
+        title="Propozice MČR Stupno 2026"
+      />
     </div>
   );
 }
