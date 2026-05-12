@@ -1,8 +1,6 @@
 import { prisma } from "@/lib/prisma";
 import { notFound } from "next/navigation";
-import dynamic from "next/dynamic";
-
-const PdfViewer = dynamic(() => import("@/components/frontend/PdfViewer"), { ssr: false });
+import PdfViewerClient from "@/components/frontend/PdfViewerClient";
 
 export const revalidate = 3600;
 
@@ -51,7 +49,7 @@ export default async function PropozicePage({
 
       {/* PDF propozice */}
       <div className="mb-8">
-        <PdfViewer
+        <PdfViewerClient
           file="/propozice-mcr-stupno-2026.pdf"
           downloadName="Propozice-MCR-Stupno-2026.pdf"
         />
