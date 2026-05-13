@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { createPortal } from "react-dom";
 import { Document, Page, pdfjs } from "react-pdf";
 import "react-pdf/dist/Page/AnnotationLayer.css";
 import "react-pdf/dist/Page/TextLayer.css";
@@ -36,8 +37,8 @@ export default function PdfFullscreenModal({
     };
   }, [onClose]);
 
-  return (
-    <div className="fixed inset-0 z-[100] flex flex-col bg-slate-950 animate-fadeIn">
+  return createPortal(
+    <div className="fixed inset-0 z-[100] flex flex-col bg-slate-950">
       {/* Sticky header */}
       <div className="flex-shrink-0 flex items-center justify-between gap-3 px-4 sm:px-6 py-3 bg-slate-900/95 backdrop-blur border-b border-white/[0.08]">
         <span className="text-sm font-semibold text-white/60 truncate">
@@ -91,6 +92,7 @@ export default function PdfFullscreenModal({
           </Document>
         </div>
       </div>
-    </div>
+    </div>,
+    document.body
   );
 }
