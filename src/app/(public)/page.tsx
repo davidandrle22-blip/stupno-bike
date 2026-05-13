@@ -5,6 +5,7 @@ import AnimatedSection from "@/components/frontend/AnimatedSection";
 import HeroSection from "@/components/frontend/HeroSection";
 import GpsTrackingSection from "@/components/frontend/GpsTrackingSection";
 import PartnersStrip from "@/components/frontend/PartnersStrip";
+import PropoziceCard from "@/components/frontend/PropoziceCard";
 
 export const revalidate = 3600;
 import {
@@ -85,18 +86,12 @@ export default async function HomePage() {
             {/* 3 karty (Propozice, Program, Okruhy) */}
             <AnimatedSection>
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-5 sm:gap-6 lg:gap-8 mb-12 sm:mb-16">
+                {/* Propozice karta — s tlačítky Číst / Stáhnout */}
+                <AnimatedSection delay={0}>
+                  <PropoziceCard href={`/zavod/${race.slug}/propozice`} />
+                </AnimatedSection>
+
                 {[
-                  {
-                    href: `/zavod/${race.slug}/propozice`,
-                    icon: Trophy,
-                    title: "Propozice",
-                    desc: "MČR — technický okruh 4 km s náročnými sjezdy a výjezdy v areálu Ultramarinka",
-                    gradient: "from-primary/20 to-primary/10",
-                    border: "hover:border-primary/40",
-                    shadow: "hover:shadow-primary/15",
-                    iconColor: "text-primary",
-                    hoverColor: "group-hover:text-primary",
-                  },
                   {
                     href: `/zavod/${race.slug}/program`,
                     icon: Calendar,
@@ -120,7 +115,7 @@ export default async function HomePage() {
                     hoverColor: "group-hover:text-accent",
                   },
                 ].map((card, i) => (
-                  <AnimatedSection key={card.title} delay={i * 0.12}>
+                  <AnimatedSection key={card.title} delay={(i + 1) * 0.12}>
                     <Link
                       href={card.href}
                       className={`group block bg-slate-900/50 backdrop-blur-sm rounded-2xl border border-white/[0.08] ${card.border} shadow-sm hover:shadow-xl ${card.shadow} transition-all duration-500 hover:-translate-y-1 sm:hover:-translate-y-2 p-6 sm:p-7 lg:p-10 text-center`}
