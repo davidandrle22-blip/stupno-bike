@@ -56,12 +56,12 @@ export default function PdfFullscreenModal({
           </a>
           <button
             onClick={onClose}
-            className="inline-flex items-center gap-1.5 text-sm font-bold text-white bg-white/[0.08] hover:bg-white/[0.16] px-4 py-2 rounded-lg border border-white/10 transition-colors"
+            aria-label="Zavřít PDF"
+            className="w-9 h-9 flex items-center justify-center rounded-full bg-white text-slate-900 hover:bg-slate-200 transition-colors shadow-md flex-shrink-0"
           >
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
               <line x1="18" y1="6" x2="6" y2="18" /><line x1="6" y1="6" x2="18" y2="18" />
             </svg>
-            Zavřít
           </button>
         </div>
       </div>
