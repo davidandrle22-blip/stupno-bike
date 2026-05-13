@@ -2,8 +2,8 @@
 
 import dynamic from "next/dynamic";
 
-const PdfViewer = dynamic(() => import("./PdfViewer"), { ssr: false });
+const PdfSection = dynamic(() => import("./PdfSection"), { ssr: false });
 
-export default function PdfViewerClient({ file, downloadName, openUrl }: { file: string; downloadName: string; openUrl?: string }) {
-  return <PdfViewer file={file} downloadName={downloadName} openUrl={openUrl} />;
+export default function PdfViewerClient({ file, downloadName }: { file: string; downloadName: string }) {
+  return <PdfSection file={file} downloadName={downloadName} />;
 }
