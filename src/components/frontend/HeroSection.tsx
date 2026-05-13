@@ -120,7 +120,7 @@ export default function HeroSection({
                       </p>
                       {mobileControls}
                     </div>
-                    <Countdown targetDate="2026-07-17T09:00:00" />
+                    <Countdown targetDate="2026-07-17T15:00:00" />
                   </div>
                 </AnimatedSection>
 
