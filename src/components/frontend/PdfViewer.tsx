@@ -35,6 +35,7 @@ export default function PdfViewer({ file, downloadName, openUrl }: { file: strin
   const pageWidth = containerWidth > 0 ? Math.min(containerWidth - 32, 700) : undefined;
 
   return (
+    <>
     <div className="bg-white/[0.04] border border-white/[0.08] rounded-2xl overflow-hidden">
       {/* Toolbar */}
       <div className="flex items-center justify-between px-3 sm:px-4 py-3 border-b border-white/[0.06] bg-white/[0.02]">
@@ -151,5 +152,6 @@ export default function PdfViewer({ file, downloadName, openUrl }: { file: strin
     {modalOpen && (
       <PdfModal file={file} onClose={() => setModalOpen(false)} />
     )}
+    </>
   );
 }
