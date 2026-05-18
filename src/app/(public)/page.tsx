@@ -19,12 +19,18 @@ import {
 } from "lucide-react";
 
 export default async function HomePage() {
-  const [races, settings] = await Promise.all([
+  const [races, settings, articles] = await Promise.all([
     prisma.race.findMany({
       where: { status: "PUBLISHED" },
       orderBy: { date: "asc" },
     }),
     prisma.siteSettings.findFirst({ where: { id: "main" } }),
+    prisma.article.findMany({
+      where: { status: "PUBLISHED" },
+      orderBy: { publishedAt: "desc" },
+      take: 3,
+      select: { id: true, title: true, slug: true, excerpt: true, featuredImage: true, publishedAt: true, createdAt: true },
+    }),
   ]);
 
   const race = races[0];
@@ -196,6 +202,88 @@ export default async function HomePage() {
           </div>
         </section>
       )}
+
+      {/* ═══════════════ NOVINKY & AKTUALITY ═══════════════ */}
+      <section className="py-14 sm:py-20 lg:py-24 relative z-10">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6">
+          <AnimatedSection>
+            <div className="flex items-end justify-between mb-8 sm:mb-10">
+              <div>
+                <span className="text-[11px] font-bold uppercase tracking-[0.4em] text-white/30">Aktuality</span>
+                <h2 className="text-xl sm:text-2xl lg:text-3xl font-black text-white uppercase tracking-tight mt-1">
+                  Novinky
+                </h2>
+              </div>
+              <Link
+                href="/novinky"
+                className="inline-flex items-center gap-1.5 text-sm font-semibold text-white/40 hover:text-primary transition-colors duration-200 shrink-0"
+              >
+                Všechny novinky
+                <ArrowRight size={14} />
+              </Link>
+            </div>
+          </AnimatedSection>
+
+          {articles.length > 0 ? (
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6">
+              {articles.map((article, i) => (
+                <AnimatedSection key={article.id} delay={i * 0.1}>
+                  <Link
+                    href={`/novinky/${article.slug}`}
+                    className="group flex flex-col bg-white/[0.04] border border-white/[0.08] hover:border-white/20 rounded-2xl overflow-hidden hover:bg-white/[0.07] transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:shadow-black/30 h-full"
+                  >
+                    <div className="relative h-44 sm:h-48 bg-white/[0.03] overflow-hidden shrink-0">
+                      {article.featuredImage ? (
+                        <img
+                          src={article.featuredImage}
+                          alt={article.title}
+                          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                        />
+                      ) : (
+                        <div className="w-full h-full bg-gradient-to-br from-primary/10 to-secondary/10 flex items-center justify-center">
+                          <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="text-white/20">
+                            <path d="M4 22h16a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2H8a2 2 0 0 0-2 2v16a2 2 0 0 1-2 2Zm0 0a2 2 0 0 1-2-2v-9c0-1.1.9-2 2-2h2"/><path d="M18 14h-8"/><path d="M15 18h-5"/><path d="M10 6h8v4h-8V6Z"/>
+                          </svg>
+                        </div>
+                      )}
+                    </div>
+                    <div className="flex flex-col flex-1 p-5">
+                      <p className="text-[11px] text-slate-500 uppercase tracking-[0.2em] font-semibold mb-2">
+                        {article.publishedAt
+                          ? new Date(article.publishedAt).toLocaleDateString("cs-CZ", { day: "numeric", month: "long", year: "numeric" })
+                          : new Date(article.createdAt).toLocaleDateString("cs-CZ", { day: "numeric", month: "long", year: "numeric" })}
+                      </p>
+                      <h3 className="font-bold text-white text-base leading-snug group-hover:text-primary transition-colors mb-2">
+                        {article.title}
+                      </h3>
+                      {article.excerpt && (
+                        <p className="text-slate-400 text-sm leading-relaxed line-clamp-3 flex-1">
+                          {article.excerpt}
+                        </p>
+                      )}
+                      <span className="inline-flex items-center gap-1 text-xs font-semibold text-primary mt-4 opacity-0 group-hover:opacity-100 transition-opacity">
+                        Číst více <ArrowRight size={11} />
+                      </span>
+                    </div>
+                  </Link>
+                </AnimatedSection>
+              ))}
+            </div>
+          ) : (
+            <AnimatedSection>
+              <div className="bg-white/[0.03] border border-white/[0.06] rounded-2xl p-8 sm:p-12 text-center">
+                <p className="text-slate-400 text-sm">Novinky budou brzy přidány.</p>
+                <Link
+                  href="/novinky"
+                  className="inline-flex items-center gap-1.5 text-sm font-semibold text-primary hover:text-primary-light mt-4 transition-colors"
+                >
+                  Přejít na novinky <ArrowRight size={13} />
+                </Link>
+              </div>
+            </AnimatedSection>
+          )}
+        </div>
+      </section>
 
       {/* ═══════════════ PARTNERS ═══════════════ */}
       <PartnersStrip />
