@@ -167,6 +167,15 @@ export const partners: Partner[] = [
     description: 'Recovera by Veolia je přední česká společnost v oblasti odpadového hospodářství a cirkulární ekonomiky. Zajišťuje sběr, třídění a recyklaci odpadů pro firmy i obce. Součást globální skupiny Veolia – světového lídra v ekologické transformaci průmyslu.',
     order: 17,
   },
+  {
+    id: 'grillvlek',
+    name: 'Grill Vlek',
+    tier: 'partner',
+    url: 'https://www.grillvlek.cz',
+    logo: '/images/partners/18-grillvlek.jpg',
+    description: 'Indická restaurace přímo v areálu Ultramarinka v Břasích — domovském závodišti MČR XCO Stupno. Autentická indická kuchyně v srdci přírody Brd. Ideální místo pro posílení před závodem i po něm.',
+    order: 18,
+  },
 ];
 
 export const getPartnersByTier = (tier: PartnerTier) =>
