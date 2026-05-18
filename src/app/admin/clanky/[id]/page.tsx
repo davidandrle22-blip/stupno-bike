@@ -20,6 +20,7 @@ export default async function EditArticlePage({
     content: article.content,
     excerpt: article.excerpt,
     featuredImage: article.featuredImage,
+    videoUrl: article.videoUrl,
     tags: article.tags,
     status: article.status,
     publishedAt: article.publishedAt?.toISOString() || null,

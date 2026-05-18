@@ -14,6 +14,7 @@ export async function createArticle(formData: FormData) {
       content: (formData.get("content") as string) || "",
       excerpt: (formData.get("excerpt") as string) || null,
       featuredImage: (formData.get("featuredImage") as string) || null,
+      videoUrl: (formData.get("videoUrl") as string) || null,
       tags: (formData.get("tags") as string) || null,
       status: (formData.get("status") as string) || "DRAFT",
       publishedAt: formData.get("publishedAt")
@@ -37,6 +38,7 @@ export async function updateArticle(id: string, formData: FormData) {
       content: (formData.get("content") as string) || "",
       excerpt: (formData.get("excerpt") as string) || null,
       featuredImage: (formData.get("featuredImage") as string) || null,
+      videoUrl: (formData.get("videoUrl") as string) || null,
       tags: (formData.get("tags") as string) || null,
       status: (formData.get("status") as string) || "DRAFT",
       publishedAt: formData.get("publishedAt")

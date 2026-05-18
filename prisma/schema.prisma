@@ -65,6 +65,7 @@ model Article {
   content       String
   excerpt       String?
   featuredImage String?
+  videoUrl      String?
   tags          String?
   status        String    @default("DRAFT")
   publishedAt   DateTime?

@@ -9,6 +9,7 @@ type Article = {
   content: string;
   excerpt: string | null;
   featuredImage: string | null;
+  videoUrl: string | null;
   tags: string | null;
   status: string;
   publishedAt: string | null;
@@ -64,15 +65,27 @@ export default function ArticleForm({
           </div>
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-1">
-              Tagy (JSON array)
+              Video URL (YouTube, atd.)
             </label>
             <input
-              name="tags"
-              defaultValue={article?.tags || ""}
+              name="videoUrl"
+              defaultValue={article?.videoUrl || ""}
               className="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 outline-none"
-              placeholder='["tag1", "tag2"]'
+              placeholder="https://www.youtube.com/watch?v=..."
             />
           </div>
+        </div>
+
+        <div>
+          <label className="block text-sm font-medium text-gray-700 mb-1">
+            Tagy (JSON array)
+          </label>
+          <input
+            name="tags"
+            defaultValue={article?.tags || ""}
+            className="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 outline-none"
+            placeholder='["tag1", "tag2"]'
+          />
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">

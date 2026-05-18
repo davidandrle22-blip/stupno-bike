@@ -34,6 +34,18 @@ export default async function ArticleDetailPage({
 
   const tags: string[] = article.tags ? JSON.parse(article.tags) : [];
 
+  function getYouTubeEmbedUrl(url: string): string | null {
+    try {
+      const u = new URL(url);
+      let videoId: string | null = null;
+      if (u.hostname.includes("youtube.com")) videoId = u.searchParams.get("v");
+      else if (u.hostname === "youtu.be") videoId = u.pathname.slice(1);
+      return videoId ? `https://www.youtube.com/embed/${videoId}` : null;
+    } catch { return null; }
+  }
+
+  const embedUrl = article.videoUrl ? getYouTubeEmbedUrl(article.videoUrl) : null;
+
   // Related articles
   const related = await prisma.article.findMany({
     where: {
@@ -77,6 +89,31 @@ export default async function ArticleDetailPage({
         className="tiptap-content prose prose-lg max-w-none mb-8"
         dangerouslySetInnerHTML={{ __html: article.content }}
       />
+
+      {article.videoUrl && (
+        <div className="mb-8">
+          {embedUrl ? (
+            <div className="relative w-full aspect-video rounded-xl overflow-hidden">
+              <iframe
+                src={embedUrl}
+                title="Video"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowFullScreen
+                className="absolute inset-0 w-full h-full"
+              />
+            </div>
+          ) : (
+            <a
+              href={article.videoUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-secondary hover:underline text-sm"
+            >
+              ▶ Přehrát video
+            </a>
+          )}
+        </div>
+      )}
 
       {tags.length > 0 && (
         <div className="flex flex-wrap gap-2 mb-8">
