@@ -172,7 +172,7 @@ export const partners: Partner[] = [
     name: 'Grill Vlek',
     tier: 'partner',
     url: 'https://www.grillvlek.cz',
-    logo: '/images/partners/18-grillvlek.jpg',
+    logo: '/images/partners/18-grillvlek.png',
     description: 'Indická restaurace přímo v areálu Ultramarinka v Břasích — domovském závodišti MČR XCO Stupno. Autentická indická kuchyně v srdci přírody Brd. Ideální místo pro posílení před závodem i po něm.',
     order: 18,
   },
