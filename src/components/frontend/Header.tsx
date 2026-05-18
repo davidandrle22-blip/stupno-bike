@@ -20,11 +20,13 @@ const ZAVOD_LINKS = [
   { label: "Pořadatel", href: "/zavod/stupno/poradatel" },
   { label: "Partneři závodu", href: "/zavod/stupno/partneri" },
   { label: "Výsledky", href: "/zavod/stupno/vysledky" },
-  { label: "Pravidla", href: "/pravidla", dividerBefore: true },
+  { label: "Novinky", href: "/novinky", dividerBefore: true },
+  { label: "Pravidla", href: "/pravidla" },
 ];
 
 const TOP_LINKS = [
   { label: "← Domů", href: "/" },
+  { label: "Novinky", href: "/novinky" },
   { label: "Partneři", href: "/partneri" },
   { label: "O nás", href: "/o-nas" },
   { label: "Kontakt", href: "/kontakt" },

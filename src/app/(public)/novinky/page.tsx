@@ -32,6 +32,16 @@ export default async function NovinkyPage() {
         Novinky
       </h1>
 
+      <AnimatedSection>
+        <div className="bg-white/[0.04] border border-white/[0.08] rounded-2xl p-6 sm:p-8 mb-8 sm:mb-10">
+          <p className="text-slate-300 text-sm sm:text-base leading-relaxed">
+            Zde budeme průběžně zveřejňovat nové články a informace týkající se závodu —
+            aktuální novinky z příprav, informace pro závodníky, změny v programu
+            a vše důležité kolem MČR XCO Stupno 2026.
+          </p>
+        </div>
+      </AnimatedSection>
+
       {articles.length > 0 ? (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {articles.map((article, i) => (
@@ -49,7 +59,9 @@ export default async function NovinkyPage() {
                     />
                   ) : (
                     <div className="w-full h-full bg-gradient-to-br from-secondary/10 to-primary/10 flex items-center justify-center">
-                      <span className="text-5xl opacity-20">📰</span>
+                      <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="text-white/20">
+                        <path d="M4 22h16a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2H8a2 2 0 0 0-2 2v16a2 2 0 0 1-2 2Zm0 0a2 2 0 0 1-2-2v-9c0-1.1.9-2 2-2h2"/><path d="M18 14h-8"/><path d="M15 18h-5"/><path d="M10 6h8v4h-8V6Z"/>
+                      </svg>
                     </div>
                   )}
                 </div>
@@ -73,7 +85,7 @@ export default async function NovinkyPage() {
           ))}
         </div>
       ) : (
-        <p className="text-slate-400">Zatím nejsou žádné novinky.</p>
+        <p className="text-slate-400 text-sm">Články budou brzy přidány.</p>
       )}
     </div>
   );
