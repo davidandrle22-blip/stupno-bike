@@ -34,7 +34,7 @@ export default async function RaceResultsPage({
         />
       ) : (
         <p className="text-slate-400">
-          Výsledky tohoto závodu budou zveřejněny po závodě.
+          Připravujeme – po závodě.
         </p>
       )}
     </div>
