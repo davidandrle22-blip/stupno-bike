@@ -44,14 +44,17 @@ export default function ArticleForm({
     const file = e.target.files?.[0];
     if (!file) return;
     setImageUploading(true);
-    setImagePreview(URL.createObjectURL(file));
-    const fd = new FormData();
-    fd.append("file", file);
-    const res = await fetch("/api/admin/upload", { method: "POST", body: fd });
-    if (res.ok) {
-      const { url } = await res.json();
-      setImageUrl(url);
-    }
+    // Resize + compress to max 1200px wide, JPEG 85% quality
+    const bitmap = await createImageBitmap(file);
+    const maxW = 1200;
+    const scale = bitmap.width > maxW ? maxW / bitmap.width : 1;
+    const canvas = document.createElement("canvas");
+    canvas.width = Math.round(bitmap.width * scale);
+    canvas.height = Math.round(bitmap.height * scale);
+    canvas.getContext("2d")!.drawImage(bitmap, 0, 0, canvas.width, canvas.height);
+    const dataUrl = canvas.toDataURL("image/jpeg", 0.85);
+    setImagePreview(dataUrl);
+    setImageUrl(dataUrl);
     setImageUploading(false);
   }
 
@@ -59,14 +62,12 @@ export default function ArticleForm({
     const file = e.target.files?.[0];
     if (!file) return;
     setVideoUploading(true);
-    const fd = new FormData();
-    fd.append("file", file);
-    const res = await fetch("/api/admin/upload", { method: "POST", body: fd });
-    if (res.ok) {
-      const { url } = await res.json();
-      setVideoUrl(url);
-    }
-    setVideoUploading(false);
+    const reader = new FileReader();
+    reader.onload = () => {
+      setVideoUrl(reader.result as string);
+      setVideoUploading(false);
+    };
+    reader.readAsDataURL(file);
   }
 
   return (
