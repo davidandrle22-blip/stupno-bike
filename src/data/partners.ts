@@ -42,10 +42,10 @@ export const partners: Partner[] = [
   },
   {
     id: 'raben',
-    name: 'Raben Logistics',
+    name: 'Raben Logistics Czech',
     tier: 'main',
     url: 'https://ceskarepublika.raben-group.com',
-    logo: '/images/partners/07-raben.png',
+    logo: '/images/partners/07-raben.svg',
     description: 'Přední evropský poskytovatel logistických služeb s více než 90 lety zkušeností. V ČR provozuje 10 strategických dep a nabízí vnitrostátní i mezinárodní přepravu, skladování a logistiku čerstvých potravin. Přes 12 200 zaměstnanců ve 170+ lokalitách v 17 zemích.',
     order: 4,
   },
