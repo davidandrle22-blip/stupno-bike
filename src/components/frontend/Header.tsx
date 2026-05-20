@@ -27,6 +27,7 @@ const ZAVOD_LINKS = [
 const TOP_LINKS = [
   { label: "← Domů", href: "/" },
   { label: "Novinky", href: "/novinky" },
+  { label: "Fotogalerie", href: "/fotogalerie" },
   { label: "Partneři", href: "/partneri" },
   { label: "O nás", href: "/o-nas" },
   { label: "Kontakt", href: "/kontakt" },
