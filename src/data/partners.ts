@@ -114,13 +114,22 @@ export const partners: Partner[] = [
     order: 11,
   },
   {
+    id: 'vif',
+    name: 'VIF Sports',
+    tier: 'partner',
+    url: 'https://www.vifsports.cz',
+    logo: '/images/partners/19-vif.svg',
+    description: 'VIF Sports je česká sportovní značka zaměřená na výkonnostní sportovce. Kvalitní sportovní výživa, doplňky a vybavení pro cyklisty i další sportovce, kteří chtějí posouvat své výkony na maximum.',
+    order: 12,
+  },
+  {
     id: 'winth3000',
     name: 'Winth 3000',
     tier: 'partner',
     url: 'https://www.winth.cz',
     logo: '/images/partners/05-winth3000.png',
     description: 'Rokycanská firma specializující se na instalatérství, topenářství a kompletní rekonstrukce. Prodej instalačního materiálu v maloobchodní i velkoobchodní prodejně. Lokální partner, který zná region jako své boty.',
-    order: 12,
+    order: 13,
   },
   {
     id: 'helas-kovo',
@@ -129,7 +138,7 @@ export const partners: Partner[] = [
     url: 'https://www.helaskovo.cz',
     logo: '/images/partners/09-helas-kovo.png',
     description: 'Česká společnost z Všenic u Břas vyrábějící přesné kovové komponenty pro průmysl. Laserové řezání na strojích TRUMPF, ohraňování, svařování a prášková lakovna. Na trhu od roku 1999, certifikace ISO 9001.',
-    order: 13,
+    order: 14,
   },
   {
     id: 'ploty-kodl',
@@ -138,7 +147,7 @@ export const partners: Partner[] = [
     url: 'https://www.kodl-ploty.cz',
     logo: '/images/partners/16-ploty-kodl.png',
     description: 'Plotové centrum pro Rokycany, Plzeň a celý Plzeňský kraj. Od roku 1995 prodej, stavba a montáž oplocení – od rodinných domů po průmyslové areály. Pletivo, brány, sloupky a kompletní realizace na klíč.',
-    order: 14,
+    order: 15,
   },
   {
     id: 'ac-heating',
@@ -147,7 +156,7 @@ export const partners: Partner[] = [
     url: 'https://www.ac-heating.cz',
     logo: '/images/partners/10-ac-heating.png',
     description: 'Český výrobce tepelných čerpadel a fotovoltaických systémů. Řada Convert nabízí špičková řešení vytápění a chlazení pro rodinné i komerční objekty. Úspora až 70 % nákladů za vytápění. Tiché, spolehlivé a vyrobené v ČR.',
-    order: 15,
+    order: 16,
   },
   {
     id: 'lawi',
@@ -156,7 +165,7 @@ export const partners: Partner[] = [
     url: 'https://www.lawi.cz',
     logo: '/images/partners/15-lawi.png',
     description: 'Česká značka sportovního a cyklistického oblečení. Dresy, kraťasy, bundy a doplňky navržené pro výkon, pohodlí a styl. Nabízí i zakázkovou výrobu dresů s vlastním designem. Vše vyráběno s pečlivostí v České republice.',
-    order: 16,
+    order: 17,
   },
   {
     id: 'recovera',
@@ -165,7 +174,7 @@ export const partners: Partner[] = [
     url: 'https://www.recovera.cz',
     logo: '/images/partners/17-recovera.png',
     description: 'Recovera by Veolia je přední česká společnost v oblasti odpadového hospodářství a cirkulární ekonomiky. Zajišťuje sběr, třídění a recyklaci odpadů pro firmy i obce. Součást globální skupiny Veolia – světového lídra v ekologické transformaci průmyslu.',
-    order: 17,
+    order: 18,
   },
   {
     id: 'grillvlek',
@@ -174,7 +183,7 @@ export const partners: Partner[] = [
     url: 'https://www.grillvlek.cz',
     logo: '/images/partners/18-grillvlek.png',
     description: 'Indická restaurace přímo v areálu Ultramarinka v Břasích — domovském závodišti MČR XCO Stupno. Autentická indická kuchyně v srdci přírody Brd. Ideální místo pro posílení před závodem i po něm.',
-    order: 18,
+    order: 19,
   },
 ];
 
