@@ -119,7 +119,7 @@ export const partners: Partner[] = [
     tier: 'partner',
     url: 'https://www.vifsports.cz',
     logo: '/images/partners/19-vif.svg',
-    description: 'VIF Sports je česká sportovní značka zaměřená na výkonnostní sportovce. Kvalitní sportovní výživa, doplňky a vybavení pro cyklisty i další sportovce, kteří chtějí posouvat své výkony na maximum.',
+    description: 'Česká značka kvalitních sportovních brýlí s doživotní zárukou.',
     order: 12,
   },
   {
