@@ -1,5 +1,7 @@
 # Stupno Bike — web
 
+Web závodu Stupno Bike. Next.js 16 + Prisma + NextAuth + Tailwind CSS.
+
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
 ## Getting Started
