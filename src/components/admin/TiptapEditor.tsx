@@ -1,5 +1,6 @@
 "use client";
 
+import { useRef, useState } from "react";
 import { useEditor, EditorContent } from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
 import LinkExtension from "@tiptap/extension-link";
@@ -16,6 +17,7 @@ import {
   ListOrdered,
   Link as LinkIcon,
   Image as ImageIcon,
+  Upload,
   Quote,
   Undo,
   Redo,
@@ -28,6 +30,9 @@ export default function TiptapEditor({
   content: string;
   onChange: (html: string) => void;
 }) {
+  const fileInputRef = useRef<HTMLInputElement>(null);
+  const [uploading, setUploading] = useState(false);
+
   const editor = useEditor({
     extensions: [
       StarterKit,
@@ -84,6 +89,28 @@ export default function TiptapEditor({
     const url = prompt("URL obrázku:");
     if (url) {
       editor.chain().focus().setImage({ src: url }).run();
+    }
+  };
+
+  const uploadImage = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    e.target.value = "";
+    if (!file) return;
+    setUploading(true);
+    try {
+      const formData = new FormData();
+      formData.append("file", file);
+      const res = await fetch("/api/admin/upload", {
+        method: "POST",
+        body: formData,
+      });
+      if (!res.ok) throw new Error("Upload selhal");
+      const data = await res.json();
+      editor.chain().focus().setImage({ src: data.url }).run();
+    } catch {
+      alert("Nahrání obrázku se nepovedlo.");
+    } finally {
+      setUploading(false);
     }
   };
 
@@ -165,9 +192,22 @@ export default function TiptapEditor({
         <ToolbarButton onClick={addLink} title="Odkaz">
           <LinkIcon size={16} />
         </ToolbarButton>
-        <ToolbarButton onClick={addImage} title="Obrázek">
+        <ToolbarButton onClick={addImage} title="Obrázek z URL">
           <ImageIcon size={16} />
         </ToolbarButton>
+        <ToolbarButton
+          onClick={() => fileInputRef.current?.click()}
+          title="Nahrát obrázek z PC"
+        >
+          <Upload size={16} className={uploading ? "animate-pulse" : ""} />
+        </ToolbarButton>
+        <input
+          ref={fileInputRef}
+          type="file"
+          accept="image/*"
+          onChange={uploadImage}
+          className="hidden"
+        />
         <div className="w-px bg-gray-300 mx-1" />
         <ToolbarButton
           onClick={() => editor.chain().focus().undo().run()}
