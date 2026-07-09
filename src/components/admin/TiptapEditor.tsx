@@ -98,19 +98,15 @@ export default function TiptapEditor({
     if (!file) return;
     setUploading(true);
     try {
-      // Resize + compress to max 1200px wide, JPEG 85% quality, embedded as
-      // base64 data URL (same approach as the featured image — the app's
-      // production hosting has a read-only filesystem, so on-disk upload
-      // endpoints don't work there).
-      const bitmap = await createImageBitmap(file);
-      const maxW = 1200;
-      const scale = bitmap.width > maxW ? maxW / bitmap.width : 1;
-      const canvas = document.createElement("canvas");
-      canvas.width = Math.round(bitmap.width * scale);
-      canvas.height = Math.round(bitmap.height * scale);
-      canvas.getContext("2d")!.drawImage(bitmap, 0, 0, canvas.width, canvas.height);
-      const dataUrl = canvas.toDataURL("image/jpeg", 0.85);
-      editor.chain().focus().setImage({ src: dataUrl }).run();
+      const formData = new FormData();
+      formData.append("file", file);
+      const res = await fetch("/api/admin/upload", {
+        method: "POST",
+        body: formData,
+      });
+      if (!res.ok) throw new Error("Upload selhal");
+      const data = await res.json();
+      editor.chain().focus().setImage({ src: data.url }).run();
     } catch {
       alert("Nahrání obrázku se nepovedlo.");
     } finally {
