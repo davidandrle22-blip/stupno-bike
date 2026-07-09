@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { put } from "@vercel/blob";
+import { prisma } from "@/lib/prisma";
 import { auth } from "@/lib/auth";
 
 export const runtime = "nodejs";
@@ -16,9 +16,12 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ error: "No file" }, { status: 400 });
   }
 
-  const ext = (file.name.split(".").pop() || "jpg").toLowerCase().replace(/[^a-z0-9]/g, "");
-  const name = `articles/${Date.now()}-${Math.random().toString(36).slice(2)}.${ext}`;
-  const blob = await put(name, file, { access: "public" });
+  const image = await prisma.uploadedImage.create({
+    data: {
+      data: Buffer.from(await file.arrayBuffer()),
+      mimeType: file.type || "image/jpeg",
+    },
+  });
 
-  return NextResponse.json({ url: blob.url });
+  return NextResponse.json({ url: `/api/images/${image.id}` });
 }

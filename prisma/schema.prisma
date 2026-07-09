@@ -73,6 +73,13 @@ model Article {
   updatedAt     DateTime  @updatedAt
 }
 
+model UploadedImage {
+  id        String   @id @default(cuid())
+  data      Bytes
+  mimeType  String
+  createdAt DateTime @default(now())
+}
+
 model Photo {
   id        String   @id @default(cuid())
   url       String   @db.Text
