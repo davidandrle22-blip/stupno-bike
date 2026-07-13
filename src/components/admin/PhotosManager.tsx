@@ -14,7 +14,7 @@ type Photo = {
 
 type Race = { id: string; title: string };
 
-async function compressImage(file: File): Promise<string> {
+async function compressImage(file: File): Promise<Blob> {
   const bitmap = await createImageBitmap(file);
   const maxW = 1400;
   const scale = bitmap.width > maxW ? maxW / bitmap.width : 1;
@@ -22,7 +22,9 @@ async function compressImage(file: File): Promise<string> {
   canvas.width = Math.round(bitmap.width * scale);
   canvas.height = Math.round(bitmap.height * scale);
   canvas.getContext("2d")!.drawImage(bitmap, 0, 0, canvas.width, canvas.height);
-  return canvas.toDataURL("image/jpeg", 0.82);
+  return new Promise((resolve, reject) => {
+    canvas.toBlob((blob) => (blob ? resolve(blob) : reject(new Error("toBlob failed"))), "image/jpeg", 0.82);
+  });
 }
 
 export default function PhotosManager({
@@ -51,14 +53,20 @@ export default function PhotosManager({
       setUploadProgress(`${i + 1} / ${fileArr.length}`);
 
       try {
-        const dataUrl = await compressImage(file);
+        const compressed = await compressImage(file);
+        const uploadForm = new FormData();
+        uploadForm.append("file", compressed, file.name);
+        const uploadRes = await fetch("/api/admin/upload", { method: "POST", body: uploadForm });
+        if (!uploadRes.ok) throw new Error("Upload selhal");
+        const { url } = await uploadRes.json();
+
         const albumName = album.trim() || (selectedRace ? races.find(r => r.id === selectedRace)?.title : "") || "Obecná galerie";
 
         const res = await fetch("/api/admin/photos", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
-            url: dataUrl,
+            url,
             alt: file.name.replace(/\.[^.]+$/, ""),
             album: albumName,
             raceId: selectedRace || null,
@@ -158,7 +166,7 @@ export default function PhotosManager({
             <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-3">
               {albumPhotos.map(photo => (
                 <div key={photo.id} className="relative group bg-white rounded-lg overflow-hidden shadow-sm border border-gray-200">
-                  <img src={photo.url} alt={photo.alt || ""} className="w-full h-28 object-cover" />
+                  <img src={photo.url} alt={photo.alt || ""} loading="lazy" className="w-full h-28 object-cover" />
                   <div className="px-2 py-1">
                     <p className="text-[11px] text-gray-500 truncate">{photo.alt || "—"}</p>
                   </div>
