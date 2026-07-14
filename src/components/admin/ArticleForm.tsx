@@ -44,30 +44,52 @@ export default function ArticleForm({
     const file = e.target.files?.[0];
     if (!file) return;
     setImageUploading(true);
-    // Resize + compress to max 1200px wide, JPEG 85% quality
-    const bitmap = await createImageBitmap(file);
-    const maxW = 1200;
-    const scale = bitmap.width > maxW ? maxW / bitmap.width : 1;
-    const canvas = document.createElement("canvas");
-    canvas.width = Math.round(bitmap.width * scale);
-    canvas.height = Math.round(bitmap.height * scale);
-    canvas.getContext("2d")!.drawImage(bitmap, 0, 0, canvas.width, canvas.height);
-    const dataUrl = canvas.toDataURL("image/jpeg", 0.85);
-    setImagePreview(dataUrl);
-    setImageUrl(dataUrl);
-    setImageUploading(false);
+    try {
+      // Resize + compress to max 1200px wide, JPEG 85% quality
+      const bitmap = await createImageBitmap(file);
+      const maxW = 1200;
+      const scale = bitmap.width > maxW ? maxW / bitmap.width : 1;
+      const canvas = document.createElement("canvas");
+      canvas.width = Math.round(bitmap.width * scale);
+      canvas.height = Math.round(bitmap.height * scale);
+      canvas.getContext("2d")!.drawImage(bitmap, 0, 0, canvas.width, canvas.height);
+      setImagePreview(canvas.toDataURL("image/jpeg", 0.85));
+
+      const compressed = await new Promise<Blob>((resolve, reject) => {
+        canvas.toBlob((blob) => (blob ? resolve(blob) : reject(new Error("toBlob failed"))), "image/jpeg", 0.85);
+      });
+      const formData = new FormData();
+      formData.append("file", compressed, file.name);
+      const res = await fetch("/api/admin/upload", { method: "POST", body: formData });
+      if (!res.ok) throw new Error("Upload selhal");
+      const { url } = await res.json();
+      setImageUrl(url);
+    } catch {
+      alert("Nahrání obrázku se nepovedlo.");
+      setImagePreview(null);
+      setImageUrl("");
+    } finally {
+      setImageUploading(false);
+    }
   }
 
   async function handleVideoFileChange(e: React.ChangeEvent<HTMLInputElement>) {
     const file = e.target.files?.[0];
     if (!file) return;
     setVideoUploading(true);
-    const reader = new FileReader();
-    reader.onload = () => {
-      setVideoUrl(reader.result as string);
+    try {
+      const formData = new FormData();
+      formData.append("file", file);
+      const res = await fetch("/api/admin/upload", { method: "POST", body: formData });
+      if (!res.ok) throw new Error("Upload selhal");
+      const { url } = await res.json();
+      setVideoUrl(url);
+    } catch {
+      alert("Nahrání videa se nepovedlo.");
+      setVideoUrl("");
+    } finally {
       setVideoUploading(false);
-    };
-    reader.readAsDataURL(file);
+    }
   }
 
   return (
