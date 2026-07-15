@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useRef } from "react";
+import { upload } from "@vercel/blob/client";
 import TiptapEditor from "./TiptapEditor";
 import { ImageIcon, VideoIcon, X, Upload } from "lucide-react";
 
@@ -58,12 +59,11 @@ export default function ArticleForm({
       const compressed = await new Promise<Blob>((resolve, reject) => {
         canvas.toBlob((blob) => (blob ? resolve(blob) : reject(new Error("toBlob failed"))), "image/jpeg", 0.85);
       });
-      const formData = new FormData();
-      formData.append("file", compressed, file.name);
-      const res = await fetch("/api/admin/upload", { method: "POST", body: formData });
-      if (!res.ok) throw new Error("Upload selhal");
-      const { url } = await res.json();
-      setImageUrl(url);
+      const blob = await upload(`articles/${Date.now()}-${file.name}`, compressed, {
+        access: "public",
+        handleUploadUrl: "/api/admin/upload",
+      });
+      setImageUrl(blob.url);
     } catch {
       alert("Nahrání obrázku se nepovedlo.");
       setImagePreview(null);
@@ -78,12 +78,11 @@ export default function ArticleForm({
     if (!file) return;
     setVideoUploading(true);
     try {
-      const formData = new FormData();
-      formData.append("file", file);
-      const res = await fetch("/api/admin/upload", { method: "POST", body: formData });
-      if (!res.ok) throw new Error("Upload selhal");
-      const { url } = await res.json();
-      setVideoUrl(url);
+      const blob = await upload(`articles/${Date.now()}-${file.name}`, file, {
+        access: "public",
+        handleUploadUrl: "/api/admin/upload",
+      });
+      setVideoUrl(blob.url);
     } catch {
       alert("Nahrání videa se nepovedlo.");
       setVideoUrl("");

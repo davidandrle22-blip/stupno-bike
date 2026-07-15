@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useRef } from "react";
+import { upload } from "@vercel/blob/client";
 import { Trash2, Upload, FolderOpen } from "lucide-react";
 
 type Photo = {
@@ -54,11 +55,11 @@ export default function PhotosManager({
 
       try {
         const compressed = await compressImage(file);
-        const uploadForm = new FormData();
-        uploadForm.append("file", compressed, file.name);
-        const uploadRes = await fetch("/api/admin/upload", { method: "POST", body: uploadForm });
-        if (!uploadRes.ok) throw new Error("Upload selhal");
-        const { url } = await uploadRes.json();
+        const blob = await upload(`photos/${Date.now()}-${file.name}`, compressed, {
+          access: "public",
+          handleUploadUrl: "/api/admin/upload",
+        });
+        const url = blob.url;
 
         const albumName = album.trim() || (selectedRace ? races.find(r => r.id === selectedRace)?.title : "") || "Obecná galerie";
 

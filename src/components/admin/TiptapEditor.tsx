@@ -1,6 +1,7 @@
 "use client";
 
 import { useRef, useState } from "react";
+import { upload } from "@vercel/blob/client";
 import { useEditor, EditorContent } from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
 import LinkExtension from "@tiptap/extension-link";
@@ -98,15 +99,11 @@ export default function TiptapEditor({
     if (!file) return;
     setUploading(true);
     try {
-      const formData = new FormData();
-      formData.append("file", file);
-      const res = await fetch("/api/admin/upload", {
-        method: "POST",
-        body: formData,
+      const blob = await upload(`articles/${Date.now()}-${file.name}`, file, {
+        access: "public",
+        handleUploadUrl: "/api/admin/upload",
       });
-      if (!res.ok) throw new Error("Upload selhal");
-      const data = await res.json();
-      editor.chain().focus().setImage({ src: data.url }).run();
+      editor.chain().focus().setImage({ src: blob.url }).run();
     } catch {
       alert("Nahrání obrázku se nepovedlo.");
     } finally {
