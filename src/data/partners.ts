@@ -185,6 +185,15 @@ export const partners: Partner[] = [
     description: 'Indická restaurace přímo v areálu Ultramarinka v Břasích — domovském závodišti MČR XCO Stupno. Autentická indická kuchyně v srdci přírody Brd. Ideální místo pro posílení před závodem i po něm.',
     order: 19,
   },
+  {
+    id: 'cnrdd',
+    name: 'Český národní registr dárců dřeně',
+    tier: 'partner',
+    url: 'https://www.kostnidren.cz',
+    logo: '/images/partners/20-cnrdd.png',
+    description: 'Nezisková organizace propojující dobrovolné dárce kostní dřeně s pacienty, kteří bojují o život. Zapište se do registru a možná právě vy budete tou nadějí, kterou někdo hledá.',
+    order: 20,
+  },
 ];
 
 export const getPartnersByTier = (tier: PartnerTier) =>
